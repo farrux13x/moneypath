@@ -9,12 +9,14 @@
         :error="errors.name"
       />
 
-      <ColorPicker
-        v-model="formData.color"
-        label="Color"
-      />
+      <ColorPicker v-model="formData.color" label="Color" />
 
-      <Button type="submit" variant="primary" full-width :disabled="isSubmitting">
+      <Button
+        type="submit"
+        variant="primary"
+        full-width
+        :disabled="isSubmitting"
+      >
         {{ isSubmitting ? 'Adding...' : 'Add Category' }}
       </Button>
     </form>
@@ -33,11 +35,11 @@ const { addCategory } = useCategories()
 
 const formData = reactive({
   name: '',
-  color: '#6366f1'
+  color: '#6366f1',
 })
 
 const errors = reactive({
-  name: ''
+  name: '',
 })
 
 const isSubmitting = ref(false)
@@ -65,7 +67,7 @@ const handleSubmit = () => {
 
   addCategory({
     name: formData.name.trim(),
-    color: formData.color
+    color: formData.color,
   })
 
   // Reset form
@@ -90,5 +92,3 @@ const handleSubmit = () => {
   gap: 1.25rem;
 }
 </style>
-
-

@@ -1,8 +1,10 @@
 <template>
   <Card>
     <h2 class="section-title">Export Data</h2>
-    <p class="section-description">Download your expenses and categories as a JSON file</p>
-    
+    <p class="section-description">
+      Download your expenses and categories as a JSON file
+    </p>
+
     <div class="export-options">
       <div class="export-option">
         <label class="checkbox-label">
@@ -14,7 +16,7 @@
           <span>Export Expenses ({{ expensesCount }} items)</span>
         </label>
       </div>
-      
+
       <div class="export-option">
         <label class="checkbox-label">
           <input
@@ -54,7 +56,7 @@ const { categories } = useCategories()
 
 const exportOptions = ref({
   expenses: true,
-  categories: true
+  categories: true,
 })
 
 const isExporting = ref(false)
@@ -75,7 +77,7 @@ const handleExport = () => {
 
   const data: any = {
     version: '1.0',
-    exportedAt: new Date().toISOString()
+    exportedAt: new Date().toISOString(),
   }
 
   if (exportOptions.value.expenses) {
@@ -160,5 +162,3 @@ const handleExport = () => {
   font-size: 0.875rem;
 }
 </style>
-
-

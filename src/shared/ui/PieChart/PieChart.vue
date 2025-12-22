@@ -67,7 +67,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: 200
+  size: 200,
 })
 
 const hoveredIndex = ref<number | null>(null)
@@ -118,7 +118,7 @@ const slices = computed(() => {
       path,
       percentage: Math.round(percentage),
       labelX,
-      labelY
+      labelY,
     }
   })
 })
@@ -144,4 +144,3 @@ const formatValue = (value: number): string => {
   transition: opacity 0.2s ease;
 }
 </style>
-

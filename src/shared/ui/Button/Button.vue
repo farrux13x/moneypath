@@ -1,6 +1,11 @@
 <template>
   <button
-    :class="['button', `button--${variant}`, `button--${size}`, { 'button--full-width': fullWidth }]"
+    :class="[
+      'button',
+      `button--${variant}`,
+      `button--${size}`,
+      { 'button--full-width': fullWidth },
+    ]"
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
@@ -20,7 +25,7 @@ withDefaults(defineProps<Props>(), {
   variant: 'primary',
   size: 'md',
   fullWidth: false,
-  disabled: false
+  disabled: false,
 })
 
 defineEmits<{
@@ -103,5 +108,3 @@ defineEmits<{
   width: 100%;
 }
 </style>
-
-

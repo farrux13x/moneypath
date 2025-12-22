@@ -11,7 +11,9 @@ export function useTheme() {
 
   const getSystemTheme = (): 'light' | 'dark' => {
     if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
     }
     return 'light'
   }
@@ -65,17 +67,20 @@ export function useTheme() {
   }
 
   // Watch user theme changes
-  watch(() => user.value?.theme, (newTheme) => {
-    if (newTheme) {
-      applyTheme(newTheme)
-    }
-  }, { immediate: true })
+  watch(
+    () => user.value?.theme,
+    (newTheme) => {
+      if (newTheme) {
+        applyTheme(newTheme)
+      }
+    },
+    { immediate: true },
+  )
 
   return {
     currentTheme: computed(() => currentTheme.value),
     effectiveTheme: computed(() => effectiveTheme.value),
     setTheme,
-    toggleTheme
+    toggleTheme,
   }
 }
-

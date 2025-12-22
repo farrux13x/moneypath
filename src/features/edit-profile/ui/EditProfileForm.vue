@@ -19,10 +19,7 @@
 
       <div class="input-wrapper">
         <label class="input-label">Currency</label>
-        <select
-          v-model="formData.currency"
-          class="input"
-        >
+        <select v-model="formData.currency" class="input">
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
           <option value="GBP">GBP (£)</option>
@@ -38,10 +35,7 @@
 
       <div class="input-wrapper">
         <label class="input-label">Date Format</label>
-        <select
-          v-model="formData.dateFormat"
-          class="input"
-        >
+        <select v-model="formData.dateFormat" class="input">
           <option value="MM/DD/YYYY">MM/DD/YYYY</option>
           <option value="DD/MM/YYYY">DD/MM/YYYY</option>
           <option value="YYYY-MM-DD">YYYY-MM-DD</option>
@@ -51,17 +45,19 @@
 
       <div class="input-wrapper">
         <label class="input-label">Theme</label>
-        <select
-          v-model="formData.theme"
-          class="input"
-        >
+        <select v-model="formData.theme" class="input">
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="auto">Auto (System)</option>
         </select>
       </div>
 
-      <Button type="submit" variant="primary" full-width :disabled="isSubmitting">
+      <Button
+        type="submit"
+        variant="primary"
+        full-width
+        :disabled="isSubmitting"
+      >
         {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
       </Button>
 
@@ -73,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { Input } from '@/shared/ui/Input'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
@@ -88,12 +84,12 @@ const formData = reactive({
   email: '',
   currency: 'USD',
   dateFormat: 'MM/DD/YYYY',
-  theme: 'light' as 'light' | 'dark' | 'auto'
+  theme: 'light' as 'light' | 'dark' | 'auto',
 })
 
 const errors = reactive({
   name: '',
-  email: ''
+  email: '',
 })
 
 const isSubmitting = ref(false)
@@ -137,7 +133,7 @@ const handleSubmit = () => {
     email: formData.email.trim(),
     currency: formData.currency,
     dateFormat: formData.dateFormat,
-    theme: formData.theme
+    theme: formData.theme,
   })
 
   // Apply theme immediately
@@ -206,4 +202,3 @@ select.input:focus {
   font-size: 0.875rem;
 }
 </style>
-

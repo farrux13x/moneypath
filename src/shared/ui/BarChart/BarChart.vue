@@ -82,7 +82,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   width: 400,
   height: 300,
-  color: '#6366f1'
+  color: '#6366f1',
 })
 
 const padding = 50
@@ -96,7 +96,7 @@ const barWidth = computed(() => {
 
 const maxValue = computed(() => {
   if (props.data.length === 0) return 1
-  return Math.max(...props.data.map(d => d.value), 0) || 1
+  return Math.max(...props.data.map((d) => d.value), 0) || 1
 })
 
 const formatValue = (value: number): string => {
@@ -121,5 +121,3 @@ const formatValue = (value: number): string => {
   opacity: 0.8;
 }
 </style>
-
-

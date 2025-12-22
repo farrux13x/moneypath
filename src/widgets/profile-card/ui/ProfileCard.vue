@@ -6,7 +6,7 @@
           {{ userInitials }}
         </div>
       </div>
-      
+
       <div class="profile-info">
         <h2 class="profile-name">{{ user?.name || 'User' }}</h2>
         <p v-if="user?.email" class="profile-email">{{ user.email }}</p>
@@ -16,15 +16,22 @@
       <div class="profile-details">
         <div class="profile-detail-item">
           <span class="detail-label">Currency:</span>
-          <span class="detail-value">{{ getCurrencySymbol(user?.currency || 'USD') }} {{ user?.currency || 'USD' }}</span>
+          <span class="detail-value"
+            >{{ getCurrencySymbol(user?.currency || 'USD') }}
+            {{ user?.currency || 'USD' }}</span
+          >
         </div>
         <div class="profile-detail-item">
           <span class="detail-label">Date Format:</span>
-          <span class="detail-value">{{ user?.dateFormat || 'MM/DD/YYYY' }}</span>
+          <span class="detail-value">{{
+            user?.dateFormat || 'MM/DD/YYYY'
+          }}</span>
         </div>
         <div class="profile-detail-item">
           <span class="detail-label">Theme:</span>
-          <span class="detail-value">{{ capitalize(user?.theme || 'light') }}</span>
+          <span class="detail-value">{{
+            capitalize(user?.theme || 'light')
+          }}</span>
         </div>
         <div class="profile-detail-item">
           <span class="detail-label">Member Since:</span>
@@ -62,7 +69,7 @@ const getCurrencySymbol = (currency: string): string => {
     CAD: '$',
     AUD: '$',
     CHF: 'Fr',
-    RUB: '₽'
+    RUB: '₽',
   }
   return symbols[currency] || '$'
 }
@@ -77,7 +84,7 @@ const formatDate = (dateString?: string): string => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 </script>
@@ -95,7 +102,11 @@ const formatDate = (dateString?: string): string => {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,5 +169,3 @@ const formatDate = (dateString?: string): string => {
   font-weight: 600;
 }
 </style>
-
-

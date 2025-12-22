@@ -9,7 +9,7 @@
         placeholder="0.00"
         :error="errors.amount"
       />
-      
+
       <div class="input-wrapper">
         <label class="input-label">Category</label>
         <select
@@ -25,7 +25,9 @@
             {{ category.name }}
           </option>
         </select>
-        <span v-if="errors.category" class="input-error">{{ errors.category }}</span>
+        <span v-if="errors.category" class="input-error">{{
+          errors.category
+        }}</span>
       </div>
 
       <Input
@@ -42,7 +44,12 @@
         :error="errors.date"
       />
 
-      <Button type="submit" variant="primary" full-width :disabled="isSubmitting">
+      <Button
+        type="submit"
+        variant="primary"
+        full-width
+        :disabled="isSubmitting"
+      >
         {{ isSubmitting ? 'Adding...' : 'Add Expense' }}
       </Button>
     </form>
@@ -68,14 +75,14 @@ const formData = reactive({
   amount: '' as number | string,
   category: '',
   description: '',
-  date: new Date().toISOString().split('T')[0]
+  date: new Date().toISOString().split('T')[0],
 })
 
 const errors = reactive({
   amount: '',
   category: '',
   description: '',
-  date: ''
+  date: '',
 })
 
 const isSubmitting = ref(false)
@@ -113,7 +120,7 @@ const handleSubmit = () => {
     amount: Number(formData.amount),
     category: formData.category,
     description: formData.description.trim() || '',
-    date: formData.date
+    date: formData.date,
   })
 
   // Reset form
@@ -123,7 +130,7 @@ const handleSubmit = () => {
   formData.date = new Date().toISOString().split('T')[0]
 
   isSubmitting.value = false
-  
+
   // Emit event when expense is added
   emit('expense-added')
 }
@@ -177,4 +184,3 @@ select.input--error {
   border-color: var(--danger-color);
 }
 </style>
-

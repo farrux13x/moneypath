@@ -7,7 +7,9 @@
       </div>
       <div class="statistics-card-content">
         <div class="statistics-card-value">{{ value }}</div>
-        <div v-if="subtitle" class="statistics-card-subtitle">{{ subtitle }}</div>
+        <div v-if="subtitle" class="statistics-card-subtitle">
+          {{ subtitle }}
+        </div>
       </div>
     </div>
   </Card>
@@ -68,5 +70,3 @@ defineProps<Props>()
   color: var(--text-secondary);
 }
 </style>
-
-

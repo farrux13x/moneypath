@@ -24,12 +24,7 @@
       />
 
       <!-- Area under line -->
-      <path
-        :d="areaPath"
-        :fill="color"
-        opacity="0.2"
-        class="area"
-      />
+      <path :d="areaPath" :fill="color" opacity="0.2" class="area" />
 
       <!-- Data points -->
       <circle
@@ -88,7 +83,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   width: 400,
   height: 300,
-  color: '#6366f1'
+  color: '#6366f1',
 })
 
 const padding = 50
@@ -97,18 +92,19 @@ const chartWidth = props.width - padding * 2
 
 const maxValue = computed(() => {
   if (props.data.length === 0) return 1
-  return Math.max(...props.data.map(d => d.value), 0) || 1
+  return Math.max(...props.data.map((d) => d.value), 0) || 1
 })
 
 const points = computed(() => {
   return props.data.map((item, index) => {
     const x = padding + (index / (props.data.length - 1 || 1)) * chartWidth
-    const y = padding + chartHeight - (item.value / maxValue.value) * chartHeight
+    const y =
+      padding + chartHeight - (item.value / maxValue.value) * chartHeight
     return {
       x,
       y,
       label: item.label,
-      value: item.value
+      value: item.value,
     }
   })
 })
@@ -116,7 +112,10 @@ const points = computed(() => {
 const linePath = computed(() => {
   if (points.value.length === 0) return ''
   return points.value.reduce((path, point, index) => {
-    return path + (index === 0 ? `M ${point.x} ${point.y}` : ` L ${point.x} ${point.y}`)
+    return (
+      path +
+      (index === 0 ? `M ${point.x} ${point.y}` : ` L ${point.x} ${point.y}`)
+    )
   }, '')
 })
 
@@ -147,5 +146,3 @@ const areaPath = computed(() => {
   r: 6;
 }
 </style>
-
-

@@ -19,7 +19,10 @@
           >
             {{ category.name }}
           </div>
-          <div class="category-color-display" :style="{ backgroundColor: category.color }"></div>
+          <div
+            class="category-color-display"
+            :style="{ backgroundColor: category.color }"
+          ></div>
         </div>
         <Button
           variant="danger"
@@ -35,14 +38,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useCategories } from '@/entities/category/model/useCategories'
 
 const { categories, removeCategory } = useCategories()
 
-const defaultCategoryIds = ['food', 'transport', 'shopping', 'bills', 'entertainment', 'health', 'education', 'other']
+const defaultCategoryIds = [
+  'food',
+  'transport',
+  'shopping',
+  'bills',
+  'entertainment',
+  'health',
+  'education',
+  'other',
+]
 
 const isDefaultCategory = (id: string): boolean => {
   return defaultCategoryIds.includes(id)
@@ -54,7 +65,11 @@ const handleRemove = (id: string) => {
     return
   }
 
-  if (confirm('Are you sure you want to delete this category? Expenses using this category will still be visible.')) {
+  if (
+    confirm(
+      'Are you sure you want to delete this category? Expenses using this category will still be visible.',
+    )
+  ) {
     removeCategory(id)
   }
 }
@@ -127,5 +142,3 @@ const handleRemove = (id: string) => {
   }
 }
 </style>
-
-

@@ -6,7 +6,7 @@
     <SettingsPage v-else-if="currentPage === 'export'" />
     <ProfilePage v-else-if="currentPage === 'profile'" />
     <AddTransactionPage v-else-if="currentPage === 'add-transaction'" />
-    
+
     <BottomNavigation
       v-if="currentPage !== 'add-transaction'"
       :current-page="currentPage"
@@ -25,7 +25,14 @@ import { ProfilePage } from '@/pages/profile/ui'
 import { AddTransactionPage } from '@/pages/add-transaction/ui'
 import { BottomNavigation } from '@/widgets/bottom-navigation/ui'
 
-const currentPage = ref<'home' | 'categories' | 'statistics' | 'export' | 'profile' | 'add-transaction'>('home')
+const currentPage = ref<
+  | 'home'
+  | 'categories'
+  | 'statistics'
+  | 'export'
+  | 'profile'
+  | 'add-transaction'
+>('home')
 
 const updatePage = () => {
   const hash = window.location.hash.slice(1)
@@ -61,4 +68,3 @@ onUnmounted(() => {
   window.removeEventListener('hashchange', updatePage)
 })
 </script>
-

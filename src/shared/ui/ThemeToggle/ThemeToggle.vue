@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 import { useTheme } from '@/shared/lib/theme/useTheme'
 
-const { currentTheme, effectiveTheme, toggleTheme } = useTheme()
+const { effectiveTheme, toggleTheme } = useTheme()
 
 const themeIcon = computed(() => {
   const theme = effectiveTheme.value
@@ -64,10 +64,9 @@ const themeLabel = computed(() => {
   .theme-toggle {
     padding: 0.5rem;
   }
-  
+
   .theme-label {
     display: none;
   }
 }
 </style>
-

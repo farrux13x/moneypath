@@ -15,7 +15,6 @@
           <CategoryList />
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -72,7 +71,6 @@ import { CategoryList } from '@/features/category-list/ui'
   width: 100%;
 }
 
-
 @media (min-width: 1024px) {
   .page-content {
     grid-template-columns: 1fr 1fr;
@@ -85,4 +83,3 @@ import { CategoryList } from '@/features/category-list/ui'
   }
 }
 </style>
-

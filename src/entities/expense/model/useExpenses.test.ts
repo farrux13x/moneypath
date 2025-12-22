@@ -9,10 +9,21 @@ describe('useExpenses', () => {
 
   it('adds expenses and computes totals by category and month', async () => {
     const { useExpenses } = await import('./useExpenses')
-    const { addExpense, totalAmount, expensesByCategory, monthlyExpenses } = useExpenses()
+    const { addExpense, totalAmount, expensesByCategory, monthlyExpenses } =
+      useExpenses()
 
-    addExpense({ amount: 10, category: 'food', date: '2024-03-10', description: 'Lunch' })
-    addExpense({ amount: 20, category: 'food', date: '2024-03-11', description: 'Dinner' })
+    addExpense({
+      amount: 10,
+      category: 'food',
+      date: '2024-03-10',
+      description: 'Lunch',
+    })
+    addExpense({
+      amount: 20,
+      category: 'food',
+      date: '2024-03-11',
+      description: 'Dinner',
+    })
 
     expect(totalAmount.value).toBe(30)
     expect(expensesByCategory.value.food).toBe(30)
@@ -28,7 +39,7 @@ describe('useExpenses', () => {
       amount: 12,
       category: 'bills',
       date: '2024-02-01',
-      description: 'Internet'
+      description: 'Internet',
     })
 
     importExpense({
@@ -36,7 +47,7 @@ describe('useExpenses', () => {
       amount: 18,
       category: 'bills',
       date: '2024-02-01',
-      description: 'Internet updated'
+      description: 'Internet updated',
     })
 
     expect(expenses.value).toHaveLength(1)
@@ -47,7 +58,12 @@ describe('useExpenses', () => {
     const { useExpenses } = await import('./useExpenses')
     const { addExpense, clearAllExpenses, expenses } = useExpenses()
 
-    addExpense({ amount: 5, category: 'other', date: '2024-01-05', description: 'Snack' })
+    addExpense({
+      amount: 5,
+      category: 'other',
+      date: '2024-01-05',
+      description: 'Snack',
+    })
     clearAllExpenses()
 
     expect(expenses.value).toHaveLength(0)

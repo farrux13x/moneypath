@@ -10,7 +10,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  padded: true
+  padded: true,
 })
 </script>
 
@@ -32,5 +32,3 @@ withDefaults(defineProps<Props>(), {
   }
 }
 </style>
-
-

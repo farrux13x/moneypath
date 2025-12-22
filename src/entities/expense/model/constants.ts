@@ -8,7 +8,5 @@ export const EXPENSE_CATEGORIES: ExpenseCategory[] = [
   { id: 'entertainment', name: 'Entertainment', color: '#ec4899' },
   { id: 'health', name: 'Health & Fitness', color: '#10b981' },
   { id: 'education', name: 'Education', color: '#6366f1' },
-  { id: 'other', name: 'Other', color: '#6b7280' }
+  { id: 'other', name: 'Other', color: '#6b7280' },
 ]
-
-

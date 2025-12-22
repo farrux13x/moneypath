@@ -64,5 +64,3 @@ const handleBack = () => {
   }
 }
 </style>
-
-

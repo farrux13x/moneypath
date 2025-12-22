@@ -4,16 +4,14 @@
       <h2 class="results-title">Search Results</h2>
       <div v-if="results.length === 0" class="no-results">
         <p>No expenses found matching your search criteria.</p>
-        <p class="no-results-hint">Try adjusting your filters or search query.</p>
+        <p class="no-results-hint">
+          Try adjusting your filters or search query.
+        </p>
       </div>
     </div>
 
     <div v-if="results.length > 0" class="results-list">
-      <div
-        v-for="expense in results"
-        :key="expense.id"
-        class="result-item"
-      >
+      <div v-for="expense in results" :key="expense.id" class="result-item">
         <div class="result-item-content">
           <div
             class="result-category-badge"
@@ -22,16 +20,14 @@
             {{ getCategoryName(expense.category) }}
           </div>
           <div class="result-details">
-            <p class="result-description">{{ expense.description || 'No description' }}</p>
+            <p class="result-description">
+              {{ expense.description || 'No description' }}
+            </p>
             <p class="result-date">{{ formatDate(expense.date) }}</p>
           </div>
           <div class="result-amount">${{ expense.amount.toFixed(2) }}</div>
         </div>
-        <Button
-          variant="danger"
-          size="sm"
-          @click="handleRemove(expense.id)"
-        >
+        <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
         </Button>
       </div>
@@ -65,7 +61,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { removeExpense } = useExpenses()
-const { categories, getCategoryById } = useCategories()
+const { getCategoryById } = useCategories()
 
 const getCategoryName = (categoryId: string): string => {
   return getCategoryById(categoryId)?.name || 'Unknown'
@@ -80,7 +76,7 @@ const formatDate = (dateString: string): string => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
@@ -224,5 +220,3 @@ const handleRemove = (id: string) => {
   }
 }
 </style>
-
-

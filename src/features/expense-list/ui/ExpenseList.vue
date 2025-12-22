@@ -19,20 +19,21 @@
         class="expense-item"
       >
         <div class="expense-item-content">
-          <div class="expense-category-badge" :style="{ backgroundColor: getCategoryColor(expense.category) }">
+          <div
+            class="expense-category-badge"
+            :style="{ backgroundColor: getCategoryColor(expense.category) }"
+          >
             {{ getCategoryName(expense.category) }}
           </div>
           <div class="expense-details">
-            <p class="expense-description">{{ expense.description || 'No description' }}</p>
+            <p class="expense-description">
+              {{ expense.description || 'No description' }}
+            </p>
             <p class="expense-date">{{ formatDate(expense.date) }}</p>
           </div>
           <div class="expense-amount">${{ expense.amount.toFixed(2) }}</div>
         </div>
-        <Button
-          variant="danger"
-          size="sm"
-          @click="handleRemove(expense.id)"
-        >
+        <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
         </Button>
       </div>
@@ -48,7 +49,7 @@ import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
 
 const { expenses, totalAmount, removeExpense } = useExpenses()
-const { categories, getCategoryById } = useCategories()
+const { getCategoryById } = useCategories()
 
 const sortedExpenses = computed(() => {
   return [...expenses.value].sort((a, b) => {
@@ -69,7 +70,7 @@ const formatDate = (dateString: string): string => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
@@ -188,4 +189,3 @@ const handleRemove = (id: string) => {
   }
 }
 </style>
-

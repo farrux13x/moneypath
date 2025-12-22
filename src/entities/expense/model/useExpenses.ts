@@ -7,7 +7,7 @@ export function useExpenses() {
   const addExpense = (expense: Omit<Expense, 'id'>) => {
     const newExpense: Expense = {
       ...expense,
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
+      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
     }
     expenses.value.push(newExpense)
     // Save to localStorage
@@ -15,13 +15,15 @@ export function useExpenses() {
   }
 
   const removeExpense = (id: string) => {
-    expenses.value = expenses.value.filter(exp => exp.id !== id)
+    expenses.value = expenses.value.filter((exp) => exp.id !== id)
     localStorage.setItem('expenses', JSON.stringify(expenses.value))
   }
 
   const importExpense = (expense: Expense) => {
     // Check if expense with this ID already exists
-    const existingIndex = expenses.value.findIndex(exp => exp.id === expense.id)
+    const existingIndex = expenses.value.findIndex(
+      (exp) => exp.id === expense.id,
+    )
     if (existingIndex !== -1) {
       expenses.value[existingIndex] = expense
     } else {
@@ -41,7 +43,7 @@ export function useExpenses() {
 
   const expensesByCategory = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       grouped[exp.category] = (grouped[exp.category] || 0) + exp.amount
     })
     return grouped
@@ -49,7 +51,7 @@ export function useExpenses() {
 
   const expensesByDate = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       const date = exp.date
       grouped[date] = (grouped[date] || 0) + exp.amount
     })
@@ -58,7 +60,7 @@ export function useExpenses() {
 
   const monthlyExpenses = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       const date = new Date(exp.date)
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
       grouped[monthKey] = (grouped[monthKey] || 0) + exp.amount
@@ -68,7 +70,7 @@ export function useExpenses() {
 
   const weeklyExpenses = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       const date = new Date(exp.date)
       const weekStart = new Date(date)
       weekStart.setDate(date.getDate() - date.getDay())
@@ -106,7 +108,7 @@ export function useExpenses() {
 
   const dailyExpenses = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       const date = exp.date
       grouped[date] = (grouped[date] || 0) + exp.amount
     })
@@ -115,7 +117,7 @@ export function useExpenses() {
 
   const yearlyExpenses = computed(() => {
     const grouped: Record<string, number> = {}
-    expenses.value.forEach(exp => {
+    expenses.value.forEach((exp) => {
       const date = new Date(exp.date)
       const yearKey = date.getFullYear().toString()
       grouped[yearKey] = (grouped[yearKey] || 0) + exp.amount
@@ -123,7 +125,9 @@ export function useExpenses() {
     return grouped
   })
 
-  const getExpensesByPeriod = (period: 'daily' | 'weekly' | 'monthly' | 'yearly') => {
+  const getExpensesByPeriod = (
+    period: 'daily' | 'weekly' | 'monthly' | 'yearly',
+  ) => {
     switch (period) {
       case 'daily':
         return dailyExpenses.value
@@ -170,7 +174,6 @@ export function useExpenses() {
     topCategories,
     thisMonthTotal,
     lastMonthTotal,
-    getExpensesByPeriod
+    getExpensesByPeriod,
   }
 }
-

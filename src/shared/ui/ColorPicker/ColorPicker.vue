@@ -5,13 +5,17 @@
       <input
         type="color"
         :value="modelValue"
-        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        @input="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
         class="color-input"
       />
       <input
         type="text"
         :value="modelValue"
-        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        @input="
+          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+        "
         class="color-text-input"
         placeholder="#000000"
         maxlength="7"
@@ -73,5 +77,3 @@ defineEmits<{
   box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
 }
 </style>
-
-

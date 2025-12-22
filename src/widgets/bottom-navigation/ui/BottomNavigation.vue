@@ -18,7 +18,7 @@ interface Props {
   currentPage: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emit = defineEmits<{
   navigate: [page: string]
@@ -28,7 +28,7 @@ const navItems = [
   { id: 'home', label: 'Transactions', icon: '📋' },
   { id: 'statistics', label: 'Statistics', icon: '📊' },
   { id: 'categories', label: 'Categories', icon: '📁' },
-  { id: 'profile', label: 'Profile', icon: '👤' }
+  { id: 'profile', label: 'Profile', icon: '👤' },
 ]
 
 const navigate = (page: string) => {
@@ -89,11 +89,9 @@ const navigate = (page: string) => {
   letter-spacing: 0.05em;
 }
 
-
 @media (min-width: 768px) {
   .bottom-navigation {
     display: none;
   }
 }
 </style>
-

@@ -5,13 +5,15 @@ import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT, DEFAULT_THEME } from './types'
 const user = ref<User | null>(null)
 
 export function useUser() {
-  const createUser = (userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const createUser = (
+    userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>,
+  ) => {
     const now = new Date().toISOString()
     const newUser: User = {
       ...userData,
       id: 'user-' + Date.now().toString(),
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     }
     user.value = newUser
     saveUser()
@@ -26,15 +28,15 @@ export function useUser() {
         email: '',
         currency: DEFAULT_CURRENCY,
         dateFormat: DEFAULT_DATE_FORMAT,
-        theme: DEFAULT_THEME
+        theme: DEFAULT_THEME,
       })
     }
-    
+
     if (user.value) {
       user.value = {
         ...user.value,
         ...updates,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       }
       saveUser()
     }
@@ -73,15 +75,13 @@ export function useUser() {
       email: '',
       currency: DEFAULT_CURRENCY,
       dateFormat: DEFAULT_DATE_FORMAT,
-      theme: DEFAULT_THEME
+      theme: DEFAULT_THEME,
     })
   }
 
   return {
     user: computed(() => user.value),
     updateUser,
-    clearUser
+    clearUser,
   }
 }
-
-

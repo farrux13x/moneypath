@@ -81,8 +81,12 @@
           >
             <div class="top-category-rank">#{{ index + 1 }}</div>
             <div class="top-category-info">
-              <div class="top-category-name">{{ getCategoryName(category.category) }}</div>
-              <div class="top-category-amount">{{ formatCurrency(category.amount) }}</div>
+              <div class="top-category-name">
+                {{ getCategoryName(category.category) }}
+              </div>
+              <div class="top-category-amount">
+                {{ formatCurrency(category.amount) }}
+              </div>
             </div>
             <div
               class="top-category-color"
@@ -91,7 +95,6 @@
           </div>
         </div>
       </Card>
-
     </div>
   </div>
 </template>
@@ -113,20 +116,15 @@ const selectedPeriod = ref<Period>('monthly')
 
 const {
   expenses,
-  totalAmount,
-  expensesByCategory,
-  monthlyExpenses,
   weeklyExpenses,
   dailyExpenses,
   yearlyExpenses,
-  averageExpense,
-  topCategories,
   thisMonthTotal,
   lastMonthTotal,
-  getExpensesByPeriod
+  getExpensesByPeriod,
 } = useExpenses()
 
-const { categories, getCategoryById } = useCategories()
+const { getCategoryById } = useCategories()
 
 const handlePeriodChange = (period: Period) => {
   selectedPeriod.value = period
@@ -209,11 +207,15 @@ const getPeriodTitle = (): string => {
 
 const getPeriodComparison = (): string => {
   const diff = periodTotal.value - previousPeriodTotal.value
-  const periodLabel = selectedPeriod.value === 'daily' ? 'yesterday' 
-    : selectedPeriod.value === 'weekly' ? 'last week'
-    : selectedPeriod.value === 'monthly' ? 'last month'
-    : 'last year'
-  
+  const periodLabel =
+    selectedPeriod.value === 'daily'
+      ? 'yesterday'
+      : selectedPeriod.value === 'weekly'
+        ? 'last week'
+        : selectedPeriod.value === 'monthly'
+          ? 'last month'
+          : 'last year'
+
   if (diff > 0) {
     return `↑ ${formatCurrency(diff)} from ${periodLabel}`
   } else if (diff < 0) {
@@ -253,13 +255,12 @@ const getPeriodChartTitle = (): string => {
 }
 
 const filteredExpenses = computed(() => {
-  const now = new Date()
   const periodData = periodExpenses.value
   const periodKeys = Object.keys(periodData)
-  
+
   if (periodKeys.length === 0) return []
-  
-  return expenses.value.filter(exp => {
+
+  return expenses.value.filter((exp) => {
     const expDate = new Date(exp.date)
     if (selectedPeriod.value === 'daily') {
       return periodKeys.includes(exp.date)
@@ -280,7 +281,7 @@ const filteredExpenses = computed(() => {
 
 const filteredExpensesByCategory = computed(() => {
   const grouped: Record<string, number> = {}
-  filteredExpenses.value.forEach(exp => {
+  filteredExpenses.value.forEach((exp) => {
     grouped[exp.category] = (grouped[exp.category] || 0) + exp.amount
   })
   return grouped
@@ -304,30 +305,36 @@ const filteredAverageExpense = computed(() => {
 })
 
 const categoryPieData = computed(() => {
-  return Object.entries(filteredExpensesByCategory.value).map(([category, amount]) => ({
-    label: getCategoryName(category),
-    value: amount,
-    color: getCategoryColor(category)
-  }))
+  return Object.entries(filteredExpensesByCategory.value).map(
+    ([category, amount]) => ({
+      label: getCategoryName(category),
+      value: amount,
+      color: getCategoryColor(category),
+    }),
+  )
 })
 
 const categoryBarData = computed(() => {
-  return filteredTopCategories.value.map(cat => ({
+  return filteredTopCategories.value.map((cat) => ({
     label: getCategoryName(cat.category),
     value: cat.amount,
-    color: getCategoryColor(cat.category)
+    color: getCategoryColor(cat.category),
   }))
 })
 
 const trendLineData = computed(() => {
   const periodData = periodExpenses.value
-  const sorted = Object.entries(periodData)
-    .sort(([a], [b]) => a.localeCompare(b))
-  
+  const sorted = Object.entries(periodData).sort(([a], [b]) =>
+    a.localeCompare(b),
+  )
+
   let sliceCount = 6
-  if (selectedPeriod.value === 'daily') sliceCount = 7 // Last 7 days
-  else if (selectedPeriod.value === 'weekly') sliceCount = 8 // Last 8 weeks
-  else if (selectedPeriod.value === 'monthly') sliceCount = 6 // Last 6 months
+  if (selectedPeriod.value === 'daily')
+    sliceCount = 7 // Last 7 days
+  else if (selectedPeriod.value === 'weekly')
+    sliceCount = 8 // Last 8 weeks
+  else if (selectedPeriod.value === 'monthly')
+    sliceCount = 6 // Last 6 months
   else if (selectedPeriod.value === 'yearly') sliceCount = 5 // Last 5 years
 
   const sliced = sorted.slice(-sliceCount)
@@ -336,45 +343,16 @@ const trendLineData = computed(() => {
     let label = ''
     if (selectedPeriod.value === 'daily') {
       const date = new Date(key)
-      label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      label = date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })
     } else if (selectedPeriod.value === 'weekly') {
       const date = new Date(key)
-      label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-    } else if (selectedPeriod.value === 'monthly') {
-      const [year, monthNum] = key.split('-')
-      const date = new Date(parseInt(year), parseInt(monthNum) - 1, 1)
-      label = date.toLocaleDateString('en-US', { month: 'short' })
-    } else if (selectedPeriod.value === 'yearly') {
-      label = key
-    }
-    return {
-      label,
-      value: amount
-    }
-  })
-})
-
-const periodBarData = computed(() => {
-  const periodData = periodExpenses.value
-  const sorted = Object.entries(periodData)
-    .sort(([a], [b]) => a.localeCompare(b))
-  
-  let sliceCount = 4
-  if (selectedPeriod.value === 'daily') sliceCount = 7 // Last 7 days
-  else if (selectedPeriod.value === 'weekly') sliceCount = 4 // Last 4 weeks
-  else if (selectedPeriod.value === 'monthly') sliceCount = 6 // Last 6 months
-  else if (selectedPeriod.value === 'yearly') sliceCount = 5 // Last 5 years
-
-  const sliced = sorted.slice(-sliceCount)
-
-  return sliced.map(([key, amount]) => {
-    let label = ''
-    if (selectedPeriod.value === 'daily') {
-      const date = new Date(key)
-      label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-    } else if (selectedPeriod.value === 'weekly') {
-      const date = new Date(key)
-      label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      label = date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })
     } else if (selectedPeriod.value === 'monthly') {
       const [year, monthNum] = key.split('-')
       const date = new Date(parseInt(year), parseInt(monthNum) - 1, 1)
@@ -385,11 +363,55 @@ const periodBarData = computed(() => {
     return {
       label,
       value: amount,
-      color: '#6366f1'
     }
   })
 })
 
+const periodBarData = computed(() => {
+  const periodData = periodExpenses.value
+  const sorted = Object.entries(periodData).sort(([a], [b]) =>
+    a.localeCompare(b),
+  )
+
+  let sliceCount = 4
+  if (selectedPeriod.value === 'daily')
+    sliceCount = 7 // Last 7 days
+  else if (selectedPeriod.value === 'weekly')
+    sliceCount = 4 // Last 4 weeks
+  else if (selectedPeriod.value === 'monthly')
+    sliceCount = 6 // Last 6 months
+  else if (selectedPeriod.value === 'yearly') sliceCount = 5 // Last 5 years
+
+  const sliced = sorted.slice(-sliceCount)
+
+  return sliced.map(([key, amount]) => {
+    let label = ''
+    if (selectedPeriod.value === 'daily') {
+      const date = new Date(key)
+      label = date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })
+    } else if (selectedPeriod.value === 'weekly') {
+      const date = new Date(key)
+      label = date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      })
+    } else if (selectedPeriod.value === 'monthly') {
+      const [year, monthNum] = key.split('-')
+      const date = new Date(parseInt(year), parseInt(monthNum) - 1, 1)
+      label = date.toLocaleDateString('en-US', { month: 'short' })
+    } else if (selectedPeriod.value === 'yearly') {
+      label = key
+    }
+    return {
+      label,
+      value: amount,
+      color: '#6366f1',
+    }
+  })
+})
 </script>
 
 <style scoped>
@@ -506,7 +528,6 @@ const periodBarData = computed(() => {
   flex-shrink: 0;
 }
 
-
 @media (min-width: 768px) {
   .page-title {
     font-size: 4rem;
@@ -523,4 +544,3 @@ const periodBarData = computed(() => {
   }
 }
 </style>
-

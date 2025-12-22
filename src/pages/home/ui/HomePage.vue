@@ -5,22 +5,29 @@
       <header class="mobile-header">
         <h1 class="mobile-title">Transactions</h1>
         <div class="header-actions">
-          <button class="filter-button" @click="showSearch = !showSearch" aria-label="Filter">
+          <button
+            class="filter-button"
+            @click="showSearch = !showSearch"
+            aria-label="Filter"
+          >
             <span>🔍</span>
           </button>
-          <button class="add-button" @click="goToAddTransaction" aria-label="Add Expense">
+          <button
+            class="add-button"
+            @click="goToAddTransaction"
+            aria-label="Add Expense"
+          >
             <span class="add-icon">+</span>
           </button>
         </div>
       </header>
 
       <div v-if="showSearch" class="mobile-search-section">
-        <SearchExpenses 
+        <SearchExpenses
           @search-results="handleSearchResults"
           @filters-active="handleFiltersActive"
         />
       </div>
-
 
       <div v-if="showSearchResults" class="mobile-results">
         <SearchResults :results="searchResults" />
@@ -36,7 +43,9 @@
       <div class="page-container">
         <header class="page-header">
           <h1 class="page-title">💰 MoneyTrack</h1>
-          <p class="page-subtitle">Track your expenses and manage your budget</p>
+          <p class="page-subtitle">
+            Track your expenses and manage your budget
+          </p>
         </header>
 
         <div class="page-content">
@@ -45,7 +54,7 @@
           </div>
 
           <div class="content-section">
-            <SearchExpenses 
+            <SearchExpenses
               @search-results="handleSearchResults"
               @filters-active="handleFiltersActive"
             />
@@ -61,8 +70,12 @@
         </div>
 
         <div class="navigation">
-          <Button variant="secondary" @click="goToStatistics">📊 View Statistics</Button>
-          <Button variant="secondary" @click="goToCategories">📁 Manage Categories</Button>
+          <Button variant="secondary" @click="goToStatistics"
+            >📊 View Statistics</Button
+          >
+          <Button variant="secondary" @click="goToCategories"
+            >📁 Manage Categories</Button
+          >
           <Button variant="secondary" @click="goToSettings">⚙️ Settings</Button>
           <Button variant="secondary" @click="goToProfile">👤 Profile</Button>
         </div>
@@ -183,7 +196,11 @@ const goToAddTransaction = () => {
 }
 
 .add-button {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -283,4 +300,3 @@ const goToAddTransaction = () => {
   }
 }
 </style>
-

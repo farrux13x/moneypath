@@ -19,7 +19,6 @@
           <ImportData />
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -77,7 +76,6 @@ import { ImportData } from '@/features/import-data/ui'
   width: 100%;
 }
 
-
 @media (min-width: 768px) {
   .page-title {
     font-size: 4rem;
@@ -90,4 +88,3 @@ import { ImportData } from '@/features/import-data/ui'
   }
 }
 </style>
-

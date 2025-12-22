@@ -17,12 +17,16 @@
       </div>
 
       <div class="profile-actions">
-        <Button variant="primary" full-width @click="goToExport" class="settings-button">
+        <Button
+          variant="primary"
+          full-width
+          @click="goToExport"
+          class="settings-button"
+        >
           <span class="button-icon">📤</span>
           <span>Export</span>
         </Button>
       </div>
-
     </div>
   </div>
 </template>
@@ -112,4 +116,3 @@ const goToExport = () => {
   }
 }
 </style>
-

@@ -28,7 +28,7 @@ const periods: { id: Period; label: string }[] = [
   { id: 'daily', label: 'Daily' },
   { id: 'weekly', label: 'Weekly' },
   { id: 'monthly', label: 'Monthly' },
-  { id: 'yearly', label: 'Yearly' }
+  { id: 'yearly', label: 'Yearly' },
 ]
 
 const selectPeriod = (period: Period) => {
@@ -82,5 +82,3 @@ const selectPeriod = (period: Period) => {
   }
 }
 </style>
-
-

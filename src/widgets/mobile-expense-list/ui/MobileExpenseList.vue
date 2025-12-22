@@ -12,7 +12,9 @@
       >
         <div class="group-header">
           <h3 class="group-date">{{ formatDateHeader(date) }}</h3>
-          <span class="group-total">${{ getGroupTotal(group).toFixed(2) }}</span>
+          <span class="group-total"
+            >${{ getGroupTotal(group).toFixed(2) }}</span
+          >
         </div>
 
         <div class="expense-items">
@@ -29,13 +31,21 @@
             <div class="expense-content">
               <div class="expense-main">
                 <div class="expense-info">
-                  <h4 class="expense-title">{{ expense.description || 'No description' }}</h4>
+                  <h4 class="expense-title">
+                    {{ expense.description || 'No description' }}
+                  </h4>
                   <div class="expense-meta">
-                    <span class="expense-category">{{ getCategoryName(expense.category) }}</span>
-                    <span class="expense-time">{{ formatTime(expense.date) }}</span>
+                    <span class="expense-category">{{
+                      getCategoryName(expense.category)
+                    }}</span>
+                    <span class="expense-time">{{
+                      formatTime(expense.date)
+                    }}</span>
                   </div>
                 </div>
-                <div class="expense-amount">-${{ expense.amount.toFixed(2) }}</div>
+                <div class="expense-amount">
+                  -${{ expense.amount.toFixed(2) }}
+                </div>
               </div>
             </div>
           </div>
@@ -52,7 +62,7 @@ import { useCategories } from '@/entities/category/model/useCategories'
 import type { Expense } from '@/entities/expense/model/types'
 
 const { expenses } = useExpenses()
-const { categories, getCategoryById } = useCategories()
+const { getCategoryById } = useCategories()
 
 const emit = defineEmits<{
   expenseClick: [expense: Expense]
@@ -60,8 +70,8 @@ const emit = defineEmits<{
 
 const groupedExpenses = computed(() => {
   const groups: Record<string, Expense[]> = {}
-  
-  expenses.value.forEach(expense => {
+
+  expenses.value.forEach((expense) => {
     const date = expense.date
     if (!groups[date]) {
       groups[date] = []
@@ -75,14 +85,14 @@ const groupedExpenses = computed(() => {
   })
 
   // Sort expenses within each group by time (newest first)
-  sortedDates.forEach(date => {
+  sortedDates.forEach((date) => {
     groups[date].sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime()
     })
   })
 
   const result: Record<string, Expense[]> = {}
-  sortedDates.forEach(date => {
+  sortedDates.forEach((date) => {
     result[date] = groups[date]
   })
 
@@ -111,7 +121,7 @@ const formatDateHeader = (dateString: string): string => {
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     })
   }
 }
@@ -121,7 +131,7 @@ const formatTime = (dateString: string): string => {
   return date.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
-    hour12: false
+    hour12: false,
   })
 }
 
@@ -259,5 +269,3 @@ const handleExpenseClick = (expense: Expense) => {
   }
 }
 </style>
-
-

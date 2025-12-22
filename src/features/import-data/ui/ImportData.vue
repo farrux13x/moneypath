@@ -1,8 +1,10 @@
 <template>
   <Card>
     <h2 class="section-title">Import Data</h2>
-    <p class="section-description">Restore your expenses and categories from a JSON file</p>
-    
+    <p class="section-description">
+      Restore your expenses and categories from a JSON file
+    </p>
+
     <div class="import-options">
       <div class="import-option">
         <label class="checkbox-label">
@@ -14,7 +16,7 @@
           <span>Import Expenses</span>
         </label>
       </div>
-      
+
       <div class="import-option">
         <label class="checkbox-label">
           <input
@@ -65,9 +67,7 @@
       ✅ Data imported successfully!
     </div>
 
-    <div v-if="importError" class="error-message">
-      ❌ {{ importError }}
-    </div>
+    <div v-if="importError" class="error-message">❌ {{ importError }}</div>
   </Card>
 </template>
 
@@ -86,7 +86,7 @@ const { categories, importCategory, removeCategory } = useCategories()
 const importOptions = ref({
   expenses: true,
   categories: true,
-  replace: false
+  replace: false,
 })
 
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -96,7 +96,10 @@ const importSuccess = ref(false)
 const importError = ref('')
 
 const canImport = computed(() => {
-  return selectedFile.value !== null && (importOptions.value.expenses || importOptions.value.categories)
+  return (
+    selectedFile.value !== null &&
+    (importOptions.value.expenses || importOptions.value.categories)
+  )
 })
 
 const handleFileSelect = (event: Event) => {
@@ -165,7 +168,7 @@ const handleImport = async () => {
           if (validateExpense(expense)) {
             // Check if expense already exists (if not replacing)
             if (!importOptions.value.replace) {
-              const exists = expenses.value.some(e => e.id === expense.id)
+              const exists = expenses.value.some((e) => e.id === expense.id)
               if (exists) {
                 return // Skip duplicate
               }
@@ -186,8 +189,17 @@ const handleImport = async () => {
       } else {
         if (importOptions.value.replace) {
           // Remove all non-default categories
-          const defaultIds = ['food', 'transport', 'shopping', 'bills', 'entertainment', 'health', 'education', 'other']
-          categories.value.forEach(cat => {
+          const defaultIds = [
+            'food',
+            'transport',
+            'shopping',
+            'bills',
+            'entertainment',
+            'health',
+            'education',
+            'other',
+          ]
+          categories.value.forEach((cat) => {
             if (!defaultIds.includes(cat.id)) {
               removeCategory(cat.id)
             }
@@ -198,7 +210,7 @@ const handleImport = async () => {
           if (validateCategory(category)) {
             // Check if category already exists (if not replacing)
             if (!importOptions.value.replace) {
-              const exists = categories.value.some(c => c.id === category.id)
+              const exists = categories.value.some((c) => c.id === category.id)
               if (exists) {
                 return // Skip duplicate
               }
@@ -230,7 +242,8 @@ const handleImport = async () => {
       importError.value = ''
     }, 5000)
   } catch (error) {
-    importError.value = error instanceof Error ? error.message : 'Failed to import data'
+    importError.value =
+      error instanceof Error ? error.message : 'Failed to import data'
     importSuccess.value = false
   } finally {
     isImporting.value = false
@@ -335,4 +348,3 @@ const handleImport = async () => {
   font-size: 0.875rem;
 }
 </style>
-

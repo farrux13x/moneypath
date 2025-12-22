@@ -2,7 +2,7 @@
   <Card>
     <h2 class="section-title">Theme</h2>
     <p class="section-description">Choose your preferred theme</p>
-    
+
     <div class="theme-options">
       <button
         v-for="theme in themes"
@@ -27,8 +27,8 @@ const { currentTheme, setTheme } = useTheme()
 const themes = [
   { id: 'light', name: 'Light', icon: '☀️' },
   { id: 'dark', name: 'Dark', icon: '🌙' },
-  { id: 'auto', name: 'Auto (System)', icon: '🔄' }
-]
+  { id: 'auto', name: 'Auto (System)', icon: '🔄' },
+] as const
 </script>
 
 <style scoped>
@@ -94,5 +94,3 @@ const themes = [
   font-size: 1.25rem;
 }
 </style>
-
-

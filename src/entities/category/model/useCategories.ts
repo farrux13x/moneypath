@@ -10,7 +10,7 @@ const defaultCategories: Category[] = [
   { id: 'entertainment', name: 'Entertainment', color: '#ec4899' },
   { id: 'health', name: 'Health & Fitness', color: '#10b981' },
   { id: 'education', name: 'Education', color: '#6366f1' },
-  { id: 'other', name: 'Other', color: '#6b7280' }
+  { id: 'other', name: 'Other', color: '#6b7280' },
 ]
 
 const categories = ref<Category[]>([])
@@ -19,19 +19,19 @@ export function useCategories() {
   const addCategory = (category: Omit<Category, 'id'>) => {
     const newCategory: Category = {
       ...category,
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 9)
+      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
     }
     categories.value.push(newCategory)
     saveCategories()
   }
 
   const removeCategory = (id: string) => {
-    categories.value = categories.value.filter(cat => cat.id !== id)
+    categories.value = categories.value.filter((cat) => cat.id !== id)
     saveCategories()
   }
 
   const updateCategory = (id: string, updates: Partial<Category>) => {
-    const index = categories.value.findIndex(cat => cat.id === id)
+    const index = categories.value.findIndex((cat) => cat.id === id)
     if (index !== -1) {
       categories.value[index] = { ...categories.value[index], ...updates }
       saveCategories()
@@ -39,12 +39,14 @@ export function useCategories() {
   }
 
   const getCategoryById = (id: string): Category | undefined => {
-    return categories.value.find(cat => cat.id === id)
+    return categories.value.find((cat) => cat.id === id)
   }
 
   const importCategory = (category: Category) => {
     // Check if category with this ID already exists
-    const existingIndex = categories.value.findIndex(cat => cat.id === category.id)
+    const existingIndex = categories.value.findIndex(
+      (cat) => cat.id === category.id,
+    )
     if (existingIndex !== -1) {
       categories.value[existingIndex] = category
     } else {
@@ -86,7 +88,6 @@ export function useCategories() {
     updateCategory,
     getCategoryById,
     importCategory,
-    clearAllCategories
+    clearAllCategories,
   }
 }
-

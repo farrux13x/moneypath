@@ -12,7 +12,7 @@ describe('useCategories', () => {
     const { categories } = useCategories()
 
     expect(categories.value.length).toBeGreaterThan(0)
-    expect(categories.value.some(cat => cat.id === 'food')).toBe(true)
+    expect(categories.value.some((cat) => cat.id === 'food')).toBe(true)
   })
 
   it('adds and removes categories', async () => {

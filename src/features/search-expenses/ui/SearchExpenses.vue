@@ -1,7 +1,7 @@
 <template>
   <Card>
     <h2 class="search-title">🔍 Search Expenses</h2>
-    
+
     <div class="search-form">
       <Input
         v-model="searchQuery"
@@ -13,7 +13,11 @@
       <div class="search-filters">
         <div class="filter-group">
           <label class="filter-label">Category</label>
-          <select v-model="filters.category" @change="handleSearch" class="filter-select">
+          <select
+            v-model="filters.category"
+            @change="handleSearch"
+            class="filter-select"
+          >
             <option value="">All Categories</option>
             <option
               v-for="category in categories"
@@ -65,11 +69,16 @@
       </div>
 
       <div class="search-actions">
-        <Button variant="secondary" @click="clearFilters" :disabled="!hasActiveFilters">
+        <Button
+          variant="secondary"
+          @click="clearFilters"
+          :disabled="!hasActiveFilters"
+        >
           Clear Filters
         </Button>
         <div class="results-count">
-          {{ filteredExpenses.length }} {{ filteredExpenses.length === 1 ? 'result' : 'results' }}
+          {{ filteredExpenses.length }}
+          {{ filteredExpenses.length === 1 ? 'result' : 'results' }}
         </div>
       </div>
     </div>
@@ -93,7 +102,7 @@ const filters = reactive({
   minAmount: null as number | null,
   maxAmount: null as number | null,
   startDate: '',
-  endDate: ''
+  endDate: '',
 })
 
 const emit = defineEmits<{
@@ -118,7 +127,7 @@ const filteredExpenses = computed(() => {
   // Text search
   if (searchQuery.value.trim()) {
     const query = searchQuery.value.toLowerCase().trim()
-    results = results.filter(expense => {
+    results = results.filter((expense) => {
       const description = expense.description.toLowerCase()
       const categoryName = getCategoryName(expense.category).toLowerCase()
       return description.includes(query) || categoryName.includes(query)
@@ -127,23 +136,23 @@ const filteredExpenses = computed(() => {
 
   // Category filter
   if (filters.category) {
-    results = results.filter(expense => expense.category === filters.category)
+    results = results.filter((expense) => expense.category === filters.category)
   }
 
   // Amount range filter
   if (filters.minAmount !== null && filters.minAmount !== undefined) {
-    results = results.filter(expense => expense.amount >= filters.minAmount!)
+    results = results.filter((expense) => expense.amount >= filters.minAmount!)
   }
   if (filters.maxAmount !== null && filters.maxAmount !== undefined) {
-    results = results.filter(expense => expense.amount <= filters.maxAmount!)
+    results = results.filter((expense) => expense.amount <= filters.maxAmount!)
   }
 
   // Date range filter
   if (filters.startDate) {
-    results = results.filter(expense => expense.date >= filters.startDate)
+    results = results.filter((expense) => expense.date >= filters.startDate)
   }
   if (filters.endDate) {
-    results = results.filter(expense => expense.date <= filters.endDate)
+    results = results.filter((expense) => expense.date <= filters.endDate)
   }
 
   // Sort by date (newest first)
@@ -155,7 +164,9 @@ const filteredExpenses = computed(() => {
 })
 
 const getCategoryName = (categoryId: string): string => {
-  return categories.value.find(cat => cat.id === categoryId)?.name || 'Unknown'
+  return (
+    categories.value.find((cat) => cat.id === categoryId)?.name || 'Unknown'
+  )
 }
 
 const handleSearch = () => {
@@ -174,14 +185,22 @@ const clearFilters = () => {
 }
 
 // Watch for changes and emit results
-watch([filteredExpenses, searchQuery, filters], () => {
-  handleSearch()
-}, { immediate: true })
+watch(
+  [filteredExpenses, searchQuery, filters],
+  () => {
+    handleSearch()
+  },
+  { immediate: true },
+)
 
 // Emit initial state
-watch(hasActiveFilters, (active) => {
-  emit('filtersActive', active)
-}, { immediate: true })
+watch(
+  hasActiveFilters,
+  (active) => {
+    emit('filtersActive', active)
+  },
+  { immediate: true },
+)
 </script>
 
 <style scoped>
@@ -286,4 +305,3 @@ watch(hasActiveFilters, (active) => {
   }
 }
 </style>
-
