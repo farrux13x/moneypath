@@ -2,6 +2,8 @@
 
 A modern web application for tracking your expenses, built with Vue 3 Composition API, TypeScript, and Feature-Sliced Design architecture.
 
+Live site: https://moneypath-flow.netlify.app
+
 ## Features
 
 - ➕ Add expenses with amount, category, description, and date
