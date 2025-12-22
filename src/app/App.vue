@@ -32,6 +32,7 @@ import { ProfilePage } from '@/pages/profile/ui'
 import { AddTransactionPage } from '@/pages/add-transaction/ui'
 import { BottomNavigation } from '@/widgets/bottom-navigation/ui'
 import { TopNavigation } from '@/widgets/top-navigation/ui'
+import { useTheme } from '@/shared/lib/theme/useTheme'
 
 const currentPage = ref<
   | 'home'
@@ -41,6 +42,8 @@ const currentPage = ref<
   | 'profile'
   | 'add-transaction'
 >('home')
+
+useTheme()
 
 const updatePage = () => {
   const hash = window.location.hash.slice(1)
