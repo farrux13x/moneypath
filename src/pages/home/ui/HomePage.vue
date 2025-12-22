@@ -75,7 +75,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button } from '@/shared/ui/Button'
 import { AddExpenseForm } from '@/features/add-expense/ui'
 import { ExpenseList } from '@/features/expense-list/ui'
 import { SearchExpenses } from '@/features/search-expenses/ui'
@@ -99,21 +98,6 @@ const handleFiltersActive = (active: boolean) => {
   showSearchResults.value = active
 }
 
-const goToCategories = () => {
-  window.location.hash = 'categories'
-}
-
-const goToStatistics = () => {
-  window.location.hash = 'statistics'
-}
-
-const goToSettings = () => {
-  window.location.hash = 'settings'
-}
-
-const goToProfile = () => {
-  window.location.hash = 'profile'
-}
 
 const handleExpenseClick = (expense: Expense) => {
   // Handle expense click if needed (e.g., show details, edit)
