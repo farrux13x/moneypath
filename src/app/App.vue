@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <TopNavigation
+      v-if="currentPage !== 'add-transaction'"
+      class="desktop-only"
+      :current-page="currentPage"
+      @navigate="handleNavigate"
+    />
     <HomePage v-if="currentPage === 'home'" />
     <CategoriesPage v-else-if="currentPage === 'categories'" />
     <StatisticsPage v-else-if="currentPage === 'statistics'" />
@@ -9,6 +15,7 @@
 
     <BottomNavigation
       v-if="currentPage !== 'add-transaction'"
+      class="mobile-only"
       :current-page="currentPage"
       @navigate="handleNavigate"
     />
@@ -24,6 +31,7 @@ import { SettingsPage } from '@/pages/settings/ui'
 import { ProfilePage } from '@/pages/profile/ui'
 import { AddTransactionPage } from '@/pages/add-transaction/ui'
 import { BottomNavigation } from '@/widgets/bottom-navigation/ui'
+import { TopNavigation } from '@/widgets/top-navigation/ui'
 
 const currentPage = ref<
   | 'home'

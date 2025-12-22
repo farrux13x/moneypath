@@ -68,17 +68,6 @@
         <div v-else class="expense-list-section">
           <ExpenseList />
         </div>
-
-        <div class="navigation">
-          <Button variant="secondary" @click="goToStatistics"
-            >📊 View Statistics</Button
-          >
-          <Button variant="secondary" @click="goToCategories"
-            >📁 Manage Categories</Button
-          >
-          <Button variant="secondary" @click="goToSettings">⚙️ Settings</Button>
-          <Button variant="secondary" @click="goToProfile">👤 Profile</Button>
-        </div>
       </div>
     </div>
   </div>

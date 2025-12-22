@@ -89,7 +89,7 @@ const navigate = (page: string) => {
   letter-spacing: 0.05em;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 641px) {
   .bottom-navigation {
     display: none;
   }

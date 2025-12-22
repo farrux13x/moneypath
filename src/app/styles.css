@@ -67,18 +67,21 @@ body {
   min-height: 100vh;
   padding: 0;
   position: relative;
-  padding-bottom: 80px; /* Space for bottom navigation */
 }
 
-/* Mobile-first: Hide desktop layouts on mobile */
-@media (max-width: 767px) {
+/* Mobile-first: Hide desktop layouts on phones */
+@media (max-width: 640px) {
+  #app {
+    padding-bottom: 80px; /* Space for bottom navigation */
+  }
+
   .desktop-only {
     display: none !important;
   }
 }
 
 /* Tablet and Desktop */
-@media (min-width: 768px) {
+@media (min-width: 641px) {
   #app {
     padding: 2rem;
     padding-bottom: 2rem;
