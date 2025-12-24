@@ -2,8 +2,10 @@
   <div class="chat-page">
     <div class="chat-shell">
       <header class="chat-header">
-        <h1 class="chat-title">Chat</h1>
-        <p class="chat-subtitle">Start a conversation</p>
+        <div class="chat-header-text">
+          <h1 class="chat-title">{{ t('chat.title') }}</h1>
+          <p class="chat-subtitle">{{ t('chat.subtitle') }}</p>
+        </div>
       </header>
 
       <div ref="threadRef" class="chat-thread">
@@ -19,18 +21,18 @@
       </div>
 
       <form class="chat-input-bar" @submit.prevent="handleSend">
-        <button type="button" class="chat-action" aria-label="Attach">
+        <button type="button" class="chat-action" :aria-label="t('chat.attach')">
           +
         </button>
         <input
           v-model="draft"
           type="text"
           class="chat-input"
-          placeholder="Type a message..."
+          :placeholder="t('chat.placeholder')"
           @keydown.enter.exact.prevent="handleSend"
         />
         <button type="submit" class="chat-send" :disabled="isSending || !draft.trim()">
-          {{ isSending ? 'Sending...' : 'Send' }}
+          {{ isSending ? t('chat.sending') : t('chat.send') }}
         </button>
       </form>
     </div>
@@ -40,6 +42,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, watch } from 'vue'
 import { GoogleGenAI } from '@google/genai'
+import { useI18n } from '@/shared/i18n'
 
 type Message = {
   id: string
@@ -49,22 +52,22 @@ type Message = {
 
 const STORAGE_KEY = 'chatMessages'
 
-const defaultMessages: Message[] = [
-  {
-    id: 'welcome',
-    role: 'assistant',
-    content:
-      'Ask one question at a time and I will answer step by step. Focus on the topics you want to practice.',
-  },
-]
-
 const messages = ref<Message[]>([])
 const draft = ref('')
 const threadRef = ref<HTMLElement | null>(null)
 const isSending = ref(false)
+const { t } = useI18n()
 
 const apiKey = import.meta.env.VITE_GOOGLE_GENAI_API_KEY
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null
+
+const getDefaultMessages = (): Message[] => [
+  {
+    id: 'welcome',
+    role: 'assistant',
+    content: t('chat.welcome'),
+  },
+]
 
 const persistMessages = () => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value))
@@ -82,14 +85,14 @@ const loadMessages = () => {
   if (stored) {
     try {
       const parsed = JSON.parse(stored) as Message[]
-      messages.value = parsed.length ? parsed : defaultMessages
+      messages.value = parsed.length ? parsed : getDefaultMessages()
       return
     } catch {
-      messages.value = defaultMessages
+      messages.value = getDefaultMessages()
       return
     }
   }
-  messages.value = defaultMessages
+  messages.value = getDefaultMessages()
 }
 
 const handleSend = async () => {
@@ -117,7 +120,7 @@ const handleSend = async () => {
   if (!ai) {
     const fallback = messages.value.find((message) => message.id === assistantId)
     if (fallback) {
-      fallback.content = 'Missing API key in .env. Add apiKey or GOOGLE_GENAI_API_KEY and reload.'
+      fallback.content = t('chat.missingApiKey')
     }
     isSending.value = false
     persistMessages()
@@ -129,7 +132,7 @@ const handleSend = async () => {
       model: 'gemini-2.5-flash-lite',
       contents: content,
     })
-    const reply = response.text || 'No response.'
+    const reply = response.text || t('chat.noResponse')
     const assistant = messages.value.find((message) => message.id === assistantId)
     if (assistant) {
       assistant.content = reply
@@ -137,7 +140,7 @@ const handleSend = async () => {
   } catch (error) {
     const assistant = messages.value.find((message) => message.id === assistantId)
     if (assistant) {
-      assistant.content = 'Failed to get response. Try again.'
+      assistant.content = t('chat.failedResponse')
     }
     console.error('Gemini request failed', error)
   } finally {
@@ -155,6 +158,7 @@ onMounted(() => {
 watch(messages, () => {
   persistMessages()
 })
+
 </script>
 
 <style scoped src="./ChatPage.css"></style>

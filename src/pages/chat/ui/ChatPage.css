@@ -19,6 +19,12 @@
   color: white;
 }
 
+.chat-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .chat-title {
   font-size: 2rem;
   font-weight: 700;

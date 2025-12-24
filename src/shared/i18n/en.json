@@ -1,0 +1,91 @@
+{
+  "common": {
+    "language": "Language",
+    "languages": {
+      "en": "English",
+      "uz": "O'zbekcha",
+      "ru": "Русский"
+    },
+    "filter": "Filter",
+    "addExpense": "Add Expense",
+    "goBack": "Go back",
+    "export": "Export",
+    "unknown": "Unknown"
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Start a conversation",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "sending": "Sending...",
+    "attach": "Attach",
+    "welcome": "Ask one question at a time and I will answer step by step. Focus on the topics you want to practice.",
+    "missingApiKey": "Missing API key in .env. Add VITE_GOOGLE_GENAI_API_KEY and reload.",
+    "failedResponse": "Failed to get response. Try again.",
+    "noResponse": "No response."
+  },
+  "home": {
+    "mobileTitle": "Transactions",
+    "desktopTitle": "dY'ų MoneyTrack",
+    "desktopSubtitle": "Track your expenses and manage your budget"
+  },
+  "categories": {
+    "title": "Manage Categories",
+    "subtitle": "Add and organize your expense categories"
+  },
+  "settings": {
+    "title": "Export",
+    "subtitle": "Export and import your data"
+  },
+  "profile": {
+    "title": "User Profile",
+    "subtitle": "Manage your profile and preferences"
+  },
+  "addTransaction": {
+    "mobileTitle": "Add Transaction",
+    "desktopTitle": "Add Transaction",
+    "subtitle": "Record a new expense"
+  },
+  "statistics": {
+    "title": "dY\"S Statistics & Dashboard",
+    "subtitle": "Analyze your spending patterns",
+    "totalSpending": "Total Spending",
+    "averageExpense": "Average Expense",
+    "totalExpenses": "Total Expenses",
+    "items": "items",
+    "spendingByCategory": "Spending by Category",
+    "topCategories": "Top Categories",
+    "topFiveCategories": "Top 5 Categories",
+    "periodTitle": {
+      "daily": "Today",
+      "weekly": "This Week",
+      "monthly": "This Month",
+      "yearly": "This Year"
+    },
+    "periodLabel": {
+      "yesterday": "yesterday",
+      "lastWeek": "last week",
+      "lastMonth": "last month",
+      "lastYear": "last year"
+    },
+    "comparison": {
+      "more": "↑ {value} from {period}",
+      "less": "↓ {value} from {period}",
+      "same": "Same as {period}"
+    },
+    "trendChart": {
+      "daily": "Daily Spending Trend",
+      "weekly": "Weekly Spending Trend",
+      "monthly": "Monthly Spending Trend",
+      "yearly": "Yearly Spending Trend",
+      "default": "Spending Trend"
+    },
+    "periodChart": {
+      "daily": "Recent Daily Spending",
+      "weekly": "Recent Weekly Spending",
+      "monthly": "Recent Monthly Spending",
+      "yearly": "Yearly Spending",
+      "default": "Recent Spending"
+    }
+  }
+}

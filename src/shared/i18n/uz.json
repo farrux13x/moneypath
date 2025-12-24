@@ -1,0 +1,91 @@
+{
+  "common": {
+    "language": "Til",
+    "languages": {
+      "en": "English",
+      "uz": "O'zbekcha",
+      "ru": "Русский"
+    },
+    "filter": "Filtr",
+    "addExpense": "Xarajat qo'shish",
+    "goBack": "Orqaga",
+    "export": "Eksport",
+    "unknown": "Noma'lum"
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Suhbatni boshlang",
+    "placeholder": "Xabar yozing...",
+    "send": "Yuborish",
+    "sending": "Yuborilmoqda...",
+    "attach": "Ilova qilish",
+    "welcome": "Bir vaqtning o‘zida bitta savol bering, men bosqichma-bosqich javob beraman. Mashq qilmoqchi bo‘lgan mavzuga e’tibor qarating.",
+    "missingApiKey": "API kalit topilmadi. .env fayliga VITE_GOOGLE_GENAI_API_KEY qo‘shing.",
+    "failedResponse": "Javobni olishda xatolik. Qayta urinib ko‘ring.",
+    "noResponse": "Javob yo‘q."
+  },
+  "home": {
+    "mobileTitle": "Tranzaksiyalar",
+    "desktopTitle": "dY'ų MoneyTrack",
+    "desktopSubtitle": "Xarajatlaringizni kuzating va byudjetingizni boshqaring"
+  },
+  "categories": {
+    "title": "dY\"? Kategoriyalarni boshqarish",
+    "subtitle": "Xarajat toifalarini qo‘shing va tartiblang"
+  },
+  "settings": {
+    "title": "Eksport",
+    "subtitle": "Ma'lumotlaringizni eksport va import qiling"
+  },
+  "profile": {
+    "title": "Foydalanuvchi profili",
+    "subtitle": "Profil va sozlamalarni boshqaring"
+  },
+  "addTransaction": {
+    "mobileTitle": "Tranzaksiya qo‘shish",
+    "desktopTitle": "Tranzaksiya qo‘shish",
+    "subtitle": "Yangi xarajatni yozib qo‘ying"
+  },
+  "statistics": {
+    "title": "dY\"S Statistika va panel",
+    "subtitle": "Xarajatlaringizni tahlil qiling",
+    "totalSpending": "Jami xarajat",
+    "averageExpense": "O‘rtacha xarajat",
+    "totalExpenses": "Jami xarajatlar",
+    "items": "ta",
+    "spendingByCategory": "Kategoriya bo‘yicha xarajat",
+    "topCategories": "Eng yaxshi kategoriyalar",
+    "topFiveCategories": "Top 5 kategoriya",
+    "periodTitle": {
+      "daily": "Bugun",
+      "weekly": "Shu hafta",
+      "monthly": "Shu oy",
+      "yearly": "Shu yil"
+    },
+    "periodLabel": {
+      "yesterday": "kecha",
+      "lastWeek": "o‘tgan hafta",
+      "lastMonth": "o‘tgan oy",
+      "lastYear": "o‘tgan yil"
+    },
+    "comparison": {
+      "more": "↑ {value} {period}ga nisbatan",
+      "less": "↓ {value} {period}ga nisbatan",
+      "same": "{period} bilan bir xil"
+    },
+    "trendChart": {
+      "daily": "Kunlik xarajatlar trendi",
+      "weekly": "Haftalik xarajatlar trendi",
+      "monthly": "Oylik xarajatlar trendi",
+      "yearly": "Yillik xarajatlar trendi",
+      "default": "Xarajatlar trendi"
+    },
+    "periodChart": {
+      "daily": "So‘nggi kunlik xarajatlar",
+      "weekly": "So‘nggi haftalik xarajatlar",
+      "monthly": "So‘nggi oylik xarajatlar",
+      "yearly": "Yillik xarajatlar",
+      "default": "So‘nggi xarajatlar"
+    }
+  }
+}

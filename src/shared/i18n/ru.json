@@ -1,0 +1,91 @@
+{
+  "common": {
+    "language": "Язык",
+    "languages": {
+      "en": "English",
+      "uz": "O'zbekcha",
+      "ru": "Русский"
+    },
+    "filter": "Фильтр",
+    "addExpense": "Добавить расход",
+    "goBack": "Назад",
+    "export": "Экспорт",
+    "unknown": "Неизвестно"
+  },
+  "chat": {
+    "title": "Чат",
+    "subtitle": "Начните разговор",
+    "placeholder": "Введите сообщение...",
+    "send": "Отправить",
+    "sending": "Отправка...",
+    "attach": "Прикрепить",
+    "welcome": "Задавайте по одному вопросу за раз, и я отвечу шаг за шагом. Сосредоточьтесь на темах, которые хотите практиковать.",
+    "missingApiKey": "Отсутствует API ключ. Добавьте VITE_GOOGLE_GENAI_API_KEY в .env.",
+    "failedResponse": "Не удалось получить ответ. Попробуйте еще раз.",
+    "noResponse": "Нет ответа."
+  },
+  "home": {
+    "mobileTitle": "Транзакции",
+    "desktopTitle": "dY'ų MoneyTrack",
+    "desktopSubtitle": "Отслеживайте расходы и управляйте бюджетом"
+  },
+  "categories": {
+    "title": "dY\"? Управление категориями",
+    "subtitle": "Добавляйте и упорядочивайте категории расходов"
+  },
+  "settings": {
+    "title": "Экспорт",
+    "subtitle": "Экспортируйте и импортируйте данные"
+  },
+  "profile": {
+    "title": "Профиль пользователя",
+    "subtitle": "Управляйте профилем и настройками"
+  },
+  "addTransaction": {
+    "mobileTitle": "Добавить транзакцию",
+    "desktopTitle": "Добавить транзакцию",
+    "subtitle": "Запишите новый расход"
+  },
+  "statistics": {
+    "title": "dY\"S Статистика и дашборд",
+    "subtitle": "Анализируйте свои расходы",
+    "totalSpending": "Общие расходы",
+    "averageExpense": "Средний расход",
+    "totalExpenses": "Всего расходов",
+    "items": "шт.",
+    "spendingByCategory": "Расходы по категориям",
+    "topCategories": "Топ категории",
+    "topFiveCategories": "Топ 5 категорий",
+    "periodTitle": {
+      "daily": "Сегодня",
+      "weekly": "На этой неделе",
+      "monthly": "В этом месяце",
+      "yearly": "В этом году"
+    },
+    "periodLabel": {
+      "yesterday": "вчера",
+      "lastWeek": "на прошлой неделе",
+      "lastMonth": "в прошлом месяце",
+      "lastYear": "в прошлом году"
+    },
+    "comparison": {
+      "more": "↑ {value} по сравнению с {period}",
+      "less": "↓ {value} по сравнению с {period}",
+      "same": "Так же, как {period}"
+    },
+    "trendChart": {
+      "daily": "Дневной тренд расходов",
+      "weekly": "Недельный тренд расходов",
+      "monthly": "Месячный тренд расходов",
+      "yearly": "Годовой тренд расходов",
+      "default": "Тренд расходов"
+    },
+    "periodChart": {
+      "daily": "Расходы за последние дни",
+      "weekly": "Расходы за последние недели",
+      "monthly": "Расходы за последние месяцы",
+      "yearly": "Годовые расходы",
+      "default": "Недавние расходы"
+    }
+  }
+}

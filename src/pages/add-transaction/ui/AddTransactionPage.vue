@@ -3,10 +3,10 @@
     <!-- Mobile Layout -->
     <div class="mobile-layout mobile-only">
       <header class="mobile-header">
-        <button class="back-button" @click="goBack" aria-label="Go back">
+        <button class="back-button" @click="goBack" :aria-label="t('common.goBack')">
           <span class="back-icon">←</span>
         </button>
-        <h1 class="mobile-title">Add Transaction</h1>
+        <h1 class="mobile-title">{{ t('addTransaction.mobileTitle') }}</h1>
         <div class="header-spacer"></div>
       </header>
 
@@ -19,8 +19,8 @@
     <div class="desktop-layout desktop-only">
       <div class="page-container">
         <header class="page-header">
-          <h1 class="page-title">➕ Add Transaction</h1>
-          <p class="page-subtitle">Record a new expense</p>
+          <h1 class="page-title">{{ t('addTransaction.desktopTitle') }}</h1>
+          <p class="page-subtitle">{{ t('addTransaction.subtitle') }}</p>
         </header>
 
         <div class="form-container">
@@ -33,6 +33,9 @@
 
 <script setup lang="ts">
 import { AddExpenseForm } from '@/features/add-expense/ui'
+import { useI18n } from '@/shared/i18n'
+
+const { t } = useI18n()
 
 const goBack = () => {
   window.history.back()

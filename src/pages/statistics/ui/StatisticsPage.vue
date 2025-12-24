@@ -2,8 +2,8 @@
   <div class="statistics-page">
     <div class="page-container">
       <header class="page-header">
-        <h1 class="page-title">📊 Statistics & Dashboard</h1>
-        <p class="page-subtitle">Analyze your spending patterns</p>
+        <h1 class="page-title">{{ t('statistics.title') }}</h1>
+        <p class="page-subtitle">{{ t('statistics.subtitle') }}</p>
       </header>
 
       <!-- Period Filter -->
@@ -12,7 +12,7 @@
       <!-- Statistics Cards -->
       <div class="statistics-grid">
         <StatisticsCard
-          title="Total Spending"
+          :title="t('statistics.totalSpending')"
           :value="formatCurrency(filteredTotalAmount)"
           icon="💰"
         />
@@ -23,14 +23,14 @@
           icon="📅"
         />
         <StatisticsCard
-          title="Average Expense"
+          :title="t('statistics.averageExpense')"
           :value="formatCurrency(filteredAverageExpense)"
           icon="📈"
         />
         <StatisticsCard
-          title="Total Expenses"
+          :title="t('statistics.totalExpenses')"
           :value="filteredExpenses.length"
-          subtitle="items"
+          :subtitle="t('statistics.items')"
           icon="📝"
         />
       </div>
@@ -39,7 +39,7 @@
       <div class="charts-section">
         <!-- Spending by Category - Pie Chart -->
         <Card>
-          <h2 class="chart-title">Spending by Category</h2>
+          <h2 class="chart-title">{{ t('statistics.spendingByCategory') }}</h2>
           <div class="chart-container">
             <PieChart :data="categoryPieData" :size="250" />
           </div>
@@ -47,7 +47,7 @@
 
         <!-- Spending by Category - Bar Chart -->
         <Card>
-          <h2 class="chart-title">Top Categories</h2>
+          <h2 class="chart-title">{{ t('statistics.topCategories') }}</h2>
           <div class="chart-container">
             <BarChart :data="categoryBarData" />
           </div>
@@ -72,7 +72,7 @@
 
       <!-- Top Categories List -->
       <Card>
-        <h2 class="chart-title">Top 5 Categories</h2>
+        <h2 class="chart-title">{{ t('statistics.topFiveCategories') }}</h2>
         <div class="top-categories-list">
           <div
             v-for="(category, index) in filteredTopCategories"
@@ -109,6 +109,9 @@ import { LineChart } from '@/shared/ui/LineChart'
 import { PeriodFilter } from '@/features/period-filter/ui'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
+
+const { t } = useI18n()
 
 type Period = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
@@ -183,7 +186,7 @@ const formatCurrency = (amount: number): string => {
 }
 
 const getCategoryName = (categoryId: string): string => {
-  return getCategoryById(categoryId)?.name || 'Unknown'
+  return getCategoryById(categoryId)?.name || t('common.unknown')
 }
 
 const getCategoryColor = (categoryId: string): string => {
@@ -193,15 +196,15 @@ const getCategoryColor = (categoryId: string): string => {
 const getPeriodTitle = (): string => {
   switch (selectedPeriod.value) {
     case 'daily':
-      return 'Today'
+      return t('statistics.periodTitle.daily')
     case 'weekly':
-      return 'This Week'
+      return t('statistics.periodTitle.weekly')
     case 'monthly':
-      return 'This Month'
+      return t('statistics.periodTitle.monthly')
     case 'yearly':
-      return 'This Year'
+      return t('statistics.periodTitle.yearly')
     default:
-      return 'This Month'
+      return t('statistics.periodTitle.monthly')
   }
 }
 
@@ -209,48 +212,48 @@ const getPeriodComparison = (): string => {
   const diff = periodTotal.value - previousPeriodTotal.value
   const periodLabel =
     selectedPeriod.value === 'daily'
-      ? 'yesterday'
+      ? t('statistics.periodLabel.yesterday')
       : selectedPeriod.value === 'weekly'
-        ? 'last week'
+        ? t('statistics.periodLabel.lastWeek')
         : selectedPeriod.value === 'monthly'
-          ? 'last month'
-          : 'last year'
+          ? t('statistics.periodLabel.lastMonth')
+          : t('statistics.periodLabel.lastYear')
 
   if (diff > 0) {
-    return `↑ ${formatCurrency(diff)} from ${periodLabel}`
+    return t('statistics.comparison.more', { value: formatCurrency(diff), period: periodLabel })
   } else if (diff < 0) {
-    return `↓ ${formatCurrency(Math.abs(diff))} from ${periodLabel}`
+    return t('statistics.comparison.less', { value: formatCurrency(Math.abs(diff)), period: periodLabel })
   }
-  return `Same as ${periodLabel}`
+  return t('statistics.comparison.same', { period: periodLabel })
 }
 
 const getTrendChartTitle = (): string => {
   switch (selectedPeriod.value) {
     case 'daily':
-      return 'Daily Spending Trend'
+      return t('statistics.trendChart.daily')
     case 'weekly':
-      return 'Weekly Spending Trend'
+      return t('statistics.trendChart.weekly')
     case 'monthly':
-      return 'Monthly Spending Trend'
+      return t('statistics.trendChart.monthly')
     case 'yearly':
-      return 'Yearly Spending Trend'
+      return t('statistics.trendChart.yearly')
     default:
-      return 'Spending Trend'
+      return t('statistics.trendChart.default')
   }
 }
 
 const getPeriodChartTitle = (): string => {
   switch (selectedPeriod.value) {
     case 'daily':
-      return 'Recent Daily Spending'
+      return t('statistics.periodChart.daily')
     case 'weekly':
-      return 'Recent Weekly Spending'
+      return t('statistics.periodChart.weekly')
     case 'monthly':
-      return 'Recent Monthly Spending'
+      return t('statistics.periodChart.monthly')
     case 'yearly':
-      return 'Yearly Spending'
+      return t('statistics.periodChart.yearly')
     default:
-      return 'Recent Spending'
+      return t('statistics.periodChart.default')
   }
 }
 

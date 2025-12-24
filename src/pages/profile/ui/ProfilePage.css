@@ -20,6 +20,42 @@
 .page-header {
   text-align: center;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-language {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-language-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.profile-language-select {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.7);
+  color: white;
+  border-radius: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.profile-language-select:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
 .page-title {
@@ -69,5 +105,17 @@
 @media (max-width: 768px) {
   .profile-content {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-header {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .profile-language {
+    width: 100%;
+    justify-content: space-between;
   }
 }

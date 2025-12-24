@@ -2,8 +2,8 @@
   <div class="settings-page">
     <div class="page-container">
       <header class="page-header">
-        <h1 class="page-title">📤 Export</h1>
-        <p class="page-subtitle">Export and import your data</p>
+        <h1 class="page-title">{{ t('settings.title') }}</h1>
+        <p class="page-subtitle">{{ t('settings.subtitle') }}</p>
       </header>
 
       <div class="settings-content">
@@ -27,6 +27,9 @@
 import { ThemeToggleCard } from '@/features/theme-toggle/ui'
 import { ExportData } from '@/features/export-data/ui'
 import { ImportData } from '@/features/import-data/ui'
+import { useI18n } from '@/shared/i18n'
+
+const { t } = useI18n()
 </script>
 
 <style scoped src="./SettingsPage.css"></style>

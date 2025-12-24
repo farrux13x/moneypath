@@ -3,19 +3,19 @@
     <!-- Mobile Layout -->
     <div class="mobile-layout mobile-only">
       <header class="mobile-header">
-        <h1 class="mobile-title">Transactions</h1>
+        <h1 class="mobile-title">{{ t('home.mobileTitle') }}</h1>
         <div class="header-actions">
           <button
             class="filter-button"
             @click="showSearch = !showSearch"
-            aria-label="Filter"
+            :aria-label="t('common.filter')"
           >
             <span>🔍</span>
           </button>
           <button
             class="add-button"
             @click="goToAddTransaction"
-            aria-label="Add Expense"
+            :aria-label="t('common.addExpense')"
           >
             <span class="add-icon">+</span>
           </button>
@@ -42,10 +42,8 @@
     <div class="desktop-layout desktop-only">
       <div class="page-container">
         <header class="page-header">
-          <h1 class="page-title">💰 MoneyTrack</h1>
-          <p class="page-subtitle">
-            Track your expenses and manage your budget
-          </p>
+          <h1 class="page-title">{{ t('home.desktopTitle') }}</h1>
+          <p class="page-subtitle">{{ t('home.desktopSubtitle') }}</p>
         </header>
 
         <div class="page-content">
@@ -81,6 +79,9 @@ import { SearchExpenses } from '@/features/search-expenses/ui'
 import { SearchResults } from '@/features/search-results/ui'
 import { MobileExpenseList } from '@/widgets/mobile-expense-list/ui'
 import type { Expense } from '@/entities/expense/model/types'
+import { useI18n } from '@/shared/i18n'
+
+const { t } = useI18n()
 
 const searchResults = ref<Expense[]>([])
 const showSearchResults = ref(false)
