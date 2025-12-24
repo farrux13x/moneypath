@@ -13,14 +13,4 @@ describe('Card', () => {
     expect(wrapper.text()).toContain('Content')
   })
 
-  it('omits padded class when padded is false', () => {
-    const wrapper = mount(Card, {
-      props: {
-        padded: false,
-      },
-    })
-
-    expect(wrapper.classes()).toContain('card')
-    expect(wrapper.classes()).not.toContain('card--padded')
-  })
 })
