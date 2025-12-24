@@ -1,10 +1,10 @@
 <template>
-  <div :class="$style['period-filter']">
-    <div :class="$style['period-buttons']">
+  <div class="period-filter">
+    <div class="period-buttons">
       <button
         v-for="period in periods"
         :key="period.id"
-        :class="[$style['period-button'], { [$style.active]: selectedPeriod === period.id }]"
+        :class="['period-button', { active: selectedPeriod === period.id }]"
         @click="selectPeriod(period.id)"
       >
         {{ period.label }}
@@ -37,4 +37,4 @@ const selectPeriod = (period: Period) => {
 }
 </script>
 
-<style module src="./PeriodFilter.module.css"></style>
+<style scoped src="./PeriodFilter.css"></style>

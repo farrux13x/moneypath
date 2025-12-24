@@ -1,13 +1,13 @@
 <template>
   <Card>
-    <div :class="$style['statistics-card']">
-      <div :class="$style['statistics-card-header']">
-        <h3 :class="$style['statistics-card-title']">{{ title }}</h3>
-        <div v-if="icon" :class="$style['statistics-card-icon']">{{ icon }}</div>
+    <div class="statistics-card">
+      <div class="statistics-card-header">
+        <h3 class="statistics-card-title">{{ title }}</h3>
+        <div v-if="icon" class="statistics-card-icon">{{ icon }}</div>
       </div>
-      <div :class="$style['statistics-card-content']">
-        <div :class="$style['statistics-card-value']">{{ value }}</div>
-        <div v-if="subtitle" :class="$style['statistics-card-subtitle']">
+      <div class="statistics-card-content">
+        <div class="statistics-card-value">{{ value }}</div>
+        <div v-if="subtitle" class="statistics-card-subtitle">
           {{ subtitle }}
         </div>
       </div>
@@ -28,4 +28,4 @@ interface Props {
 defineProps<Props>()
 </script>
 
-<style module src="./StatisticsCard.module.css"></style>
+<style scoped src="./StatisticsCard.css"></style>

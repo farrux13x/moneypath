@@ -1,18 +1,18 @@
 <template>
   <Card>
-    <h2 :class="$style['section-title']">Theme</h2>
-    <p :class="$style['section-description']">Choose your preferred theme</p>
+    <h2 class="section-title">Theme</h2>
+    <p class="section-description">Choose your preferred theme</p>
 
-    <div :class="$style['theme-options']">
+    <div class="theme-options">
       <button
         v-for="theme in themes"
         :key="theme.id"
-        :class="[$style['theme-option'], { [$style.active]: currentTheme === theme.id }]"
+        :class="['theme-option', { active: currentTheme === theme.id }]"
         @click="setTheme(theme.id)"
       >
-        <span :class="$style['theme-icon']">{{ theme.icon }}</span>
-        <span :class="$style['theme-name']">{{ theme.name }}</span>
-        <span v-if="currentTheme === theme.id" :class="$style['theme-check']">✓</span>
+        <span class="theme-icon">{{ theme.icon }}</span>
+        <span class="theme-name">{{ theme.name }}</span>
+        <span v-if="currentTheme === theme.id" class="theme-check">✓</span>
       </button>
     </div>
   </Card>
@@ -31,4 +31,4 @@ const themes = [
 ] as const
 </script>
 
-<style module src="./ThemeToggleCard.module.css"></style>
+<style scoped src="./ThemeToggleCard.css"></style>

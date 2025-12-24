@@ -1,16 +1,16 @@
 <template>
-  <header :class="$style['top-navigation']">
-    <div :class="$style['top-navigation__brand']">MoneyTrack</div>
-    <nav :class="$style['top-navigation__links']">
+  <header class="top-navigation">
+    <div class="top-navigation__brand">MoneyTrack</div>
+    <nav class="top-navigation__links">
       <button
         v-for="item in navItems"
         :key="item.id"
-        :class="[$style['nav-link'], { [$style.active]: currentPage === item.id }]"
+        :class="['nav-link', { active: currentPage === item.id }]"
         @click="navigate(item.id)"
         :aria-label="item.label"
       >
-        <span :class="$style['nav-icon']">{{ item.icon }}</span>
-        <span :class="$style['nav-label']">{{ item.label }}</span>
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
       </button>
     </nav>
   </header>
@@ -40,4 +40,4 @@ const navigate = (page: string) => {
 }
 </script>
 
-<style module src="./TopNavigation.module.css"></style>
+<style scoped src="./TopNavigation.css"></style>

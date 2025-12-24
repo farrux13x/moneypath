@@ -1,6 +1,6 @@
 <template>
-  <div :class="$style['mobile-expense-list']">
-    <div v-if="expenses.length === 0" :class="$style['empty-state']">
+  <div class="mobile-expense-list">
+    <div v-if="expenses.length === 0" class="empty-state">
       <p>No expenses yet. Tap the + button to add your first expense!</p>
     </div>
 
@@ -8,42 +8,42 @@
       <div
         v-for="(group, date) in groupedExpenses"
         :key="date"
-        :class="$style['expense-group']"
+        class="expense-group"
       >
-        <div :class="$style['group-header']">
-          <h3 :class="$style['group-date']">{{ formatDateHeader(date) }}</h3>
-          <span :class="$style['group-total']"
+        <div class="group-header">
+          <h3 class="group-date">{{ formatDateHeader(date) }}</h3>
+          <span class="group-total"
             >${{ getGroupTotal(group).toFixed(2) }}</span
           >
         </div>
 
-        <div :class="$style['expense-items']">
+        <div class="expense-items">
           <div
             v-for="expense in group"
             :key="expense.id"
-            :class="$style['expense-item']"
+            class="expense-item"
             @click="handleExpenseClick(expense)"
           >
             <div
-              :class="$style['expense-indicator']"
+              class="expense-indicator"
               :style="{ backgroundColor: getCategoryColor(expense.category) }"
             ></div>
-            <div :class="$style['expense-content']">
-              <div :class="$style['expense-main']">
-                <div :class="$style['expense-info']">
-                  <h4 :class="$style['expense-title']">
+            <div class="expense-content">
+              <div class="expense-main">
+                <div class="expense-info">
+                  <h4 class="expense-title">
                     {{ expense.description || 'No description' }}
                   </h4>
-                  <div :class="$style['expense-meta']">
-                    <span :class="$style['expense-category']">{{
+                  <div class="expense-meta">
+                    <span class="expense-category">{{
                       getCategoryName(expense.category)
                     }}</span>
-                    <span :class="$style['expense-time']">{{
+                    <span class="expense-time">{{
                       formatTime(expense.date)
                     }}</span>
                   </div>
                 </div>
-                <div :class="$style['expense-amount']">
+                <div class="expense-amount">
                   -${{ expense.amount.toFixed(2) }}
                 </div>
               </div>
@@ -144,4 +144,4 @@ const handleExpenseClick = (expense: Expense) => {
 }
 </script>
 
-<style module src="./MobileExpenseList.module.css"></style>
+<style scoped src="./MobileExpenseList.css"></style>

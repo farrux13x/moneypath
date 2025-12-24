@@ -1,14 +1,14 @@
 <template>
-  <nav :class="$style['bottom-navigation']">
+  <nav class="bottom-navigation">
     <button
       v-for="item in navItems"
       :key="item.id"
-      :class="[$style['nav-item'], { [$style.active]: currentPage === item.id }]"
+      :class="['nav-item', { active: currentPage === item.id }]"
       @click="navigate(item.id)"
       :aria-label="item.label"
     >
-      <span :class="$style['nav-icon']">{{ item.icon }}</span>
-      <span :class="$style['nav-label']">{{ item.label }}</span>
+      <span class="nav-icon">{{ item.icon }}</span>
+      <span class="nav-label">{{ item.label }}</span>
     </button>
   </nav>
 </template>
@@ -37,5 +37,5 @@ const navigate = (page: string) => {
 }
 </script>
 
-<style module src="./BottomNavigation.module.css"></style>
+<style scoped src="./BottomNavigation.css"></style>
 

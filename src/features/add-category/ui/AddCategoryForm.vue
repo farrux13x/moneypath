@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h2 :class="$style['form-title']">Add New Category</h2>
-    <form @submit.prevent="handleSubmit" :class="$style['category-form']">
+    <h2 class="form-title">Add New Category</h2>
+    <form @submit.prevent="handleSubmit" class="category-form">
       <Input
         v-model="formData.name"
         label="Category Name"
@@ -78,4 +78,4 @@ const handleSubmit = () => {
 }
 </script>
 
-<style module src="./AddCategoryForm.module.css"></style>
+<style scoped src="./AddCategoryForm.css"></style>

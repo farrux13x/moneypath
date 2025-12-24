@@ -1,8 +1,8 @@
 <template>
-  <div :class="$style['bar-chart']">
+  <div class="bar-chart">
     <svg :width="width" :height="height" viewBox="0 0 400 300">
       <!-- Grid lines -->
-      <g v-for="i in 5" :key="i" :class="$style['grid-line']">
+      <g v-for="i in 5" :key="i" class="grid-line">
         <line
           :x1="padding"
           :y1="padding + (i - 1) * (chartHeight / 4)"
@@ -22,7 +22,7 @@
           :width="barWidth"
           :height="(item.value / maxValue) * chartHeight"
           :fill="item.color || color"
-          :class="$style['bar']"
+          class="bar"
           :style="{ transition: 'all 0.3s ease' }"
         />
         <!-- Value label on top of bar -->
@@ -107,4 +107,4 @@ const formatValue = (value: number): string => {
 }
 </script>
 
-<style module src="./BarChart.module.css"></style>
+<style scoped src="./BarChart.css"></style>

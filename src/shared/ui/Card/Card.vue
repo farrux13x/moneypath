@@ -1,5 +1,5 @@
 <template>
-  <div :class="[$style.card, { [$style['card--padded']]: padded }]">
+  <div :class="['card', { 'card--padded': padded }]">
     <slot />
   </div>
 </template>
@@ -14,4 +14,4 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style module src="./Card.module.css"></style>
+<style scoped src="./Card.css"></style>

@@ -1,55 +1,55 @@
 <template>
   <Card>
-    <h2 :class="$style['section-title']">Import Data</h2>
-    <p :class="$style['section-description']">
+    <h2 class="section-title">Import Data</h2>
+    <p class="section-description">
       Restore your expenses and categories from a JSON file
     </p>
 
-    <div :class="$style['import-options']">
-      <div :class="$style['import-option']">
-        <label :class="$style['checkbox-label']">
+    <div class="import-options">
+      <div class="import-option">
+        <label class="checkbox-label">
           <input
             type="checkbox"
             v-model="importOptions.expenses"
-            :class="$style['checkbox']"
+            class="checkbox"
           />
           <span>Import Expenses</span>
         </label>
       </div>
 
-      <div :class="$style['import-option']">
-        <label :class="$style['checkbox-label']">
+      <div class="import-option">
+        <label class="checkbox-label">
           <input
             type="checkbox"
             v-model="importOptions.categories"
-            :class="$style['checkbox']"
+            class="checkbox"
           />
           <span>Import Categories</span>
         </label>
       </div>
 
-      <div :class="$style['import-option']">
-        <label :class="$style['checkbox-label']">
+      <div class="import-option">
+        <label class="checkbox-label">
           <input
             type="checkbox"
             v-model="importOptions.replace"
-            :class="$style['checkbox']"
+            class="checkbox"
           />
           <span>Replace existing data (otherwise merge)</span>
         </label>
       </div>
     </div>
 
-    <div :class="$style['file-input-wrapper']">
+    <div class="file-input-wrapper">
       <input
         ref="fileInput"
         type="file"
         accept=".json,application/json"
         @change="handleFileSelect"
-        :class="$style['file-input']"
+        class="file-input"
         :disabled="isImporting"
       />
-      <div v-if="selectedFile" :class="$style['selected-file']">
+      <div v-if="selectedFile" class="selected-file">
         📄 {{ selectedFile.name }}
       </div>
     </div>
@@ -63,11 +63,11 @@
       {{ isImporting ? 'Importing...' : '📤 Import Data' }}
     </Button>
 
-    <div v-if="importSuccess" :class="$style['success-message']">
+    <div v-if="importSuccess" class="success-message">
       ✅ Data imported successfully!
     </div>
 
-    <div v-if="importError" :class="$style['error-message']">❌ {{ importError }}</div>
+    <div v-if="importError" class="error-message">❌ {{ importError }}</div>
   </Card>
 </template>
 
@@ -251,4 +251,4 @@ const handleImport = async () => {
 }
 </script>
 
-<style module src="./ImportData.module.css"></style>
+<style scoped src="./ImportData.css"></style>

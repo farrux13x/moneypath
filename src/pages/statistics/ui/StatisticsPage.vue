@@ -1,16 +1,16 @@
 <template>
-  <div :class="$style['statistics-page']">
-    <div :class="$style['page-container']">
-      <header :class="$style['page-header']">
-        <h1 :class="$style['page-title']">📊 Statistics & Dashboard</h1>
-        <p :class="$style['page-subtitle']">Analyze your spending patterns</p>
+  <div class="statistics-page">
+    <div class="page-container">
+      <header class="page-header">
+        <h1 class="page-title">📊 Statistics & Dashboard</h1>
+        <p class="page-subtitle">Analyze your spending patterns</p>
       </header>
 
       <!-- Period Filter -->
       <PeriodFilter @period-change="handlePeriodChange" />
 
       <!-- Statistics Cards -->
-      <div :class="$style['statistics-grid']">
+      <div class="statistics-grid">
         <StatisticsCard
           title="Total Spending"
           :value="formatCurrency(filteredTotalAmount)"
@@ -36,35 +36,35 @@
       </div>
 
       <!-- Charts Section -->
-      <div :class="$style['charts-section']">
+      <div class="charts-section">
         <!-- Spending by Category - Pie Chart -->
         <Card>
-          <h2 :class="$style['chart-title']">Spending by Category</h2>
-          <div :class="$style['chart-container']">
+          <h2 class="chart-title">Spending by Category</h2>
+          <div class="chart-container">
             <PieChart :data="categoryPieData" :size="250" />
           </div>
         </Card>
 
         <!-- Spending by Category - Bar Chart -->
         <Card>
-          <h2 :class="$style['chart-title']">Top Categories</h2>
-          <div :class="$style['chart-container']">
+          <h2 class="chart-title">Top Categories</h2>
+          <div class="chart-container">
             <BarChart :data="categoryBarData" />
           </div>
         </Card>
 
         <!-- Spending Trend -->
         <Card>
-          <h2 :class="$style['chart-title']">{{ getTrendChartTitle() }}</h2>
-          <div :class="$style['chart-container']">
+          <h2 class="chart-title">{{ getTrendChartTitle() }}</h2>
+          <div class="chart-container">
             <LineChart :data="trendLineData" />
           </div>
         </Card>
 
         <!-- Period Spending -->
         <Card>
-          <h2 :class="$style['chart-title']">{{ getPeriodChartTitle() }}</h2>
-          <div :class="$style['chart-container']">
+          <h2 class="chart-title">{{ getPeriodChartTitle() }}</h2>
+          <div class="chart-container">
             <BarChart :data="periodBarData" />
           </div>
         </Card>
@@ -72,24 +72,24 @@
 
       <!-- Top Categories List -->
       <Card>
-        <h2 :class="$style['chart-title']">Top 5 Categories</h2>
-        <div :class="$style['top-categories-list']">
+        <h2 class="chart-title">Top 5 Categories</h2>
+        <div class="top-categories-list">
           <div
             v-for="(category, index) in filteredTopCategories"
             :key="category.category"
-            :class="$style['top-category-item']"
+            class="top-category-item"
           >
-            <div :class="$style['top-category-rank']">#{{ index + 1 }}</div>
-            <div :class="$style['top-category-info']">
-              <div :class="$style['top-category-name']">
+            <div class="top-category-rank">#{{ index + 1 }}</div>
+            <div class="top-category-info">
+              <div class="top-category-name">
                 {{ getCategoryName(category.category) }}
               </div>
-              <div :class="$style['top-category-amount']">
+              <div class="top-category-amount">
                 {{ formatCurrency(category.amount) }}
               </div>
             </div>
             <div
-              :class="$style['top-category-color']"
+              class="top-category-color"
               :style="{ backgroundColor: getCategoryColor(category.category) }"
             ></div>
           </div>
@@ -414,4 +414,4 @@ const periodBarData = computed(() => {
 })
 </script>
 
-<style module src="./StatisticsPage.module.css"></style>
+<style scoped src="./StatisticsPage.css"></style>

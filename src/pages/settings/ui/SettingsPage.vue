@@ -1,21 +1,21 @@
 <template>
-  <div :class="$style['settings-page']">
-    <div :class="$style['page-container']">
-      <header :class="$style['page-header']">
-        <h1 :class="$style['page-title']">📤 Export</h1>
-        <p :class="$style['page-subtitle']">Export and import your data</p>
+  <div class="settings-page">
+    <div class="page-container">
+      <header class="page-header">
+        <h1 class="page-title">📤 Export</h1>
+        <p class="page-subtitle">Export and import your data</p>
       </header>
 
-      <div :class="$style['settings-content']">
-        <div :class="$style['settings-section']">
+      <div class="settings-content">
+        <div class="settings-section">
           <ThemeToggleCard />
         </div>
 
-        <div :class="$style['settings-section']">
+        <div class="settings-section">
           <ExportData />
         </div>
 
-        <div :class="$style['settings-section']">
+        <div class="settings-section">
           <ImportData />
         </div>
       </div>
@@ -29,4 +29,4 @@ import { ExportData } from '@/features/export-data/ui'
 import { ImportData } from '@/features/import-data/ui'
 </script>
 
-<style module src="./SettingsPage.module.css"></style>
+<style scoped src="./SettingsPage.css"></style>

@@ -1,41 +1,41 @@
 <template>
   <Card>
-    <div :class="$style['profile-card']">
-      <div :class="$style['profile-avatar']">
-        <div :class="$style['avatar-circle']">
+    <div class="profile-card">
+      <div class="profile-avatar">
+        <div class="avatar-circle">
           {{ userInitials }}
         </div>
       </div>
 
-      <div :class="$style['profile-info']">
-        <h2 :class="$style['profile-name']">{{ user?.name || 'User' }}</h2>
-        <p v-if="user?.email" :class="$style['profile-email']">{{ user.email }}</p>
-        <p v-else :class="$style['profile-email-placeholder']">No email set</p>
+      <div class="profile-info">
+        <h2 class="profile-name">{{ user?.name || 'User' }}</h2>
+        <p v-if="user?.email" class="profile-email">{{ user.email }}</p>
+        <p v-else class="profile-email-placeholder">No email set</p>
       </div>
 
-      <div :class="$style['profile-details']">
-        <div :class="$style['profile-detail-item']">
-          <span :class="$style['detail-label']">Currency:</span>
-          <span :class="$style['detail-value']"
+      <div class="profile-details">
+        <div class="profile-detail-item">
+          <span class="detail-label">Currency:</span>
+          <span class="detail-value"
             >{{ getCurrencySymbol(user?.currency || 'USD') }}
             {{ user?.currency || 'USD' }}</span
           >
         </div>
-        <div :class="$style['profile-detail-item']">
-          <span :class="$style['detail-label']">Date Format:</span>
-          <span :class="$style['detail-value']">{{
+        <div class="profile-detail-item">
+          <span class="detail-label">Date Format:</span>
+          <span class="detail-value">{{
             user?.dateFormat || 'MM/DD/YYYY'
           }}</span>
         </div>
-        <div :class="$style['profile-detail-item']">
-          <span :class="$style['detail-label']">Theme:</span>
-          <span :class="$style['detail-value']">{{
+        <div class="profile-detail-item">
+          <span class="detail-label">Theme:</span>
+          <span class="detail-value">{{
             capitalize(user?.theme || 'light')
           }}</span>
         </div>
-        <div :class="$style['profile-detail-item']">
-          <span :class="$style['detail-label']">Member Since:</span>
-          <span :class="$style['detail-value']">{{ formatDate(user?.createdAt) }}</span>
+        <div class="profile-detail-item">
+          <span class="detail-label">Member Since:</span>
+          <span class="detail-value">{{ formatDate(user?.createdAt) }}</span>
         </div>
       </div>
     </div>
@@ -89,4 +89,4 @@ const formatDate = (dateString?: string): string => {
 }
 </script>
 
-<style module src="./ProfileCard.module.css"></style>
+<style scoped src="./ProfileCard.css"></style>

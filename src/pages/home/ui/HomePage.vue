@@ -1,59 +1,59 @@
 <template>
-  <div :class="$style['home-page']">
+  <div class="home-page">
     <!-- Mobile Layout -->
-    <div :class="[$style['mobile-layout'], $style['mobile-only']]">
-      <header :class="$style['mobile-header']">
-        <h1 :class="$style['mobile-title']">Transactions</h1>
-        <div :class="$style['header-actions']">
+    <div class="mobile-layout mobile-only">
+      <header class="mobile-header">
+        <h1 class="mobile-title">Transactions</h1>
+        <div class="header-actions">
           <button
-            :class="$style['filter-button']"
+            class="filter-button"
             @click="showSearch = !showSearch"
             aria-label="Filter"
           >
             <span>🔍</span>
           </button>
           <button
-            :class="$style['add-button']"
+            class="add-button"
             @click="goToAddTransaction"
             aria-label="Add Expense"
           >
-            <span :class="$style['add-icon']">+</span>
+            <span class="add-icon">+</span>
           </button>
         </div>
       </header>
 
-      <div v-if="showSearch" :class="$style['mobile-search-section']">
+      <div v-if="showSearch" class="mobile-search-section">
         <SearchExpenses
           @search-results="handleSearchResults"
           @filters-active="handleFiltersActive"
         />
       </div>
 
-      <div v-if="showSearchResults" :class="$style['mobile-results']">
+      <div v-if="showSearchResults" class="mobile-results">
         <SearchResults :results="searchResults" />
       </div>
 
-      <div v-else :class="$style['mobile-expenses']">
+      <div v-else class="mobile-expenses">
         <MobileExpenseList @expense-click="handleExpenseClick" />
       </div>
     </div>
 
     <!-- Desktop Layout -->
-    <div :class="[$style['desktop-layout'], $style['desktop-only']]">
-      <div :class="$style['page-container']">
-        <header :class="$style['page-header']">
-          <h1 :class="$style['page-title']">💰 MoneyTrack</h1>
-          <p :class="$style['page-subtitle']">
+    <div class="desktop-layout desktop-only">
+      <div class="page-container">
+        <header class="page-header">
+          <h1 class="page-title">💰 MoneyTrack</h1>
+          <p class="page-subtitle">
             Track your expenses and manage your budget
           </p>
         </header>
 
-        <div :class="$style['page-content']">
-          <div :class="$style['content-section']">
+        <div class="page-content">
+          <div class="content-section">
             <AddExpenseForm />
           </div>
 
-          <div :class="$style['content-section']">
+          <div class="content-section">
             <SearchExpenses
               @search-results="handleSearchResults"
               @filters-active="handleFiltersActive"
@@ -61,11 +61,11 @@
           </div>
         </div>
 
-        <div v-if="showSearchResults" :class="$style['search-results-section']">
+        <div v-if="showSearchResults" class="search-results-section">
           <SearchResults :results="searchResults" />
         </div>
 
-        <div v-else :class="$style['expense-list-section']">
+        <div v-else class="expense-list-section">
           <ExpenseList />
         </div>
       </div>
@@ -109,4 +109,4 @@ const goToAddTransaction = () => {
 }
 </script>
 
-<style module src="./HomePage.module.css"></style>
+<style scoped src="./HomePage.css"></style>

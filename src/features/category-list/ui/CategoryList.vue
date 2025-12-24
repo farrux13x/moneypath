@@ -1,26 +1,26 @@
 <template>
   <Card>
-    <h2 :class="$style['category-list-title']">Categories</h2>
+    <h2 class="category-list-title">Categories</h2>
 
-    <div v-if="categories.length === 0" :class="$style['empty-state']">
+    <div v-if="categories.length === 0" class="empty-state">
       <p>No categories yet. Add your first category above!</p>
     </div>
 
-    <div v-else :class="$style['category-list']">
+    <div v-else class="category-list">
       <div
         v-for="category in categories"
         :key="category.id"
-        :class="$style['category-item']"
+        class="category-item"
       >
-        <div :class="$style['category-item-content']">
+        <div class="category-item-content">
           <div
-            :class="$style['category-badge']"
+            class="category-badge"
             :style="{ backgroundColor: category.color }"
           >
             {{ category.name }}
           </div>
           <div
-            :class="$style['category-color-display']"
+            class="category-color-display"
             :style="{ backgroundColor: category.color }"
           ></div>
         </div>
@@ -75,4 +75,4 @@ const handleRemove = (id: string) => {
 }
 </script>
 
-<style module src="./CategoryList.module.css"></style>
+<style scoped src="./CategoryList.css"></style>

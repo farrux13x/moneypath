@@ -1,8 +1,8 @@
 <template>
   <Card>
-    <h2 :class="$style['search-title']">🔍 Search Expenses</h2>
+    <h2 class="search-title">🔍 Search Expenses</h2>
 
-    <div :class="$style['search-form']">
+    <div class="search-form">
       <Input
         v-model="searchQuery"
         label="Search"
@@ -10,13 +10,13 @@
         @input="handleSearch"
       />
 
-      <div :class="$style['search-filters']">
-        <div :class="$style['filter-group']">
-          <label :class="$style['filter-label']">Category</label>
+      <div class="search-filters">
+        <div class="filter-group">
+          <label class="filter-label">Category</label>
           <select
             v-model="filters.category"
             @change="handleSearch"
-            :class="$style['filter-select']"
+            class="filter-select"
           >
             <option value="">All Categories</option>
             <option
@@ -29,16 +29,16 @@
           </select>
         </div>
 
-        <div :class="$style['filter-group']">
-          <label :class="$style['filter-label']">Amount Range</label>
-          <div :class="$style['amount-range']">
+        <div class="filter-group">
+          <label class="filter-label">Amount Range</label>
+          <div class="amount-range">
             <Input
               v-model.number="filters.minAmount"
               type="number"
               placeholder="Min"
               @input="handleSearch"
             />
-            <span :class="$style['range-separator']">-</span>
+            <span class="range-separator">-</span>
             <Input
               v-model.number="filters.maxAmount"
               type="number"
@@ -48,16 +48,16 @@
           </div>
         </div>
 
-        <div :class="$style['filter-group']">
-          <label :class="$style['filter-label']">Date Range</label>
-          <div :class="$style['date-range']">
+        <div class="filter-group">
+          <label class="filter-label">Date Range</label>
+          <div class="date-range">
             <Input
               v-model="filters.startDate"
               type="date"
               placeholder="Start Date"
               @input="handleSearch"
             />
-            <span :class="$style['range-separator']">-</span>
+            <span class="range-separator">-</span>
             <Input
               v-model="filters.endDate"
               type="date"
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <div :class="$style['search-actions']">
+      <div class="search-actions">
         <Button
           variant="secondary"
           @click="clearFilters"
@@ -76,7 +76,7 @@
         >
           Clear Filters
         </Button>
-        <div :class="$style['results-count']">
+        <div class="results-count">
           {{ filteredExpenses.length }}
           {{ filteredExpenses.length === 1 ? 'result' : 'results' }}
         </div>
@@ -203,4 +203,4 @@ watch(
 )
 </script>
 
-<style module src="./SearchExpenses.module.css"></style>
+<style scoped src="./SearchExpenses.css"></style>

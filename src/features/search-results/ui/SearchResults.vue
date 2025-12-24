@@ -1,31 +1,31 @@
 <template>
   <Card>
-    <div :class="$style['search-results-header']">
-      <h2 :class="$style['results-title']">Search Results</h2>
-      <div v-if="results.length === 0" :class="$style['no-results']">
+    <div class="search-results-header">
+      <h2 class="results-title">Search Results</h2>
+      <div v-if="results.length === 0" class="no-results">
         <p>No expenses found matching your search criteria.</p>
-        <p :class="$style['no-results-hint']">
+        <p class="no-results-hint">
           Try adjusting your filters or search query.
         </p>
       </div>
     </div>
 
-    <div v-if="results.length > 0" :class="$style['results-list']">
-      <div v-for="expense in results" :key="expense.id" :class="$style['result-item']">
-        <div :class="$style['result-item-content']">
+    <div v-if="results.length > 0" class="results-list">
+      <div v-for="expense in results" :key="expense.id" class="result-item">
+        <div class="result-item-content">
           <div
-            :class="$style['result-category-badge']"
+            class="result-category-badge"
             :style="{ backgroundColor: getCategoryColor(expense.category) }"
           >
             {{ getCategoryName(expense.category) }}
           </div>
-          <div :class="$style['result-details']">
-            <p :class="$style['result-description']">
+          <div class="result-details">
+            <p class="result-description">
               {{ expense.description || 'No description' }}
             </p>
-            <p :class="$style['result-date']">{{ formatDate(expense.date) }}</p>
+            <p class="result-date">{{ formatDate(expense.date) }}</p>
           </div>
-          <div :class="$style['result-amount']">${{ expense.amount.toFixed(2) }}</div>
+          <div class="result-amount">${{ expense.amount.toFixed(2) }}</div>
         </div>
         <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
@@ -33,14 +33,14 @@
       </div>
     </div>
 
-    <div v-if="results.length > 0" :class="$style['results-summary']">
-      <div :class="$style['summary-item']">
-        <span :class="$style['summary-label']">Total Amount:</span>
-        <span :class="$style['summary-value']">${{ totalAmount.toFixed(2) }}</span>
+    <div v-if="results.length > 0" class="results-summary">
+      <div class="summary-item">
+        <span class="summary-label">Total Amount:</span>
+        <span class="summary-value">${{ totalAmount.toFixed(2) }}</span>
       </div>
-      <div :class="$style['summary-item']">
-        <span :class="$style['summary-label']">Average:</span>
-        <span :class="$style['summary-value']">${{ averageAmount.toFixed(2) }}</span>
+      <div class="summary-item">
+        <span class="summary-label">Average:</span>
+        <span class="summary-value">${{ averageAmount.toFixed(2) }}</span>
       </div>
     </div>
   </Card>
@@ -96,4 +96,4 @@ const handleRemove = (id: string) => {
 }
 </script>
 
-<style module src="./SearchResults.module.css"></style>
+<style scoped src="./SearchResults.css"></style>

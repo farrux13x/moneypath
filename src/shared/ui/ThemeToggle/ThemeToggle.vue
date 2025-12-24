@@ -1,12 +1,12 @@
 <template>
   <button
-    :class="$style['theme-toggle']"
+    class="theme-toggle"
     @click="toggleTheme"
     :title="`Switch to ${effectiveTheme === 'light' ? 'dark' : 'light'} mode`"
     aria-label="Toggle theme"
   >
-    <span :class="$style['theme-icon']">{{ themeIcon }}</span>
-    <span :class="$style['theme-label']">{{ themeLabel }}</span>
+    <span class="theme-icon">{{ themeIcon }}</span>
+    <span class="theme-label">{{ themeLabel }}</span>
   </button>
 </template>
 
@@ -30,4 +30,4 @@ const themeLabel = computed(() => {
 })
 </script>
 
-<style module src="./ThemeToggle.module.css"></style>
+<style scoped src="./ThemeToggle.css"></style>

@@ -1,7 +1,7 @@
 <template>
-  <button :class="$style['back-button']" @click="handleBack" aria-label="Go back">
-    <span :class="$style['back-icon']">←</span>
-    <span :class="$style['back-text']">Back</span>
+  <button class="back-button" @click="handleBack" aria-label="Go back">
+    <span class="back-icon">←</span>
+    <span class="back-text">Back</span>
   </button>
 </template>
 
@@ -20,4 +20,4 @@ const handleBack = () => {
 }
 </script>
 
-<style module src="./BackButton.module.css"></style>
+<style scoped src="./BackButton.css"></style>

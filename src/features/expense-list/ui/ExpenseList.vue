@@ -1,37 +1,37 @@
 <template>
   <Card>
-    <div :class="$style['expense-list-header']">
-      <h2 :class="$style['expense-list-title']">Recent Expenses</h2>
-      <div :class="$style['total-amount']">
-        <span :class="$style['total-label']">Total:</span>
-        <span :class="$style['total-value']">${{ totalAmount.toFixed(2) }}</span>
+    <div class="expense-list-header">
+      <h2 class="expense-list-title">Recent Expenses</h2>
+      <div class="total-amount">
+        <span class="total-label">Total:</span>
+        <span class="total-value">${{ totalAmount.toFixed(2) }}</span>
       </div>
     </div>
 
-    <div v-if="expenses.length === 0" :class="$style['empty-state']">
+    <div v-if="expenses.length === 0" class="empty-state">
       <p>No expenses yet. Add your first expense above!</p>
     </div>
 
-    <div v-else :class="$style['expense-list']">
+    <div v-else class="expense-list">
       <div
         v-for="expense in sortedExpenses"
         :key="expense.id"
-        :class="$style['expense-item']"
+        class="expense-item"
       >
-        <div :class="$style['expense-item-content']">
+        <div class="expense-item-content">
           <div
-            :class="$style['expense-category-badge']"
+            class="expense-category-badge"
             :style="{ backgroundColor: getCategoryColor(expense.category) }"
           >
             {{ getCategoryName(expense.category) }}
           </div>
-          <div :class="$style['expense-details']">
-            <p :class="$style['expense-description']">
+          <div class="expense-details">
+            <p class="expense-description">
               {{ expense.description || 'No description' }}
             </p>
-            <p :class="$style['expense-date']">{{ formatDate(expense.date) }}</p>
+            <p class="expense-date">{{ formatDate(expense.date) }}</p>
           </div>
-          <div :class="$style['expense-amount']">${{ expense.amount.toFixed(2) }}</div>
+          <div class="expense-amount">${{ expense.amount.toFixed(2) }}</div>
         </div>
         <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
@@ -81,4 +81,4 @@ const handleRemove = (id: string) => {
 }
 </script>
 
-<style module src="./ExpenseList.module.css"></style>
+<style scoped src="./ExpenseList.css"></style>

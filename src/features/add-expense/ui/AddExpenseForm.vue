@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h2 :class="$style['form-title']">Add New Expense</h2>
-    <form @submit.prevent="handleSubmit" :class="$style['expense-form']">
+    <h2 class="form-title">Add New Expense</h2>
+    <form @submit.prevent="handleSubmit" class="expense-form">
       <Input
         v-model.number="formData.amount"
         type="number"
@@ -10,11 +10,11 @@
         :error="errors.amount"
       />
 
-      <div :class="$style['input-wrapper']">
-        <label :class="$style['input-label']">Category</label>
+      <div class="input-wrapper">
+        <label class="input-label">Category</label>
         <select
           v-model="formData.category"
-          :class="[$style.input, { [$style['input--error']]: errors.category }]"
+          :class="['input', { 'input--error': errors.category }]"
         >
           <option value="">Select a category</option>
           <option
@@ -25,7 +25,7 @@
             {{ category.name }}
           </option>
         </select>
-        <span v-if="errors.category" :class="$style['input-error']">{{
+        <span v-if="errors.category" class="input-error">{{
           errors.category
         }}</span>
       </div>
@@ -136,4 +136,4 @@ const handleSubmit = () => {
 }
 </script>
 
-<style module src="./AddExpenseForm.module.css"></style>
+<style scoped src="./AddExpenseForm.css"></style>

@@ -1,14 +1,14 @@
 <template>
-  <div :class="$style['color-picker-wrapper']">
-    <label v-if="label" :class="$style['input-label']">{{ label }}</label>
-    <div :class="$style['color-picker']">
+  <div class="color-picker-wrapper">
+    <label v-if="label" class="input-label">{{ label }}</label>
+    <div class="color-picker">
       <input
         type="color"
         :value="modelValue"
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
-        :class="$style['color-input']"
+        class="color-input"
       />
       <input
         type="text"
@@ -16,7 +16,7 @@
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
-        :class="$style['color-text-input']"
+        class="color-text-input"
         placeholder="#000000"
         maxlength="7"
       />
@@ -37,4 +37,4 @@ defineEmits<{
 }>()
 </script>
 
-<style module src="./ColorPicker.module.css"></style>
+<style scoped src="./ColorPicker.css"></style>

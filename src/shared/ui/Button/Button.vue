@@ -1,10 +1,10 @@
 <template>
   <button
     :class="[
-      $style.button,
-      $style[`button--${variant}`],
-      $style[`button--${size}`],
-      { [$style['button--full-width']]: fullWidth },
+      'button',
+      `button--${variant}`,
+      `button--${size}`,
+      { 'button--full-width': fullWidth },
     ]"
     :disabled="disabled"
     @click="$emit('click', $event)"
@@ -33,4 +33,4 @@ defineEmits<{
 }>()
 </script>
 
-<style module src="./Button.module.css"></style>
+<style scoped src="./Button.css"></style>

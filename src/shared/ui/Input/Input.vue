@@ -1,18 +1,18 @@
 <template>
-  <div :class="$style['input-wrapper']">
-    <label v-if="label" :for="inputId" :class="$style['input-label']">{{ label }}</label>
+  <div class="input-wrapper">
+    <label v-if="label" :for="inputId" class="input-label">{{ label }}</label>
     <input
       :id="inputId"
       :type="type"
       :value="modelValue ?? ''"
       :placeholder="placeholder"
       :disabled="disabled"
-      :class="[$style.input, { [$style['input--error']]: error }]"
+      :class="['input', { 'input--error': error }]"
       @input="
         $emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
     />
-    <span v-if="error" :class="$style['input-error']">{{ error }}</span>
+    <span v-if="error" class="input-error">{{ error }}</span>
   </div>
 </template>
 
@@ -42,4 +42,4 @@ const inputId = computed(
 )
 </script>
 
-<style module src="./Input.module.css"></style>
+<style scoped src="./Input.css"></style>

@@ -1,29 +1,29 @@
 <template>
-  <div :class="$style['profile-page']">
-    <div :class="$style['page-container']">
-      <header :class="$style['page-header']">
-        <h1 :class="$style['page-title']">👤 User Profile</h1>
-        <p :class="$style['page-subtitle']">Manage your profile and preferences</p>
+  <div class="profile-page">
+    <div class="page-container">
+      <header class="page-header">
+        <h1 class="page-title">👤 User Profile</h1>
+        <p class="page-subtitle">Manage your profile and preferences</p>
       </header>
 
-      <div :class="$style['profile-content']">
-        <div :class="$style['profile-section']">
+      <div class="profile-content">
+        <div class="profile-section">
           <ProfileCard />
         </div>
 
-        <div :class="$style['profile-section']">
+        <div class="profile-section">
           <EditProfileForm />
         </div>
       </div>
 
-      <div :class="$style['profile-actions']">
+      <div class="profile-actions">
         <Button
           variant="primary"
           full-width
           @click="goToExport"
-          :class="$style['settings-button']"
+          class="settings-button"
         >
-          <span :class="$style['button-icon']">📤</span>
+          <span class="button-icon">📤</span>
           <span>Export</span>
         </Button>
       </div>
@@ -41,4 +41,4 @@ const goToExport = () => {
 }
 </script>
 
-<style module src="./ProfilePage.module.css"></style>
+<style scoped src="./ProfilePage.css"></style>

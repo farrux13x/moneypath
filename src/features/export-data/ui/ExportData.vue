@@ -1,28 +1,28 @@
 <template>
   <Card>
-    <h2 :class="$style['section-title']">Export Data</h2>
-    <p :class="$style['section-description']">
+    <h2 class="section-title">Export Data</h2>
+    <p class="section-description">
       Download your expenses and categories as a JSON file
     </p>
 
-    <div :class="$style['export-options']">
-      <div :class="$style['export-option']">
-        <label :class="$style['checkbox-label']">
+    <div class="export-options">
+      <div class="export-option">
+        <label class="checkbox-label">
           <input
             type="checkbox"
             v-model="exportOptions.expenses"
-            :class="$style['checkbox']"
+            class="checkbox"
           />
           <span>Export Expenses ({{ expensesCount }} items)</span>
         </label>
       </div>
 
-      <div :class="$style['export-option']">
-        <label :class="$style['checkbox-label']">
+      <div class="export-option">
+        <label class="checkbox-label">
           <input
             type="checkbox"
             v-model="exportOptions.categories"
-            :class="$style['checkbox']"
+            class="checkbox"
           />
           <span>Export Categories ({{ categoriesCount }} items)</span>
         </label>
@@ -38,7 +38,7 @@
       {{ isExporting ? 'Exporting...' : '📥 Export Data' }}
     </Button>
 
-    <div v-if="exportSuccess" :class="$style['success-message']">
+    <div v-if="exportSuccess" class="success-message">
       ✅ Data exported successfully!
     </div>
   </Card>
@@ -108,4 +108,4 @@ const handleExport = () => {
 }
 </script>
 
-<style module src="./ExportData.module.css"></style>
+<style scoped src="./ExportData.css"></style>

@@ -1,35 +1,35 @@
 <template>
-  <div :class="$style['chat-page']">
-    <div :class="$style['chat-shell']">
-      <header :class="$style['chat-header']">
-        <h1 :class="$style['chat-title']">Chat</h1>
-        <p :class="$style['chat-subtitle']">Start a conversation</p>
+  <div class="chat-page">
+    <div class="chat-shell">
+      <header class="chat-header">
+        <h1 class="chat-title">Chat</h1>
+        <p class="chat-subtitle">Start a conversation</p>
       </header>
 
-      <div ref="threadRef" :class="$style['chat-thread']">
+      <div ref="threadRef" class="chat-thread">
         <div
           v-for="message in messages"
           :key="message.id"
-          :class="[$style.message, $style[`message--${message.role}`]]"
+          :class="['message', `message--${message.role}`]"
         >
-          <div :class="$style['message-content']">
+          <div class="message-content">
             {{ message.content }}
           </div>
         </div>
       </div>
 
-      <form :class="$style['chat-input-bar']" @submit.prevent="handleSend">
-        <button type="button" :class="$style['chat-action']" aria-label="Attach">
+      <form class="chat-input-bar" @submit.prevent="handleSend">
+        <button type="button" class="chat-action" aria-label="Attach">
           +
         </button>
         <input
           v-model="draft"
           type="text"
-          :class="$style['chat-input']"
+          class="chat-input"
           placeholder="Type a message..."
           @keydown.enter.exact.prevent="handleSend"
         />
-        <button type="submit" :class="$style['chat-send']" :disabled="isSending || !draft.trim()">
+        <button type="submit" class="chat-send" :disabled="isSending || !draft.trim()">
           {{ isSending ? 'Sending...' : 'Send' }}
         </button>
       </form>
@@ -157,4 +157,4 @@ watch(messages, () => {
 })
 </script>
 
-<style module src="./ChatPage.module.css"></style>
+<style scoped src="./ChatPage.css"></style>
