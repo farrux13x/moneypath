@@ -31,6 +31,7 @@ const navItems = [
   { id: 'home', label: 'Transactions', icon: 'H' },
   { id: 'statistics', label: 'Statistics', icon: 'S' },
   { id: 'categories', label: 'Categories', icon: 'C' },
+  { id: 'chat', label: 'Chat', icon: 'T' },
   { id: 'profile', label: 'Profile', icon: 'P' },
 ]
 

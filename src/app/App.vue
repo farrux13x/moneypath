@@ -12,6 +12,7 @@
     <SettingsPage v-else-if="currentPage === 'export'" />
     <ProfilePage v-else-if="currentPage === 'profile'" />
     <AddTransactionPage v-else-if="currentPage === 'add-transaction'" />
+    <ChatPage v-else-if="currentPage === 'chat'" />
 
     <BottomNavigation
       v-if="currentPage !== 'add-transaction'"
@@ -30,6 +31,7 @@ import { StatisticsPage } from '@/pages/statistics/ui'
 import { SettingsPage } from '@/pages/settings/ui'
 import { ProfilePage } from '@/pages/profile/ui'
 import { AddTransactionPage } from '@/pages/add-transaction/ui'
+import { ChatPage } from '@/pages/chat/ui'
 import { BottomNavigation } from '@/widgets/bottom-navigation/ui'
 import { TopNavigation } from '@/widgets/top-navigation/ui'
 import { useTheme } from '@/shared/lib/theme/useTheme'
@@ -41,6 +43,7 @@ const currentPage = ref<
   | 'export'
   | 'profile'
   | 'add-transaction'
+  | 'chat'
 >('home')
 
 useTheme()
@@ -57,6 +60,8 @@ const updatePage = () => {
     currentPage.value = 'profile'
   } else if (hash === 'add-transaction') {
     currentPage.value = 'add-transaction'
+  } else if (hash === 'chat') {
+    currentPage.value = 'chat'
   } else {
     currentPage.value = 'home'
   }

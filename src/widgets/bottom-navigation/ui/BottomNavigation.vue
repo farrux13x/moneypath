@@ -28,6 +28,7 @@ const navItems = [
   { id: 'home', label: 'Transactions', icon: '📋' },
   { id: 'statistics', label: 'Statistics', icon: '📊' },
   { id: 'categories', label: 'Categories', icon: '📁' },
+  { id: 'chat', label: 'Chat', icon: 'T' },
   { id: 'profile', label: 'Profile', icon: '👤' },
 ]
 
@@ -95,3 +96,4 @@ const navigate = (page: string) => {
   }
 }
 </style>
+
