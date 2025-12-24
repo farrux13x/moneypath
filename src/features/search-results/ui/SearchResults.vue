@@ -1,31 +1,31 @@
 <template>
   <Card>
-    <div class="search-results-header">
-      <h2 class="results-title">Search Results</h2>
-      <div v-if="results.length === 0" class="no-results">
+    <div :class="$style['search-results-header']">
+      <h2 :class="$style['results-title']">Search Results</h2>
+      <div v-if="results.length === 0" :class="$style['no-results']">
         <p>No expenses found matching your search criteria.</p>
-        <p class="no-results-hint">
+        <p :class="$style['no-results-hint']">
           Try adjusting your filters or search query.
         </p>
       </div>
     </div>
 
-    <div v-if="results.length > 0" class="results-list">
-      <div v-for="expense in results" :key="expense.id" class="result-item">
-        <div class="result-item-content">
+    <div v-if="results.length > 0" :class="$style['results-list']">
+      <div v-for="expense in results" :key="expense.id" :class="$style['result-item']">
+        <div :class="$style['result-item-content']">
           <div
-            class="result-category-badge"
+            :class="$style['result-category-badge']"
             :style="{ backgroundColor: getCategoryColor(expense.category) }"
           >
             {{ getCategoryName(expense.category) }}
           </div>
-          <div class="result-details">
-            <p class="result-description">
+          <div :class="$style['result-details']">
+            <p :class="$style['result-description']">
               {{ expense.description || 'No description' }}
             </p>
-            <p class="result-date">{{ formatDate(expense.date) }}</p>
+            <p :class="$style['result-date']">{{ formatDate(expense.date) }}</p>
           </div>
-          <div class="result-amount">${{ expense.amount.toFixed(2) }}</div>
+          <div :class="$style['result-amount']">${{ expense.amount.toFixed(2) }}</div>
         </div>
         <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
@@ -33,14 +33,14 @@
       </div>
     </div>
 
-    <div v-if="results.length > 0" class="results-summary">
-      <div class="summary-item">
-        <span class="summary-label">Total Amount:</span>
-        <span class="summary-value">${{ totalAmount.toFixed(2) }}</span>
+    <div v-if="results.length > 0" :class="$style['results-summary']">
+      <div :class="$style['summary-item']">
+        <span :class="$style['summary-label']">Total Amount:</span>
+        <span :class="$style['summary-value']">${{ totalAmount.toFixed(2) }}</span>
       </div>
-      <div class="summary-item">
-        <span class="summary-label">Average:</span>
-        <span class="summary-value">${{ averageAmount.toFixed(2) }}</span>
+      <div :class="$style['summary-item']">
+        <span :class="$style['summary-label']">Average:</span>
+        <span :class="$style['summary-value']">${{ averageAmount.toFixed(2) }}</span>
       </div>
     </div>
   </Card>
@@ -96,127 +96,4 @@ const handleRemove = (id: string) => {
 }
 </script>
 
-<style scoped>
-.search-results-header {
-  margin-bottom: 1.5rem;
-}
-
-.results-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-
-.no-results {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-secondary);
-}
-
-.no-results-hint {
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  opacity: 0.8;
-}
-
-.results-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.result-item {
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
-}
-
-.result-item:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
-
-.result-item-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.result-category-badge {
-  padding: 0.375rem 0.75rem;
-  border-radius: var(--radius-sm);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.result-details {
-  flex: 1;
-  min-width: 200px;
-}
-
-.result-description {
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.result-date {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.result-amount {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.results-summary {
-  display: flex;
-  justify-content: space-around;
-  padding: 1.25rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.summary-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.summary-label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.summary-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
-@media (max-width: 640px) {
-  .result-item-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .result-amount {
-    align-self: flex-end;
-  }
-}
-</style>
+<style module src="./SearchResults.module.css"></style>

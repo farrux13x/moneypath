@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h2 class="form-title">Add New Expense</h2>
-    <form @submit.prevent="handleSubmit" class="expense-form">
+    <h2 :class="$style['form-title']">Add New Expense</h2>
+    <form @submit.prevent="handleSubmit" :class="$style['expense-form']">
       <Input
         v-model.number="formData.amount"
         type="number"
@@ -10,11 +10,11 @@
         :error="errors.amount"
       />
 
-      <div class="input-wrapper">
-        <label class="input-label">Category</label>
+      <div :class="$style['input-wrapper']">
+        <label :class="$style['input-label']">Category</label>
         <select
           v-model="formData.category"
-          :class="['input', { 'input--error': errors.category }]"
+          :class="[$style.input, { [$style['input--error']]: errors.category }]"
         >
           <option value="">Select a category</option>
           <option
@@ -25,7 +25,7 @@
             {{ category.name }}
           </option>
         </select>
-        <span v-if="errors.category" class="input-error">{{
+        <span v-if="errors.category" :class="$style['input-error']">{{
           errors.category
         }}</span>
       </div>
@@ -136,51 +136,4 @@ const handleSubmit = () => {
 }
 </script>
 
-<style scoped>
-.form-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-.expense-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.input-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-select.input {
-  width: 100%;
-  padding: 0.625rem 0.875rem;
-  font-size: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-select.input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
-}
-
-select.input--error {
-  border-color: var(--danger-color);
-}
-</style>
+<style module src="./AddExpenseForm.module.css"></style>

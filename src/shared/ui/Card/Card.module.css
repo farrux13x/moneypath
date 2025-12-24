@@ -1,0 +1,16 @@
+.card {
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.card--padded {
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .card--padded {
+    padding: 2rem;
+  }
+}

@@ -1,55 +1,55 @@
 <template>
   <Card>
-    <h2 class="section-title">Import Data</h2>
-    <p class="section-description">
+    <h2 :class="$style['section-title']">Import Data</h2>
+    <p :class="$style['section-description']">
       Restore your expenses and categories from a JSON file
     </p>
 
-    <div class="import-options">
-      <div class="import-option">
-        <label class="checkbox-label">
+    <div :class="$style['import-options']">
+      <div :class="$style['import-option']">
+        <label :class="$style['checkbox-label']">
           <input
             type="checkbox"
             v-model="importOptions.expenses"
-            class="checkbox"
+            :class="$style['checkbox']"
           />
           <span>Import Expenses</span>
         </label>
       </div>
 
-      <div class="import-option">
-        <label class="checkbox-label">
+      <div :class="$style['import-option']">
+        <label :class="$style['checkbox-label']">
           <input
             type="checkbox"
             v-model="importOptions.categories"
-            class="checkbox"
+            :class="$style['checkbox']"
           />
           <span>Import Categories</span>
         </label>
       </div>
 
-      <div class="import-option">
-        <label class="checkbox-label">
+      <div :class="$style['import-option']">
+        <label :class="$style['checkbox-label']">
           <input
             type="checkbox"
             v-model="importOptions.replace"
-            class="checkbox"
+            :class="$style['checkbox']"
           />
           <span>Replace existing data (otherwise merge)</span>
         </label>
       </div>
     </div>
 
-    <div class="file-input-wrapper">
+    <div :class="$style['file-input-wrapper']">
       <input
         ref="fileInput"
         type="file"
         accept=".json,application/json"
         @change="handleFileSelect"
-        class="file-input"
+        :class="$style['file-input']"
         :disabled="isImporting"
       />
-      <div v-if="selectedFile" class="selected-file">
+      <div v-if="selectedFile" :class="$style['selected-file']">
         📄 {{ selectedFile.name }}
       </div>
     </div>
@@ -63,11 +63,11 @@
       {{ isImporting ? 'Importing...' : '📤 Import Data' }}
     </Button>
 
-    <div v-if="importSuccess" class="success-message">
+    <div v-if="importSuccess" :class="$style['success-message']">
       ✅ Data imported successfully!
     </div>
 
-    <div v-if="importError" class="error-message">❌ {{ importError }}</div>
+    <div v-if="importError" :class="$style['error-message']">❌ {{ importError }}</div>
   </Card>
 </template>
 
@@ -251,100 +251,4 @@ const handleImport = async () => {
 }
 </script>
 
-<style scoped>
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.section-description {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.import-options {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.import-option {
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: var(--text-primary);
-}
-
-.checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: var(--primary-color);
-}
-
-.file-input-wrapper {
-  margin-bottom: 1.5rem;
-}
-
-.file-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px dashed var(--border-color);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-secondary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.file-input:hover:not(:disabled) {
-  border-color: var(--primary-color);
-  background-color: var(--bg-tertiary);
-}
-
-.file-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.selected-file {
-  margin-top: 0.75rem;
-  padding: 0.75rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  color: var(--text-primary);
-}
-
-.success-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #d1fae5;
-  color: #065f46;
-  border-radius: var(--radius-md);
-  text-align: center;
-  font-size: 0.875rem;
-}
-
-.error-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #fee2e2;
-  color: #991b1b;
-  border-radius: var(--radius-md);
-  text-align: center;
-  font-size: 0.875rem;
-}
-</style>
+<style module src="./ImportData.module.css"></style>

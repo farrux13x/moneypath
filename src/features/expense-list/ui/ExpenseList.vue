@@ -1,37 +1,37 @@
 <template>
   <Card>
-    <div class="expense-list-header">
-      <h2 class="expense-list-title">Recent Expenses</h2>
-      <div class="total-amount">
-        <span class="total-label">Total:</span>
-        <span class="total-value">${{ totalAmount.toFixed(2) }}</span>
+    <div :class="$style['expense-list-header']">
+      <h2 :class="$style['expense-list-title']">Recent Expenses</h2>
+      <div :class="$style['total-amount']">
+        <span :class="$style['total-label']">Total:</span>
+        <span :class="$style['total-value']">${{ totalAmount.toFixed(2) }}</span>
       </div>
     </div>
 
-    <div v-if="expenses.length === 0" class="empty-state">
+    <div v-if="expenses.length === 0" :class="$style['empty-state']">
       <p>No expenses yet. Add your first expense above!</p>
     </div>
 
-    <div v-else class="expense-list">
+    <div v-else :class="$style['expense-list']">
       <div
         v-for="expense in sortedExpenses"
         :key="expense.id"
-        class="expense-item"
+        :class="$style['expense-item']"
       >
-        <div class="expense-item-content">
+        <div :class="$style['expense-item-content']">
           <div
-            class="expense-category-badge"
+            :class="$style['expense-category-badge']"
             :style="{ backgroundColor: getCategoryColor(expense.category) }"
           >
             {{ getCategoryName(expense.category) }}
           </div>
-          <div class="expense-details">
-            <p class="expense-description">
+          <div :class="$style['expense-details']">
+            <p :class="$style['expense-description']">
               {{ expense.description || 'No description' }}
             </p>
-            <p class="expense-date">{{ formatDate(expense.date) }}</p>
+            <p :class="$style['expense-date']">{{ formatDate(expense.date) }}</p>
           </div>
-          <div class="expense-amount">${{ expense.amount.toFixed(2) }}</div>
+          <div :class="$style['expense-amount']">${{ expense.amount.toFixed(2) }}</div>
         </div>
         <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
           Remove
@@ -81,111 +81,4 @@ const handleRemove = (id: string) => {
 }
 </script>
 
-<style scoped>
-.expense-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.expense-list-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.total-amount {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.total-label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.total-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
-.empty-state {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-secondary);
-}
-
-.expense-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.expense-item {
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
-}
-
-.expense-item:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
-
-.expense-item-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.expense-category-badge {
-  padding: 0.375rem 0.75rem;
-  border-radius: var(--radius-sm);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.expense-details {
-  flex: 1;
-  min-width: 200px;
-}
-
-.expense-description {
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.expense-date {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.expense-amount {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-@media (max-width: 640px) {
-  .expense-item-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .expense-amount {
-    align-self: flex-end;
-  }
-}
-</style>
+<style module src="./ExpenseList.module.css"></style>

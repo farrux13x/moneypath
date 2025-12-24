@@ -1,28 +1,28 @@
 <template>
   <Card>
-    <h2 class="section-title">Export Data</h2>
-    <p class="section-description">
+    <h2 :class="$style['section-title']">Export Data</h2>
+    <p :class="$style['section-description']">
       Download your expenses and categories as a JSON file
     </p>
 
-    <div class="export-options">
-      <div class="export-option">
-        <label class="checkbox-label">
+    <div :class="$style['export-options']">
+      <div :class="$style['export-option']">
+        <label :class="$style['checkbox-label']">
           <input
             type="checkbox"
             v-model="exportOptions.expenses"
-            class="checkbox"
+            :class="$style['checkbox']"
           />
           <span>Export Expenses ({{ expensesCount }} items)</span>
         </label>
       </div>
 
-      <div class="export-option">
-        <label class="checkbox-label">
+      <div :class="$style['export-option']">
+        <label :class="$style['checkbox-label']">
           <input
             type="checkbox"
             v-model="exportOptions.categories"
-            class="checkbox"
+            :class="$style['checkbox']"
           />
           <span>Export Categories ({{ categoriesCount }} items)</span>
         </label>
@@ -38,7 +38,7 @@
       {{ isExporting ? 'Exporting...' : '📥 Export Data' }}
     </Button>
 
-    <div v-if="exportSuccess" class="success-message">
+    <div v-if="exportSuccess" :class="$style['success-message']">
       ✅ Data exported successfully!
     </div>
   </Card>
@@ -108,57 +108,4 @@ const handleExport = () => {
 }
 </script>
 
-<style scoped>
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.section-description {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.export-options {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.export-option {
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: var(--text-primary);
-}
-
-.checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: var(--primary-color);
-}
-
-.success-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #d1fae5;
-  color: #065f46;
-  border-radius: var(--radius-md);
-  text-align: center;
-  font-size: 0.875rem;
-}
-</style>
+<style module src="./ExportData.module.css"></style>

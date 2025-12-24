@@ -1,0 +1,17 @@
+.line-chart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.line {
+  transition: all 0.3s ease;
+}
+
+.point {
+  cursor: pointer;
+  transition: r 0.2s ease;
+}
+
+.point:hover {
+  r: 6;
+}

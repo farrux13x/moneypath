@@ -1,5 +1,5 @@
 <template>
-  <div class="pie-chart">
+  <div :class="$style['pie-chart']">
     <svg :width="size" :height="size + 100" viewBox="0 0 200 300">
       <g transform="translate(100, 100)">
         <path
@@ -8,7 +8,7 @@
           :d="slice.path"
           :fill="slice.color"
           :opacity="hoveredIndex === index ? 0.8 : 1"
-          class="slice"
+          :class="$style['slice']"
           @mouseenter="hoveredIndex = index"
           @mouseleave="hoveredIndex = null"
         />
@@ -131,16 +131,4 @@ const formatValue = (value: number): string => {
 }
 </script>
 
-<style scoped>
-.pie-chart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.slice {
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-</style>
+<style module src="./PieChart.module.css"></style>

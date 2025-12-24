@@ -1,16 +1,16 @@
 <template>
-  <div class="statistics-page">
-    <div class="page-container">
-      <header class="page-header">
-        <h1 class="page-title">📊 Statistics & Dashboard</h1>
-        <p class="page-subtitle">Analyze your spending patterns</p>
+  <div :class="$style['statistics-page']">
+    <div :class="$style['page-container']">
+      <header :class="$style['page-header']">
+        <h1 :class="$style['page-title']">📊 Statistics & Dashboard</h1>
+        <p :class="$style['page-subtitle']">Analyze your spending patterns</p>
       </header>
 
       <!-- Period Filter -->
       <PeriodFilter @period-change="handlePeriodChange" />
 
       <!-- Statistics Cards -->
-      <div class="statistics-grid">
+      <div :class="$style['statistics-grid']">
         <StatisticsCard
           title="Total Spending"
           :value="formatCurrency(filteredTotalAmount)"
@@ -36,35 +36,35 @@
       </div>
 
       <!-- Charts Section -->
-      <div class="charts-section">
+      <div :class="$style['charts-section']">
         <!-- Spending by Category - Pie Chart -->
         <Card>
-          <h2 class="chart-title">Spending by Category</h2>
-          <div class="chart-container">
+          <h2 :class="$style['chart-title']">Spending by Category</h2>
+          <div :class="$style['chart-container']">
             <PieChart :data="categoryPieData" :size="250" />
           </div>
         </Card>
 
         <!-- Spending by Category - Bar Chart -->
         <Card>
-          <h2 class="chart-title">Top Categories</h2>
-          <div class="chart-container">
+          <h2 :class="$style['chart-title']">Top Categories</h2>
+          <div :class="$style['chart-container']">
             <BarChart :data="categoryBarData" />
           </div>
         </Card>
 
         <!-- Spending Trend -->
         <Card>
-          <h2 class="chart-title">{{ getTrendChartTitle() }}</h2>
-          <div class="chart-container">
+          <h2 :class="$style['chart-title']">{{ getTrendChartTitle() }}</h2>
+          <div :class="$style['chart-container']">
             <LineChart :data="trendLineData" />
           </div>
         </Card>
 
         <!-- Period Spending -->
         <Card>
-          <h2 class="chart-title">{{ getPeriodChartTitle() }}</h2>
-          <div class="chart-container">
+          <h2 :class="$style['chart-title']">{{ getPeriodChartTitle() }}</h2>
+          <div :class="$style['chart-container']">
             <BarChart :data="periodBarData" />
           </div>
         </Card>
@@ -72,24 +72,24 @@
 
       <!-- Top Categories List -->
       <Card>
-        <h2 class="chart-title">Top 5 Categories</h2>
-        <div class="top-categories-list">
+        <h2 :class="$style['chart-title']">Top 5 Categories</h2>
+        <div :class="$style['top-categories-list']">
           <div
             v-for="(category, index) in filteredTopCategories"
             :key="category.category"
-            class="top-category-item"
+            :class="$style['top-category-item']"
           >
-            <div class="top-category-rank">#{{ index + 1 }}</div>
-            <div class="top-category-info">
-              <div class="top-category-name">
+            <div :class="$style['top-category-rank']">#{{ index + 1 }}</div>
+            <div :class="$style['top-category-info']">
+              <div :class="$style['top-category-name']">
                 {{ getCategoryName(category.category) }}
               </div>
-              <div class="top-category-amount">
+              <div :class="$style['top-category-amount']">
                 {{ formatCurrency(category.amount) }}
               </div>
             </div>
             <div
-              class="top-category-color"
+              :class="$style['top-category-color']"
               :style="{ backgroundColor: getCategoryColor(category.category) }"
             ></div>
           </div>
@@ -414,133 +414,4 @@ const periodBarData = computed(() => {
 })
 </script>
 
-<style scoped>
-.statistics-page {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.page-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 1rem;
-}
-
-@media (min-width: 768px) {
-  .page-container {
-    padding: 2rem;
-  }
-}
-
-.page-header {
-  text-align: center;
-  color: white;
-}
-
-.page-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.page-subtitle {
-  font-size: 1.25rem;
-  opacity: 0.95;
-}
-
-.statistics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.charts-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-}
-
-.chart-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-.chart-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 300px;
-  overflow-x: auto;
-}
-
-.top-categories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.top-category-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-}
-
-.top-category-rank {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  min-width: 40px;
-}
-
-.top-category-info {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-.top-category-name {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.top-category-amount {
-  font-weight: 700;
-  color: var(--text-primary);
-  font-size: 1.125rem;
-}
-
-.top-category-color {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--border-color);
-  flex-shrink: 0;
-}
-
-@media (min-width: 768px) {
-  .page-title {
-    font-size: 4rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .charts-section {
-    grid-template-columns: 1fr;
-  }
-
-  .statistics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-</style>
+<style module src="./StatisticsPage.module.css"></style>

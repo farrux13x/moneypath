@@ -1,8 +1,8 @@
 <template>
-  <div class="line-chart">
+  <div :class="$style['line-chart']">
     <svg :width="width" :height="height" viewBox="0 0 400 300">
       <!-- Grid lines -->
-      <g v-for="i in 5" :key="i" class="grid-line">
+      <g v-for="i in 5" :key="i" :class="$style['grid-line']">
         <line
           :x1="padding"
           :y1="padding + (i - 1) * (chartHeight / 4)"
@@ -20,11 +20,11 @@
         fill="none"
         :stroke="color"
         stroke-width="3"
-        class="line"
+        :class="$style['line']"
       />
 
       <!-- Area under line -->
-      <path :d="areaPath" :fill="color" opacity="0.2" class="area" />
+      <path :d="areaPath" :fill="color" opacity="0.2" :class="$style['area']" />
 
       <!-- Data points -->
       <circle
@@ -34,7 +34,7 @@
         :cy="point.y"
         r="4"
         :fill="color"
-        class="point"
+        :class="$style['point']"
       />
 
       <!-- X-axis labels -->
@@ -127,22 +127,4 @@ const areaPath = computed(() => {
 })
 </script>
 
-<style scoped>
-.line-chart {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.line {
-  transition: all 0.3s ease;
-}
-
-.point {
-  cursor: pointer;
-  transition: r 0.2s ease;
-}
-
-.point:hover {
-  r: 6;
-}
-</style>
+<style module src="./LineChart.module.css"></style>

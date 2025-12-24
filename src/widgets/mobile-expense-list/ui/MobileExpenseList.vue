@@ -1,6 +1,6 @@
 <template>
-  <div class="mobile-expense-list">
-    <div v-if="expenses.length === 0" class="empty-state">
+  <div :class="$style['mobile-expense-list']">
+    <div v-if="expenses.length === 0" :class="$style['empty-state']">
       <p>No expenses yet. Tap the + button to add your first expense!</p>
     </div>
 
@@ -8,42 +8,42 @@
       <div
         v-for="(group, date) in groupedExpenses"
         :key="date"
-        class="expense-group"
+        :class="$style['expense-group']"
       >
-        <div class="group-header">
-          <h3 class="group-date">{{ formatDateHeader(date) }}</h3>
-          <span class="group-total"
+        <div :class="$style['group-header']">
+          <h3 :class="$style['group-date']">{{ formatDateHeader(date) }}</h3>
+          <span :class="$style['group-total']"
             >${{ getGroupTotal(group).toFixed(2) }}</span
           >
         </div>
 
-        <div class="expense-items">
+        <div :class="$style['expense-items']">
           <div
             v-for="expense in group"
             :key="expense.id"
-            class="expense-item"
+            :class="$style['expense-item']"
             @click="handleExpenseClick(expense)"
           >
             <div
-              class="expense-indicator"
+              :class="$style['expense-indicator']"
               :style="{ backgroundColor: getCategoryColor(expense.category) }"
             ></div>
-            <div class="expense-content">
-              <div class="expense-main">
-                <div class="expense-info">
-                  <h4 class="expense-title">
+            <div :class="$style['expense-content']">
+              <div :class="$style['expense-main']">
+                <div :class="$style['expense-info']">
+                  <h4 :class="$style['expense-title']">
                     {{ expense.description || 'No description' }}
                   </h4>
-                  <div class="expense-meta">
-                    <span class="expense-category">{{
+                  <div :class="$style['expense-meta']">
+                    <span :class="$style['expense-category']">{{
                       getCategoryName(expense.category)
                     }}</span>
-                    <span class="expense-time">{{
+                    <span :class="$style['expense-time']">{{
                       formatTime(expense.date)
                     }}</span>
                   </div>
                 </div>
-                <div class="expense-amount">
+                <div :class="$style['expense-amount']">
                   -${{ expense.amount.toFixed(2) }}
                 </div>
               </div>
@@ -144,128 +144,4 @@ const handleExpenseClick = (expense: Expense) => {
 }
 </script>
 
-<style scoped>
-.mobile-expense-list {
-  padding-bottom: 5rem;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  color: var(--text-secondary);
-}
-
-.expense-group {
-  margin-bottom: 2rem;
-}
-
-.group-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.group-date {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.group-total {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.expense-items {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.expense-item {
-  display: flex;
-  align-items: center;
-  background-color: var(--bg-primary);
-  border-radius: var(--radius-md);
-  margin: 0 1rem;
-  padding: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
-}
-
-.expense-item:active {
-  background-color: var(--bg-secondary);
-  transform: scale(0.98);
-}
-
-.expense-indicator {
-  width: 4px;
-  height: 100%;
-  min-height: 48px;
-  border-radius: 2px;
-  margin-right: 1rem;
-  flex-shrink: 0;
-}
-
-.expense-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.expense-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.expense-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.expense-title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.expense-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.expense-category {
-  font-weight: 500;
-}
-
-.expense-time {
-  opacity: 0.8;
-}
-
-.expense-amount {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--danger-color);
-  flex-shrink: 0;
-}
-
-@media (min-width: 768px) {
-  .mobile-expense-list {
-    display: none;
-  }
-}
-</style>
+<style module src="./MobileExpenseList.module.css"></style>

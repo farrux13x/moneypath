@@ -1,0 +1,12 @@
+.bar-chart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.bar {
+  cursor: pointer;
+}
+
+.bar:hover {
+  opacity: 0.8;
+}

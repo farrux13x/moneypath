@@ -1,8 +1,8 @@
 <template>
   <Card>
-    <h2 class="search-title">🔍 Search Expenses</h2>
+    <h2 :class="$style['search-title']">🔍 Search Expenses</h2>
 
-    <div class="search-form">
+    <div :class="$style['search-form']">
       <Input
         v-model="searchQuery"
         label="Search"
@@ -10,13 +10,13 @@
         @input="handleSearch"
       />
 
-      <div class="search-filters">
-        <div class="filter-group">
-          <label class="filter-label">Category</label>
+      <div :class="$style['search-filters']">
+        <div :class="$style['filter-group']">
+          <label :class="$style['filter-label']">Category</label>
           <select
             v-model="filters.category"
             @change="handleSearch"
-            class="filter-select"
+            :class="$style['filter-select']"
           >
             <option value="">All Categories</option>
             <option
@@ -29,16 +29,16 @@
           </select>
         </div>
 
-        <div class="filter-group">
-          <label class="filter-label">Amount Range</label>
-          <div class="amount-range">
+        <div :class="$style['filter-group']">
+          <label :class="$style['filter-label']">Amount Range</label>
+          <div :class="$style['amount-range']">
             <Input
               v-model.number="filters.minAmount"
               type="number"
               placeholder="Min"
               @input="handleSearch"
             />
-            <span class="range-separator">-</span>
+            <span :class="$style['range-separator']">-</span>
             <Input
               v-model.number="filters.maxAmount"
               type="number"
@@ -48,16 +48,16 @@
           </div>
         </div>
 
-        <div class="filter-group">
-          <label class="filter-label">Date Range</label>
-          <div class="date-range">
+        <div :class="$style['filter-group']">
+          <label :class="$style['filter-label']">Date Range</label>
+          <div :class="$style['date-range']">
             <Input
               v-model="filters.startDate"
               type="date"
               placeholder="Start Date"
               @input="handleSearch"
             />
-            <span class="range-separator">-</span>
+            <span :class="$style['range-separator']">-</span>
             <Input
               v-model="filters.endDate"
               type="date"
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <div class="search-actions">
+      <div :class="$style['search-actions']">
         <Button
           variant="secondary"
           @click="clearFilters"
@@ -76,7 +76,7 @@
         >
           Clear Filters
         </Button>
-        <div class="results-count">
+        <div :class="$style['results-count']">
           {{ filteredExpenses.length }}
           {{ filteredExpenses.length === 1 ? 'result' : 'results' }}
         </div>
@@ -203,105 +203,4 @@ watch(
 )
 </script>
 
-<style scoped>
-.search-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-.search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.search-filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.25rem;
-  padding: 1.25rem;
-  background-color: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.filter-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.filter-select {
-  width: 100%;
-  padding: 0.625rem 0.875rem;
-  font-size: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filter-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
-}
-
-.amount-range,
-.date-range {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.amount-range :deep(.input-wrapper),
-.date-range :deep(.input-wrapper) {
-  flex: 1;
-}
-
-.range-separator {
-  color: var(--text-secondary);
-  font-weight: 500;
-  flex-shrink: 0;
-}
-
-.search-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.results-count {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-@media (max-width: 768px) {
-  .search-filters {
-    grid-template-columns: 1fr;
-  }
-
-  .amount-range,
-  .date-range {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .range-separator {
-    text-align: center;
-  }
-}
-</style>
+<style module src="./SearchExpenses.module.css"></style>

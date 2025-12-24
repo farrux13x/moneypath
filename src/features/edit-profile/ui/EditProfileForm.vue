@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h2 class="form-title">Edit Profile</h2>
-    <form @submit.prevent="handleSubmit" class="profile-form">
+    <h2 :class="$style['form-title']">Edit Profile</h2>
+    <form @submit.prevent="handleSubmit" :class="$style['profile-form']">
       <Input
         v-model="formData.name"
         label="Name"
@@ -17,9 +17,9 @@
         :error="errors.email"
       />
 
-      <div class="input-wrapper">
-        <label class="input-label">Currency</label>
-        <select v-model="formData.currency" class="input">
+      <div :class="$style['input-wrapper']">
+        <label :class="$style['input-label']">Currency</label>
+        <select v-model="formData.currency" :class="$style['input']">
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
           <option value="GBP">GBP (£)</option>
@@ -33,9 +33,9 @@
         </select>
       </div>
 
-      <div class="input-wrapper">
-        <label class="input-label">Date Format</label>
-        <select v-model="formData.dateFormat" class="input">
+      <div :class="$style['input-wrapper']">
+        <label :class="$style['input-label']">Date Format</label>
+        <select v-model="formData.dateFormat" :class="$style['input']">
           <option value="MM/DD/YYYY">MM/DD/YYYY</option>
           <option value="DD/MM/YYYY">DD/MM/YYYY</option>
           <option value="YYYY-MM-DD">YYYY-MM-DD</option>
@@ -43,9 +43,9 @@
         </select>
       </div>
 
-      <div class="input-wrapper">
-        <label class="input-label">Theme</label>
-        <select v-model="formData.theme" class="input">
+      <div :class="$style['input-wrapper']">
+        <label :class="$style['input-label']">Theme</label>
+        <select v-model="formData.theme" :class="$style['input']">
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="auto">Auto (System)</option>
@@ -61,7 +61,7 @@
         {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
       </Button>
 
-      <div v-if="saveSuccess" class="success-message">
+      <div v-if="saveSuccess" :class="$style['success-message']">
         ✅ Profile updated successfully!
       </div>
     </form>
@@ -148,57 +148,4 @@ const handleSubmit = () => {
 }
 </script>
 
-<style scoped>
-.form-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-
-.profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.input-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-select.input {
-  width: 100%;
-  padding: 0.625rem 0.875rem;
-  font-size: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-select.input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
-}
-
-.success-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #d1fae5;
-  color: #065f46;
-  border-radius: var(--radius-md);
-  text-align: center;
-  font-size: 0.875rem;
-}
-</style>
+<style module src="./EditProfileForm.module.css"></style>

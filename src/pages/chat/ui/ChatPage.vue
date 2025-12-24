@@ -1,35 +1,35 @@
 <template>
-  <div class="chat-page">
-    <div class="chat-shell">
-      <header class="chat-header">
-        <h1 class="chat-title">Chat</h1>
-        <p class="chat-subtitle">Start a conversation</p>
+  <div :class="$style['chat-page']">
+    <div :class="$style['chat-shell']">
+      <header :class="$style['chat-header']">
+        <h1 :class="$style['chat-title']">Chat</h1>
+        <p :class="$style['chat-subtitle']">Start a conversation</p>
       </header>
 
-      <div ref="threadRef" class="chat-thread">
+      <div ref="threadRef" :class="$style['chat-thread']">
         <div
           v-for="message in messages"
           :key="message.id"
-          :class="['message', `message--${message.role}`]"
+          :class="[$style.message, $style[`message--${message.role}`]]"
         >
-          <div class="message-content">
+          <div :class="$style['message-content']">
             {{ message.content }}
           </div>
         </div>
       </div>
 
-      <form class="chat-input-bar" @submit.prevent="handleSend">
-        <button type="button" class="chat-action" aria-label="Attach">
+      <form :class="$style['chat-input-bar']" @submit.prevent="handleSend">
+        <button type="button" :class="$style['chat-action']" aria-label="Attach">
           +
         </button>
         <input
           v-model="draft"
           type="text"
-          class="chat-input"
+          :class="$style['chat-input']"
           placeholder="Type a message..."
           @keydown.enter.exact.prevent="handleSend"
         />
-        <button type="submit" class="chat-send" :disabled="isSending || !draft.trim()">
+        <button type="submit" :class="$style['chat-send']" :disabled="isSending || !draft.trim()">
           {{ isSending ? 'Sending...' : 'Send' }}
         </button>
       </form>
@@ -157,141 +157,4 @@ watch(messages, () => {
 })
 </script>
 
-<style scoped>
-.chat-page {
-  width: 100%;
-  min-height: calc(100vh - 120px);
-  display: flex;
-  justify-content: center;
-  padding: 1.5rem 1rem 2.5rem;
-}
-
-.chat-shell {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.chat-header {
-  text-align: left;
-  color: white;
-}
-
-.chat-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.chat-subtitle {
-  font-size: 1rem;
-  opacity: 0.8;
-}
-
-.chat-thread {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 1.5rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  min-height: 320px;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.message {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  color: white;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.message--assistant .message-content {
-  max-width: 70%;
-}
-
-.message--user {
-  align-items: flex-end;
-}
-
-.message--user .message-content {
-  max-width: 70%;
-  background: linear-gradient(135deg, #0b5fff, #0a4cc3);
-  padding: 1rem 1.25rem;
-  border-radius: 1.25rem;
-  border-top-right-radius: 0.5rem;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35);
-}
-
-.chat-input-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 2rem;
-  padding: 0.5rem 0.75rem;
-}
-
-.chat-action {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(148, 163, 184, 0.2);
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.chat-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 1rem;
-  outline: none;
-}
-
-.chat-input::placeholder {
-  color: rgba(226, 232, 240, 0.6);
-}
-
-.chat-send {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
-  color: white;
-  border: none;
-  border-radius: 1.5rem;
-  padding: 0.5rem 1.25rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.chat-send:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@media (max-width: 640px) {
-  .chat-page {
-    padding: 1rem 1rem 6rem;
-  }
-
-  .chat-thread {
-    padding: 1.25rem;
-    max-height: 55vh;
-  }
-
-  .message--assistant .message-content,
-  .message--user .message-content {
-    max-width: 100%;
-  }
-}
-</style>
+<style module src="./ChatPage.module.css"></style>

@@ -1,0 +1,11 @@
+.pie-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slice {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}

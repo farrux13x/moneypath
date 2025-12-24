@@ -1,5 +1,5 @@
 <template>
-  <div :class="['card', { 'card--padded': padded }]">
+  <div :class="[$style.card, { [$style['card--padded']]: padded }]">
     <slot />
   </div>
 </template>
@@ -14,21 +14,4 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style scoped>
-.card {
-  background-color: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-}
-
-.card--padded {
-  padding: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .card--padded {
-    padding: 2rem;
-  }
-}
-</style>
+<style module src="./Card.module.css"></style>

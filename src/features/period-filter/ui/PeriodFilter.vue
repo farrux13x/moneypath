@@ -1,10 +1,10 @@
 <template>
-  <div class="period-filter">
-    <div class="period-buttons">
+  <div :class="$style['period-filter']">
+    <div :class="$style['period-buttons']">
       <button
         v-for="period in periods"
         :key="period.id"
-        :class="['period-button', { active: selectedPeriod === period.id }]"
+        :class="[$style['period-button'], { [$style.active]: selectedPeriod === period.id }]"
         @click="selectPeriod(period.id)"
       >
         {{ period.label }}
@@ -37,48 +37,4 @@ const selectPeriod = (period: Period) => {
 }
 </script>
 
-<style scoped>
-.period-filter {
-  margin-bottom: 2rem;
-}
-
-.period-buttons {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding: 0.5rem 0;
-  -webkit-overflow-scrolling: touch;
-}
-
-.period-button {
-  padding: 0.625rem 1.25rem;
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-md);
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.period-button:hover {
-  background-color: var(--bg-tertiary);
-  border-color: var(--primary-color);
-}
-
-.period-button.active {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: white;
-}
-
-@media (max-width: 640px) {
-  .period-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8125rem;
-  }
-}
-</style>
+<style module src="./PeriodFilter.module.css"></style>
