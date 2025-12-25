@@ -27,6 +27,20 @@
           <span class="settings-item-icon">></span>
         </button>
 
+        <div class="settings-item settings-item--select">
+          <div class="settings-item-text">
+            <span class="settings-item-title">{{ t('common.language') }}</span>
+            <span class="settings-item-subtitle">{{
+              t('settings.languageSubtitle')
+            }}</span>
+          </div>
+          <select v-model="locale" class="settings-select">
+            <option v-for="lang in locales" :key="lang" :value="lang">
+              {{ t(`common.languages.${lang}`) }}
+            </option>
+          </select>
+        </div>
+
         <div class="settings-item settings-item--toggle">
           <div class="settings-item-text">
             <span class="settings-item-title">{{ t('settings.theme') }}</span>
@@ -45,7 +59,7 @@
 import { ThemeToggle } from '@/shared/ui/ThemeToggle'
 import { useI18n } from '@/shared/i18n'
 
-const { t } = useI18n()
+const { t, locale, locales } = useI18n()
 
 const goToProfile = () => {
   window.location.hash = 'profile'

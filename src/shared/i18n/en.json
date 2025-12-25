@@ -41,7 +41,8 @@
     "export": "Export",
     "exportSubtitle": "Export or import your data",
     "theme": "Theme",
-    "themeSubtitle": "Toggle light and dark mode"
+    "themeSubtitle": "Toggle light and dark mode",
+    "languageSubtitle": "Change app language"
   },
   "export": {
     "title": "Export",
