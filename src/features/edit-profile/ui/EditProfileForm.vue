@@ -1,24 +1,26 @@
 <template>
   <Card>
-    <h2 class="form-title">Edit Profile</h2>
+    <h2 class="form-title">{{ t('features.editProfile.title') }}</h2>
     <form @submit.prevent="handleSubmit" class="profile-form">
       <Input
         v-model="formData.name"
-        label="Name"
-        placeholder="Your name"
+        :label="t('features.editProfile.nameLabel')"
+        :placeholder="t('features.editProfile.namePlaceholder')"
         :error="errors.name"
       />
 
       <Input
         v-model="formData.email"
         type="email"
-        label="Email"
-        placeholder="your.email@example.com"
+        :label="t('features.editProfile.emailLabel')"
+        :placeholder="t('features.editProfile.emailPlaceholder')"
         :error="errors.email"
       />
 
       <div class="input-wrapper">
-        <label class="input-label">Currency</label>
+        <label class="input-label">{{
+          t('features.editProfile.currencyLabel')
+        }}</label>
         <select v-model="formData.currency" class="input">
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
@@ -34,7 +36,9 @@
       </div>
 
       <div class="input-wrapper">
-        <label class="input-label">Date Format</label>
+        <label class="input-label">{{
+          t('features.editProfile.dateFormatLabel')
+        }}</label>
         <select v-model="formData.dateFormat" class="input">
           <option value="MM/DD/YYYY">MM/DD/YYYY</option>
           <option value="DD/MM/YYYY">DD/MM/YYYY</option>
@@ -49,11 +53,15 @@
         full-width
         :disabled="isSubmitting"
       >
-        {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
+        {{
+          isSubmitting
+            ? t('features.editProfile.submitting')
+            : t('features.editProfile.submit')
+        }}
       </Button>
 
       <div v-if="saveSuccess" class="success-message">
-        ✅ Profile updated successfully!
+        {{ t('features.editProfile.success') }}
       </div>
     </form>
   </Card>
@@ -65,8 +73,10 @@ import { Input } from '@/shared/ui/Input'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useUser } from '@/entities/user/model/useUser'
+import { useI18n } from '@/shared/i18n'
 
 const { user, updateUser } = useUser()
+const { t } = useI18n()
 const formData = reactive({
   name: '',
   email: '',
@@ -96,12 +106,12 @@ const validateForm = (): boolean => {
   errors.email = ''
 
   if (!formData.name.trim()) {
-    errors.name = 'Please enter your name'
+    errors.name = t('features.editProfile.errors.nameRequired')
     return false
   }
 
   if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    errors.email = 'Please enter a valid email address'
+    errors.email = t('features.editProfile.errors.emailInvalid')
     return false
   }
 

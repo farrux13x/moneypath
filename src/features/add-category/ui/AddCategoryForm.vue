@@ -1,21 +1,28 @@
 <template>
   <Card>
-    <h2 class="form-title">Add New Category</h2>
+    <h2 class="form-title">{{ t('features.addCategory.title') }}</h2>
     <form @submit.prevent="handleSubmit" class="category-form">
       <Input
         v-model="formData.name"
-        label="Category Name"
-        placeholder="e.g., Groceries"
+        :label="t('features.addCategory.nameLabel')"
+        :placeholder="t('features.addCategory.namePlaceholder')"
         :error="errors.name"
       />
-      <ColorPicker v-model="formData.color" label="Color" />
+      <ColorPicker
+        v-model="formData.color"
+        :label="t('features.addCategory.colorLabel')"
+      />
       <Button
         type="submit"
         variant="primary"
         full-width
         :disabled="isSubmitting"
       >
-        {{ isSubmitting ? 'Adding...' : 'Add Category' }}
+        {{
+          isSubmitting
+            ? t('features.addCategory.submitting')
+            : t('features.addCategory.submit')
+        }}
       </Button>
     </form>
   </Card>
@@ -28,8 +35,10 @@ import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { ColorPicker } from '@/shared/ui/ColorPicker'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { addCategory } = useCategories()
+const { t } = useI18n()
 
 const formData = reactive({
   name: '',
@@ -46,7 +55,7 @@ const validateForm = (): boolean => {
   errors.name = ''
 
   if (!formData.name.trim()) {
-    errors.name = 'Please enter a category name'
+    errors.name = t('features.addCategory.errors.nameRequired')
     return false
   }
 

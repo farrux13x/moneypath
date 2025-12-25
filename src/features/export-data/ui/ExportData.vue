@@ -1,8 +1,8 @@
 <template>
   <Card>
-    <h2 class="section-title">Export Data</h2>
+    <h2 class="section-title">{{ t('features.exportData.title') }}</h2>
     <p class="section-description">
-      Download your expenses and categories as a JSON file
+      {{ t('features.exportData.description') }}
     </p>
 
     <div class="export-options">
@@ -13,7 +13,7 @@
             v-model="exportOptions.expenses"
             class="checkbox"
           />
-          <span>Export Expenses ({{ expensesCount }} items)</span>
+          <span>{{ t('features.exportData.exportExpenses', { count: expensesCount }) }}</span>
         </label>
       </div>
 
@@ -24,7 +24,7 @@
             v-model="exportOptions.categories"
             class="checkbox"
           />
-          <span>Export Categories ({{ categoriesCount }} items)</span>
+          <span>{{ t('features.exportData.exportCategories', { count: categoriesCount }) }}</span>
         </label>
       </div>
     </div>
@@ -35,11 +35,15 @@
       @click="handleExport"
       :disabled="!canExport || isExporting"
     >
-      {{ isExporting ? 'Exporting...' : '📥 Export Data' }}
+      {{
+        isExporting
+          ? t('features.exportData.submitting')
+          : t('features.exportData.submit')
+      }}
     </Button>
 
     <div v-if="exportSuccess" class="success-message">
-      ✅ Data exported successfully!
+      {{ t('features.exportData.success') }}
     </div>
   </Card>
 </template>
@@ -50,9 +54,11 @@ import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { expenses } = useExpenses()
 const { categories } = useCategories()
+const { t } = useI18n()
 
 const exportOptions = ref({
   expenses: true,

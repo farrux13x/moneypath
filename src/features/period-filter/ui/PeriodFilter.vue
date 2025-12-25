@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from '@/shared/i18n'
 
 type Period = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
@@ -23,13 +24,14 @@ const emit = defineEmits<{
 }>()
 
 const selectedPeriod = ref<Period>('monthly')
+const { t } = useI18n()
 
-const periods: { id: Period; label: string }[] = [
-  { id: 'daily', label: 'Daily' },
-  { id: 'weekly', label: 'Weekly' },
-  { id: 'monthly', label: 'Monthly' },
-  { id: 'yearly', label: 'Yearly' },
-]
+const periods = computed(() => [
+  { id: 'daily', label: t('features.periodFilter.daily') },
+  { id: 'weekly', label: t('features.periodFilter.weekly') },
+  { id: 'monthly', label: t('features.periodFilter.monthly') },
+  { id: 'yearly', label: t('features.periodFilter.yearly') },
+])
 
 const selectPeriod = (period: Period) => {
   selectedPeriod.value = period

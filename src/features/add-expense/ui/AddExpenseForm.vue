@@ -1,22 +1,26 @@
 <template>
   <Card>
-    <h2 class="form-title">Add New Expense</h2>
+    <h2 class="form-title">{{ t('features.addExpense.title') }}</h2>
     <form @submit.prevent="handleSubmit" class="expense-form">
       <Input
         v-model.number="formData.amount"
         type="number"
-        label="Amount"
-        placeholder="0.00"
+        :label="t('features.addExpense.amountLabel')"
+        :placeholder="t('features.addExpense.amountPlaceholder')"
         :error="errors.amount"
       />
 
       <div class="input-wrapper">
-        <label class="input-label">Category</label>
+        <label class="input-label">{{
+          t('features.addExpense.categoryLabel')
+        }}</label>
         <select
           v-model="formData.category"
           :class="['input', { 'input--error': errors.category }]"
         >
-          <option value="">Select a category</option>
+          <option value="">
+            {{ t('features.addExpense.categoryPlaceholder') }}
+          </option>
           <option
             v-for="category in categories"
             :key="category.id"
@@ -32,15 +36,15 @@
 
       <Input
         v-model="formData.description"
-        label="Description"
-        placeholder="What did you spend on?"
+        :label="t('features.addExpense.descriptionLabel')"
+        :placeholder="t('features.addExpense.descriptionPlaceholder')"
         :error="errors.description"
       />
 
       <Input
         v-model="formData.date"
         type="date"
-        label="Date"
+        :label="t('features.addExpense.dateLabel')"
         :error="errors.date"
       />
 
@@ -50,7 +54,11 @@
         full-width
         :disabled="isSubmitting"
       >
-        {{ isSubmitting ? 'Adding...' : 'Add Expense' }}
+        {{
+          isSubmitting
+            ? t('features.addExpense.submitting')
+            : t('features.addExpense.submit')
+        }}
       </Button>
     </form>
   </Card>
@@ -63,9 +71,11 @@ import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { addExpense } = useExpenses()
 const { categories } = useCategories()
+const { t } = useI18n()
 
 const emit = defineEmits<{
   'expense-added': []
@@ -94,17 +104,17 @@ const validateForm = (): boolean => {
   errors.date = ''
 
   if (!formData.amount || Number(formData.amount) <= 0) {
-    errors.amount = 'Please enter a valid amount'
+    errors.amount = t('features.addExpense.errors.amountInvalid')
     return false
   }
 
   if (!formData.category) {
-    errors.category = 'Please select a category'
+    errors.category = t('features.addExpense.errors.categoryRequired')
     return false
   }
 
   if (!formData.date) {
-    errors.date = 'Please select a date'
+    errors.date = t('features.addExpense.errors.dateRequired')
     return false
   }
 

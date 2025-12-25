@@ -1,15 +1,15 @@
 <template>
   <Card>
     <div class="expense-list-header">
-      <h2 class="expense-list-title">Recent Expenses</h2>
+      <h2 class="expense-list-title">{{ t('features.expenseList.title') }}</h2>
       <div class="total-amount">
-        <span class="total-label">Total:</span>
+        <span class="total-label">{{ t('features.expenseList.totalLabel') }}</span>
         <span class="total-value">${{ totalAmount.toFixed(2) }}</span>
       </div>
     </div>
 
     <div v-if="expenses.length === 0" class="empty-state">
-      <p>No expenses yet. Add your first expense above!</p>
+      <p>{{ t('features.expenseList.empty') }}</p>
     </div>
 
     <div v-else class="expense-list">
@@ -27,14 +27,14 @@
           </div>
           <div class="expense-details">
             <p class="expense-description">
-              {{ expense.description || 'No description' }}
+              {{ expense.description || t('features.expenseList.noDescription') }}
             </p>
             <p class="expense-date">{{ formatDate(expense.date) }}</p>
           </div>
           <div class="expense-amount">${{ expense.amount.toFixed(2) }}</div>
         </div>
         <Button variant="danger" size="sm" @click="handleRemove(expense.id)">
-          Remove
+          {{ t('features.expenseList.remove') }}
         </Button>
       </div>
     </div>
@@ -47,9 +47,11 @@ import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { expenses, totalAmount, removeExpense } = useExpenses()
 const { getCategoryById } = useCategories()
+const { t, locale } = useI18n()
 
 const sortedExpenses = computed(() => {
   return [...expenses.value].sort((a, b) => {
@@ -58,7 +60,7 @@ const sortedExpenses = computed(() => {
 })
 
 const getCategoryName = (categoryId: string): string => {
-  return getCategoryById(categoryId)?.name || 'Other'
+  return getCategoryById(categoryId)?.name || t('features.expenseList.otherCategory')
 }
 
 const getCategoryColor = (categoryId: string): string => {
@@ -67,7 +69,7 @@ const getCategoryColor = (categoryId: string): string => {
 
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString(locale.value, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -75,7 +77,7 @@ const formatDate = (dateString: string): string => {
 }
 
 const handleRemove = (id: string) => {
-  if (confirm('Are you sure you want to remove this expense?')) {
+  if (confirm(t('features.expenseList.removeConfirm'))) {
     removeExpense(id)
   }
 }

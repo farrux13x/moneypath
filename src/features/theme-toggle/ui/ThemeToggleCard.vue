@@ -1,7 +1,7 @@
 <template>
   <Card>
-    <h2 class="section-title">Theme</h2>
-    <p class="section-description">Choose your preferred theme</p>
+    <h2 class="section-title">{{ t('features.themeToggle.title') }}</h2>
+    <p class="section-description">{{ t('features.themeToggle.description') }}</p>
 
     <div class="theme-options">
       <button
@@ -19,16 +19,22 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Card } from '@/shared/ui/Card'
 import { useTheme } from '@/shared/lib/theme/useTheme'
+import { useI18n } from '@/shared/i18n'
 
 const { currentTheme, setTheme } = useTheme()
+const { t } = useI18n()
 
-const themes = [
-  { id: 'light', name: 'Light', icon: '☀️' },
-  { id: 'dark', name: 'Dark', icon: '🌙' },
-  { id: 'auto', name: 'Auto (System)', icon: '🔄' },
-] as const
+const themes = computed(
+  () =>
+    [
+      { id: 'light', name: t('features.themeToggle.light'), icon: '?~??,?' },
+      { id: 'dark', name: t('features.themeToggle.dark'), icon: 'dYOT' },
+      { id: 'auto', name: t('features.themeToggle.auto'), icon: 'dY",' },
+    ] as const,
+)
 </script>
 
 <style scoped src="./ThemeToggleCard.css"></style>

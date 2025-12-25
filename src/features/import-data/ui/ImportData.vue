@@ -1,8 +1,8 @@
 <template>
   <Card>
-    <h2 class="section-title">Import Data</h2>
+    <h2 class="section-title">{{ t('features.importData.title') }}</h2>
     <p class="section-description">
-      Restore your expenses and categories from a JSON file
+      {{ t('features.importData.description') }}
     </p>
 
     <div class="import-options">
@@ -13,7 +13,7 @@
             v-model="importOptions.expenses"
             class="checkbox"
           />
-          <span>Import Expenses</span>
+          <span>{{ t('features.importData.importExpenses') }}</span>
         </label>
       </div>
 
@@ -24,7 +24,7 @@
             v-model="importOptions.categories"
             class="checkbox"
           />
-          <span>Import Categories</span>
+          <span>{{ t('features.importData.importCategories') }}</span>
         </label>
       </div>
 
@@ -35,7 +35,7 @@
             v-model="importOptions.replace"
             class="checkbox"
           />
-          <span>Replace existing data (otherwise merge)</span>
+          <span>{{ t('features.importData.replaceExisting') }}</span>
         </label>
       </div>
     </div>
@@ -50,7 +50,7 @@
         :disabled="isImporting"
       />
       <div v-if="selectedFile" class="selected-file">
-        📄 {{ selectedFile.name }}
+        {{ t('features.importData.selectedFile', { name: selectedFile.name }) }}
       </div>
     </div>
 
@@ -60,14 +60,18 @@
       @click="handleImport"
       :disabled="!canImport || isImporting"
     >
-      {{ isImporting ? 'Importing...' : '📤 Import Data' }}
+      {{
+        isImporting
+          ? t('features.importData.submitting')
+          : t('features.importData.submit')
+      }}
     </Button>
 
     <div v-if="importSuccess" class="success-message">
-      ✅ Data imported successfully!
+      {{ t('features.importData.success') }}
     </div>
 
-    <div v-if="importError" class="error-message">❌ {{ importError }}</div>
+    <div v-if="importError" class="error-message">{{ t('features.importData.errorPrefix', { message: importError }) }}</div>
   </Card>
 </template>
 
@@ -79,9 +83,11 @@ import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
 import type { Expense } from '@/entities/expense/model/types'
 import type { Category } from '@/entities/category/model/types'
+import { useI18n } from '@/shared/i18n'
 
 const { expenses, importExpense, clearAllExpenses } = useExpenses()
 const { categories, importCategory, removeCategory } = useCategories()
+const { t } = useI18n()
 
 const importOptions = ref({
   expenses: true,
@@ -147,7 +153,7 @@ const handleImport = async () => {
 
     // Validate data structure
     if (!data || typeof data !== 'object') {
-      throw new Error('Invalid file format')
+      throw new Error(t('features.importData.errors.invalidFile'))
     }
 
     let importedExpenses = 0
@@ -157,7 +163,7 @@ const handleImport = async () => {
     // Import expenses
     if (importOptions.value.expenses && data.expenses) {
       if (!Array.isArray(data.expenses)) {
-        errors.push('Expenses must be an array')
+        errors.push(t('features.importData.errors.expensesArray'))
       } else {
         if (importOptions.value.replace) {
           // Remove all existing expenses
@@ -176,7 +182,7 @@ const handleImport = async () => {
             importExpense(expense)
             importedExpenses++
           } else {
-            errors.push(`Invalid expense at index ${index}`)
+            errors.push(t('features.importData.errors.invalidExpenseAtIndex', { index }))
           }
         })
       }
@@ -185,7 +191,7 @@ const handleImport = async () => {
     // Import categories
     if (importOptions.value.categories && data.categories) {
       if (!Array.isArray(data.categories)) {
-        errors.push('Categories must be an array')
+        errors.push(t('features.importData.errors.categoriesArray'))
       } else {
         if (importOptions.value.replace) {
           // Remove all non-default categories
@@ -218,14 +224,14 @@ const handleImport = async () => {
             importCategory(category)
             importedCategories++
           } else {
-            errors.push(`Invalid category at index ${index}`)
+            errors.push(t('features.importData.errors.invalidCategoryAtIndex', { index }))
           }
         })
       }
     }
 
     if (errors.length > 0) {
-      importError.value = `Import completed with errors: ${errors.join(', ')}`
+      importError.value = t('features.importData.errors.completedWithErrors', { errors: errors.join(', ') })
     } else {
       importSuccess.value = true
       importError.value = ''
@@ -243,7 +249,7 @@ const handleImport = async () => {
     }, 5000)
   } catch (error) {
     importError.value =
-      error instanceof Error ? error.message : 'Failed to import data'
+      error instanceof Error ? error.message : t('features.importData.errors.failed')
     importSuccess.value = false
   } finally {
     isImporting.value = false

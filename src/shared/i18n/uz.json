@@ -12,6 +12,140 @@
     "export": "Eksport",
     "unknown": "Noma'lum"
   },
+  "features": {
+    "addCategory": {
+      "title": "Yangi kategoriya qo'shish",
+      "nameLabel": "Kategoriya nomi",
+      "namePlaceholder": "masalan, Oziq-ovqat",
+      "colorLabel": "Rang",
+      "submit": "Kategoriya qo'shish",
+      "submitting": "Qo'shilmoqda...",
+      "errors": {
+        "nameRequired": "Iltimos, kategoriya nomini kiriting"
+      }
+    },
+    "addExpense": {
+      "title": "Yangi xarajat qo'shish",
+      "amountLabel": "Miqdor",
+      "amountPlaceholder": "0.00",
+      "categoryLabel": "Kategoriya",
+      "categoryPlaceholder": "Kategoriya tanlang",
+      "descriptionLabel": "Tavsif",
+      "descriptionPlaceholder": "Nimaga sarfladingiz?",
+      "dateLabel": "Sana",
+      "submit": "Xarajat qo'shish",
+      "submitting": "Qo'shilmoqda...",
+      "errors": {
+        "amountInvalid": "Iltimos, to'g'ri miqdor kiriting",
+        "categoryRequired": "Iltimos, kategoriya tanlang",
+        "dateRequired": "Iltimos, sanani tanlang"
+      }
+    },
+    "categoryList": {
+      "title": "Kategoriyalar",
+      "empty": "Hali kategoriya yo'q. Yuqorida birinchi kategoriyani qo'shing!",
+      "defaultLabel": "Standart",
+      "deleteLabel": "O'chirish",
+      "defaultAlert": "Standart kategoriyalarni o'chirib bo'lmaydi",
+      "deleteConfirm": "Bu kategoriyani o'chirishni xohlaysizmi? Ushbu kategoriya bilan bog'liq xarajatlar ko'rinib turadi."
+    },
+    "editProfile": {
+      "title": "Profilni tahrirlash",
+      "nameLabel": "Ism",
+      "namePlaceholder": "Ismingiz",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "currencyLabel": "Valyuta",
+      "dateFormatLabel": "Sana formati",
+      "submit": "O'zgarishlarni saqlash",
+      "submitting": "Saqlanmoqda...",
+      "success": "Profil muvaffaqiyatli yangilandi!",
+      "errors": {
+        "nameRequired": "Iltimos, ismingizni kiriting",
+        "emailInvalid": "Iltimos, to'g'ri email kiriting"
+      }
+    },
+    "expenseList": {
+      "title": "So'nggi xarajatlar",
+      "totalLabel": "Jami:",
+      "empty": "Hali xarajat yo'q. Yuqorida birinchi xarajatni qo'shing!",
+      "noDescription": "Tavsif yo'q",
+      "remove": "O'chirish",
+      "otherCategory": "Boshqa",
+      "removeConfirm": "Bu xarajatni o'chirishni xohlaysizmi?"
+    },
+    "exportData": {
+      "title": "Ma'lumotlarni eksport qilish",
+      "description": "Xarajat va kategoriyalarni JSON fayl sifatida yuklab oling",
+      "exportExpenses": "Xarajatlarni eksport qilish ({count} ta)",
+      "exportCategories": "Kategoriyalarni eksport qilish ({count} ta)",
+      "submit": "Ma'lumotlarni eksport qilish",
+      "submitting": "Eksport qilinmoqda...",
+      "success": "Ma'lumotlar muvaffaqiyatli eksport qilindi!"
+    },
+    "importData": {
+      "title": "Ma'lumotlarni import qilish",
+      "description": "JSON fayldan xarajat va kategoriyalarni tiklash",
+      "importExpenses": "Xarajatlarni import qilish",
+      "importCategories": "Kategoriyalarni import qilish",
+      "replaceExisting": "Mavjud ma'lumotlarni almashtirish (aks holda birlashtiriladi)",
+      "selectedFile": "Tanlangan fayl: {name}",
+      "submit": "Ma'lumotlarni import qilish",
+      "submitting": "Import qilinmoqda...",
+      "success": "Ma'lumotlar muvaffaqiyatli import qilindi!",
+      "errorPrefix": "Xatolik: {message}",
+      "errors": {
+        "invalidFile": "Fayl formati noto'g'ri",
+        "expensesArray": "Xarajatlar massiv bo'lishi kerak",
+        "categoriesArray": "Kategoriyalar massiv bo'lishi kerak",
+        "invalidExpenseAtIndex": "{index}-indeksdagi xarajat noto'g'ri",
+        "invalidCategoryAtIndex": "{index}-indeksdagi kategoriya noto'g'ri",
+        "completedWithErrors": "Import xatolar bilan yakunlandi: {errors}",
+        "failed": "Ma'lumotlarni import qilib bo'lmadi"
+      }
+    },
+    "periodFilter": {
+      "daily": "Kunlik",
+      "weekly": "Haftalik",
+      "monthly": "Oylik",
+      "yearly": "Yillik"
+    },
+    "searchExpenses": {
+      "title": "Xarajatlarni qidirish",
+      "searchLabel": "Qidirish",
+      "searchPlaceholder": "Tavsif yoki kategoriya bo'yicha qidiring...",
+      "categoryLabel": "Kategoriya",
+      "categoryAll": "Barcha kategoriyalar",
+      "amountRangeLabel": "Miqdor oralig'i",
+      "minPlaceholder": "Min",
+      "maxPlaceholder": "Maks",
+      "dateRangeLabel": "Sana oralig'i",
+      "startDatePlaceholder": "Boshlanish sanasi",
+      "endDatePlaceholder": "Tugash sanasi",
+      "clearFilters": "Filtrlarni tozalash",
+      "result": "natija",
+      "results": "natija",
+      "unknownCategory": "Noma'lum"
+    },
+    "searchResults": {
+      "title": "Qidiruv natijalari",
+      "noResults": "Qidiruv mezonlariga mos xarajatlar topilmadi.",
+      "noResultsHint": "Filtrlarni yoki so'rovni o'zgartirib ko'ring.",
+      "noDescription": "Tavsif yo'q",
+      "remove": "O'chirish",
+      "totalAmountLabel": "Jami summa:",
+      "averageLabel": "O'rtacha:",
+      "unknownCategory": "Noma'lum",
+      "removeConfirm": "Bu xarajatni o'chirishni xohlaysizmi?"
+    },
+    "themeToggle": {
+      "title": "Mavzu",
+      "description": "Kerakli mavzuni tanlang",
+      "light": "Yorug'",
+      "dark": "Qorong'i",
+      "auto": "Avto (tizim)"
+    }
+  },
   "chat": {
     "title": "Chat",
     "subtitle": "Suhbatni boshlang",

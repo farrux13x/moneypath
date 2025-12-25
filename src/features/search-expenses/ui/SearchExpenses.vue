@@ -1,24 +1,28 @@
 <template>
   <Card>
-    <h2 class="search-title">🔍 Search Expenses</h2>
+    <h2 class="search-title">{{ t('features.searchExpenses.title') }}</h2>
 
     <div class="search-form">
       <Input
         v-model="searchQuery"
-        label="Search"
-        placeholder="Search by description, category..."
+        :label="t('features.searchExpenses.searchLabel')"
+        :placeholder="t('features.searchExpenses.searchPlaceholder')"
         @input="handleSearch"
       />
 
       <div class="search-filters">
         <div class="filter-group">
-          <label class="filter-label">Category</label>
+          <label class="filter-label">{{
+            t('features.searchExpenses.categoryLabel')
+          }}</label>
           <select
             v-model="filters.category"
             @change="handleSearch"
             class="filter-select"
           >
-            <option value="">All Categories</option>
+            <option value="">{{
+              t('features.searchExpenses.categoryAll')
+            }}</option>
             <option
               v-for="category in categories"
               :key="category.id"
@@ -30,38 +34,42 @@
         </div>
 
         <div class="filter-group">
-          <label class="filter-label">Amount Range</label>
+          <label class="filter-label">{{
+            t('features.searchExpenses.amountRangeLabel')
+          }}</label>
           <div class="amount-range">
             <Input
               v-model.number="filters.minAmount"
               type="number"
-              placeholder="Min"
+              :placeholder="t('features.searchExpenses.minPlaceholder')"
               @input="handleSearch"
             />
             <span class="range-separator">-</span>
             <Input
               v-model.number="filters.maxAmount"
               type="number"
-              placeholder="Max"
+              :placeholder="t('features.searchExpenses.maxPlaceholder')"
               @input="handleSearch"
             />
           </div>
         </div>
 
         <div class="filter-group">
-          <label class="filter-label">Date Range</label>
+          <label class="filter-label">{{
+            t('features.searchExpenses.dateRangeLabel')
+          }}</label>
           <div class="date-range">
             <Input
               v-model="filters.startDate"
               type="date"
-              placeholder="Start Date"
+              :placeholder="t('features.searchExpenses.startDatePlaceholder')"
               @input="handleSearch"
             />
             <span class="range-separator">-</span>
             <Input
               v-model="filters.endDate"
               type="date"
-              placeholder="End Date"
+              :placeholder="t('features.searchExpenses.endDatePlaceholder')"
               @input="handleSearch"
             />
           </div>
@@ -74,11 +82,15 @@
           @click="clearFilters"
           :disabled="!hasActiveFilters"
         >
-          Clear Filters
+          {{ t('features.searchExpenses.clearFilters') }}
         </Button>
         <div class="results-count">
           {{ filteredExpenses.length }}
-          {{ filteredExpenses.length === 1 ? 'result' : 'results' }}
+          {{
+            filteredExpenses.length === 1
+              ? t('features.searchExpenses.result')
+              : t('features.searchExpenses.results')
+          }}
         </div>
       </div>
     </div>
@@ -92,9 +104,11 @@ import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { expenses } = useExpenses()
 const { categories } = useCategories()
+const { t } = useI18n()
 
 const searchQuery = ref('')
 const filters = reactive({
@@ -165,7 +179,8 @@ const filteredExpenses = computed(() => {
 
 const getCategoryName = (categoryId: string): string => {
   return (
-    categories.value.find((cat) => cat.id === categoryId)?.name || 'Unknown'
+    categories.value.find((cat) => cat.id === categoryId)?.name ||
+    t('features.searchExpenses.unknownCategory')
   )
 }
 

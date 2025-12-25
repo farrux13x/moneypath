@@ -1,9 +1,9 @@
 <template>
   <Card>
-    <h2 class="category-list-title">Categories</h2>
+    <h2 class="category-list-title">{{ t('features.categoryList.title') }}</h2>
 
     <div v-if="categories.length === 0" class="empty-state">
-      <p>No categories yet. Add your first category above!</p>
+      <p>{{ t('features.categoryList.empty') }}</p>
     </div>
 
     <div v-else class="category-list">
@@ -30,7 +30,11 @@
           @click="handleRemove(category.id)"
           :disabled="isDefaultCategory(category.id)"
         >
-          {{ isDefaultCategory(category.id) ? 'Default' : 'Delete' }}
+          {{
+            isDefaultCategory(category.id)
+              ? t('features.categoryList.defaultLabel')
+              : t('features.categoryList.deleteLabel')
+          }}
         </Button>
       </div>
     </div>
@@ -41,8 +45,10 @@
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useCategories } from '@/entities/category/model/useCategories'
+import { useI18n } from '@/shared/i18n'
 
 const { categories, removeCategory } = useCategories()
+const { t } = useI18n()
 
 const defaultCategoryIds = [
   'food',
@@ -61,13 +67,13 @@ const isDefaultCategory = (id: string): boolean => {
 
 const handleRemove = (id: string) => {
   if (isDefaultCategory(id)) {
-    alert('Default categories cannot be deleted')
+    alert(t('features.categoryList.defaultAlert'))
     return
   }
 
   if (
     confirm(
-      'Are you sure you want to delete this category? Expenses using this category will still be visible.',
+      t('features.categoryList.deleteConfirm'),
     )
   ) {
     removeCategory(id)
