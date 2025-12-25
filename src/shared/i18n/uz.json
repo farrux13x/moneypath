@@ -160,25 +160,25 @@
   },
   "home": {
     "mobileTitle": "Tranzaksiyalar",
-    "desktopTitle": "dY'ų MoneyTrack",
+    "desktopTitle": "MoneyTrack",
     "desktopSubtitle": "Xarajatlaringizni kuzating va byudjetingizni boshqaring"
   },
   "categories": {
-    "title": "dY\"? Kategoriyalarni boshqarish",
+    "title": "Kategoriyalarni boshqarish",
     "subtitle": "Xarajat toifalarini qo‘shing va tartiblang"
   },
   "settings": {
-    "title": "Settings",
-    "subtitle": "Manage preferences and data",
-    "profile": "Profile",
-    "profileSubtitle": "Update your details and preferences",
-    "export": "Export",
-    "exportSubtitle": "Export or import your data",
+    "title": "Sozlamalar",
+    "subtitle": "Afzalliklar va ma'lumotlarni boshqaring",
+    "profile": "Profil",
+    "profileSubtitle": "Ma'lumotlaringiz va afzalliklaringizni yangilang",
+    "export": "Eksport",
+    "exportSubtitle": "Ma'lumotlaringizni eksport yoki import qiling",
     "github": "GitHub",
-    "githubSubtitle": "Our product is open source",
-    "theme": "Theme",
-    "themeSubtitle": "Toggle light and dark mode",
-    "languageSubtitle": "Change app language"
+    "githubSubtitle": "Mahsulotimiz ochiq manba",
+    "theme": "Mavzu",
+    "themeSubtitle": "Yorug' va qorong'i rejimni almashtiring",
+    "languageSubtitle": "Ilova tilini o'zgartiring"
   },
   "export": {
     "title": "Export",
