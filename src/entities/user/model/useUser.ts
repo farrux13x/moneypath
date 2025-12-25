@@ -5,9 +5,8 @@ import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT } from './types'
 const user = ref<User | null>(null)
 
 export function useUser() {
-  const sanitizeUser = (raw: User & { theme?: unknown }): User => {
-    const { theme, ...rest } = raw
-    return rest
+  const sanitizeUser = (raw: User): User => {
+    return raw
   }
 
   const createUser = (
@@ -56,7 +55,7 @@ export function useUser() {
     const stored = localStorage.getItem('user')
     if (stored) {
       try {
-        const parsed = JSON.parse(stored) as User & { theme?: unknown }
+        const parsed = JSON.parse(stored) as User
         user.value = sanitizeUser(parsed)
         if (Object.prototype.hasOwnProperty.call(parsed, 'theme')) {
           saveUser()
