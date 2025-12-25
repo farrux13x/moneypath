@@ -26,7 +26,7 @@ const emit = defineEmits<{
 const selectedPeriod = ref<Period>('monthly')
 const { t } = useI18n()
 
-const periods = computed(() => [
+const periods = computed<{ id: Period; label: string }[]>(() => [
   { id: 'daily', label: t('features.periodFilter.daily') },
   { id: 'weekly', label: t('features.periodFilter.weekly') },
   { id: 'monthly', label: t('features.periodFilter.monthly') },
