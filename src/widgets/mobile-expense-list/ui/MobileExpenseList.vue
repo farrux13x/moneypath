@@ -1,7 +1,7 @@
 <template>
   <div class="mobile-expense-list">
     <div v-if="expenses.length === 0" class="empty-state">
-      <p>No expenses yet. Tap the + button to add your first expense!</p>
+      <p>{{ t('features.expenseList.empty') }}</p>
     </div>
 
     <div v-else>
@@ -60,7 +60,9 @@ import { computed } from 'vue'
 import { useExpenses } from '@/entities/expense/model/useExpenses'
 import { useCategories } from '@/entities/category/model/useCategories'
 import type { Expense } from '@/entities/expense/model/types'
+import { useI18n } from '@/shared/i18n'
 
+const { t } = useI18n()
 const { expenses } = useExpenses()
 const { getCategoryById } = useCategories()
 

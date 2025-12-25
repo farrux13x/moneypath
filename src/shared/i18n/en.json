@@ -68,7 +68,7 @@
     "expenseList": {
       "title": "Recent Expenses",
       "totalLabel": "Total:",
-      "empty": "No expenses yet. Add your first expense above!",
+      "empty": "No expenses yet. Tap the + button to add your first expense!",
       "noDescription": "No description",
       "remove": "Remove",
       "otherCategory": "Other",

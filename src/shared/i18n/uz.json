@@ -68,7 +68,7 @@
     "expenseList": {
       "title": "So'nggi xarajatlar",
       "totalLabel": "Jami:",
-      "empty": "Hali xarajat yo'q. Yuqorida birinchi xarajatni qo'shing!",
+      "empty": "Hali xarajat yo'q. + tugmasini bosing xarajat qo'shish uchun!",
       "noDescription": "Tavsif yo'q",
       "remove": "O'chirish",
       "otherCategory": "Boshqa",
