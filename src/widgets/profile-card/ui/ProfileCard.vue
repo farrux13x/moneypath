@@ -28,12 +28,6 @@
           }}</span>
         </div>
         <div class="profile-detail-item">
-          <span class="detail-label">Theme:</span>
-          <span class="detail-value">{{
-            capitalize(user?.theme || 'light')
-          }}</span>
-        </div>
-        <div class="profile-detail-item">
           <span class="detail-label">Member Since:</span>
           <span class="detail-value">{{ formatDate(user?.createdAt) }}</span>
         </div>
@@ -72,10 +66,6 @@ const getCurrencySymbol = (currency: string): string => {
     RUB: '₽',
   }
   return symbols[currency] || '$'
-}
-
-const capitalize = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 const formatDate = (dateString?: string): string => {

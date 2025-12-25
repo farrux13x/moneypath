@@ -29,7 +29,7 @@ const navItems = [
   { id: 'statistics', label: 'Statistics', icon: '📊' },
   { id: 'categories', label: 'Categories', icon: '📁' },
   { id: 'chat', label: 'Chat', icon: 'T' },
-  { id: 'profile', label: 'Profile', icon: '👤' },
+  { id: 'settings', label: 'Settings', icon: 'S' },
 ]
 
 const navigate = (page: string) => {

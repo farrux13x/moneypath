@@ -6,17 +6,35 @@
         <p class="page-subtitle">{{ t('settings.subtitle') }}</p>
       </header>
 
-      <div class="settings-content">
-        <div class="settings-section">
-          <ThemeToggleCard />
-        </div>
+      <div class="settings-list">
+        <button class="settings-item" @click="goToProfile">
+          <div class="settings-item-text">
+            <span class="settings-item-title">{{ t('settings.profile') }}</span>
+            <span class="settings-item-subtitle">{{
+              t('settings.profileSubtitle')
+            }}</span>
+          </div>
+          <span class="settings-item-icon">></span>
+        </button>
 
-        <div class="settings-section">
-          <ExportData />
-        </div>
+        <button class="settings-item" @click="goToExport">
+          <div class="settings-item-text">
+            <span class="settings-item-title">{{ t('settings.export') }}</span>
+            <span class="settings-item-subtitle">{{
+              t('settings.exportSubtitle')
+            }}</span>
+          </div>
+          <span class="settings-item-icon">></span>
+        </button>
 
-        <div class="settings-section">
-          <ImportData />
+        <div class="settings-item settings-item--toggle">
+          <div class="settings-item-text">
+            <span class="settings-item-title">{{ t('settings.theme') }}</span>
+            <span class="settings-item-subtitle">{{
+              t('settings.themeSubtitle')
+            }}</span>
+          </div>
+          <ThemeToggle />
         </div>
       </div>
     </div>
@@ -24,12 +42,18 @@
 </template>
 
 <script setup lang="ts">
-import { ThemeToggleCard } from '@/features/theme-toggle/ui'
-import { ExportData } from '@/features/export-data/ui'
-import { ImportData } from '@/features/import-data/ui'
+import { ThemeToggle } from '@/shared/ui/ThemeToggle'
 import { useI18n } from '@/shared/i18n'
 
 const { t } = useI18n()
+
+const goToProfile = () => {
+  window.location.hash = 'profile'
+}
+
+const goToExport = () => {
+  window.location.hash = 'export'
+}
 </script>
 
 <style scoped src="./SettingsPage.css"></style>

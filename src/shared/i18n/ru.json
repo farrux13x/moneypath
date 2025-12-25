@@ -34,8 +34,18 @@
     "subtitle": "Добавляйте и упорядочивайте категории расходов"
   },
   "settings": {
-    "title": "Экспорт",
-    "subtitle": "Экспортируйте и импортируйте данные"
+    "title": "Settings",
+    "subtitle": "Manage preferences and data",
+    "profile": "Profile",
+    "profileSubtitle": "Update your details and preferences",
+    "export": "Export",
+    "exportSubtitle": "Export or import your data",
+    "theme": "Theme",
+    "themeSubtitle": "Toggle light and dark mode"
+  },
+  "export": {
+    "title": "Export",
+    "subtitle": "Export and import your data"
   },
   "profile": {
     "title": "Профиль пользователя",

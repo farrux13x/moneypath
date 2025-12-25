@@ -1,10 +1,15 @@
 import { ref, computed } from 'vue'
 import type { User } from './types'
-import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT, DEFAULT_THEME } from './types'
+import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT } from './types'
 
 const user = ref<User | null>(null)
 
 export function useUser() {
+  const sanitizeUser = (raw: User & { theme?: unknown }): User => {
+    const { theme, ...rest } = raw
+    return rest
+  }
+
   const createUser = (
     userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>,
   ) => {
@@ -28,7 +33,6 @@ export function useUser() {
         email: '',
         currency: DEFAULT_CURRENCY,
         dateFormat: DEFAULT_DATE_FORMAT,
-        theme: DEFAULT_THEME,
       })
     }
 
@@ -52,7 +56,11 @@ export function useUser() {
     const stored = localStorage.getItem('user')
     if (stored) {
       try {
-        user.value = JSON.parse(stored)
+        const parsed = JSON.parse(stored) as User & { theme?: unknown }
+        user.value = sanitizeUser(parsed)
+        if (Object.prototype.hasOwnProperty.call(parsed, 'theme')) {
+          saveUser()
+        }
       } catch (e) {
         console.error('Failed to load user from localStorage', e)
         user.value = null
@@ -75,7 +83,6 @@ export function useUser() {
       email: '',
       currency: DEFAULT_CURRENCY,
       dateFormat: DEFAULT_DATE_FORMAT,
-      theme: DEFAULT_THEME,
     })
   }
 

@@ -8,9 +8,7 @@
         placeholder="e.g., Groceries"
         :error="errors.name"
       />
-
       <ColorPicker v-model="formData.color" label="Color" />
-
       <Button
         type="submit"
         variant="primary"

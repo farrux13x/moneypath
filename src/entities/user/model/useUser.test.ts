@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT, DEFAULT_THEME } from './types'
+import { DEFAULT_CURRENCY, DEFAULT_DATE_FORMAT } from './types'
 
 describe('useUser', () => {
   beforeEach(() => {
@@ -15,7 +15,6 @@ describe('useUser', () => {
     expect(user.value).not.toBeNull()
     expect(user.value?.currency).toBe(DEFAULT_CURRENCY)
     expect(user.value?.dateFormat).toBe(DEFAULT_DATE_FORMAT)
-    expect(user.value?.theme).toBe(DEFAULT_THEME)
   })
 
   it('updates user fields and persists them', async () => {

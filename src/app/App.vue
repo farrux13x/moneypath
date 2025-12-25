@@ -9,8 +9,9 @@
     <HomePage v-if="currentPage === 'home'" />
     <CategoriesPage v-else-if="currentPage === 'categories'" />
     <StatisticsPage v-else-if="currentPage === 'statistics'" />
-    <SettingsPage v-else-if="currentPage === 'export'" />
+    <SettingsPage v-else-if="currentPage === 'settings'" />
     <ProfilePage v-else-if="currentPage === 'profile'" />
+    <ExportPage v-else-if="currentPage === 'export'" />
     <AddTransactionPage v-else-if="currentPage === 'add-transaction'" />
     <ChatPage v-else-if="currentPage === 'chat'" />
 
@@ -28,8 +29,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { HomePage } from '@/pages/home/ui'
 import { CategoriesPage } from '@/pages/categories/ui'
 import { StatisticsPage } from '@/pages/statistics/ui'
-import { SettingsPage } from '@/pages/settings/ui'
 import { ProfilePage } from '@/pages/profile/ui'
+import { SettingsPage } from '@/pages/settings/ui'
+import { ExportPage } from '@/pages/export/ui'
 import { AddTransactionPage } from '@/pages/add-transaction/ui'
 import { ChatPage } from '@/pages/chat/ui'
 import { BottomNavigation } from '@/widgets/bottom-navigation/ui'
@@ -42,6 +44,7 @@ const currentPage = ref<
   | 'statistics'
   | 'export'
   | 'profile'
+  | 'settings'
   | 'add-transaction'
   | 'chat'
 >('home')
@@ -54,10 +57,12 @@ const updatePage = () => {
     currentPage.value = 'categories'
   } else if (hash === 'statistics') {
     currentPage.value = 'statistics'
-  } else if (hash === 'export') {
-    currentPage.value = 'export'
+  } else if (hash === 'settings') {
+    currentPage.value = 'settings'
   } else if (hash === 'profile') {
     currentPage.value = 'profile'
+  } else if (hash === 'export') {
+    currentPage.value = 'export'
   } else if (hash === 'add-transaction') {
     currentPage.value = 'add-transaction'
   } else if (hash === 'chat') {

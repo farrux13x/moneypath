@@ -43,15 +43,6 @@
         </select>
       </div>
 
-      <div class="input-wrapper">
-        <label class="input-label">Theme</label>
-        <select v-model="formData.theme" class="input">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="auto">Auto (System)</option>
-        </select>
-      </div>
-
       <Button
         type="submit"
         variant="primary"
@@ -74,17 +65,13 @@ import { Input } from '@/shared/ui/Input'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { useUser } from '@/entities/user/model/useUser'
-import { useTheme } from '@/shared/lib/theme/useTheme'
 
 const { user, updateUser } = useUser()
-const { setTheme } = useTheme()
-
 const formData = reactive({
   name: '',
   email: '',
   currency: 'USD',
   dateFormat: 'MM/DD/YYYY',
-  theme: 'light' as 'light' | 'dark' | 'auto',
 })
 
 const errors = reactive({
@@ -101,7 +88,6 @@ onMounted(() => {
     formData.email = user.value.email
     formData.currency = user.value.currency
     formData.dateFormat = user.value.dateFormat
-    formData.theme = user.value.theme
   }
 })
 
@@ -133,11 +119,7 @@ const handleSubmit = () => {
     email: formData.email.trim(),
     currency: formData.currency,
     dateFormat: formData.dateFormat,
-    theme: formData.theme,
   })
-
-  // Apply theme immediately
-  setTheme(formData.theme)
 
   isSubmitting.value = false
   saveSuccess.value = true
