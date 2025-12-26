@@ -1,4 +1,4 @@
-{
+﻿{
   "common": {
     "language": "Til",
     "languages": {
@@ -153,6 +153,8 @@
     "send": "Yuborish",
     "sending": "Yuborilmoqda...",
     "attach": "Ilova qilish",
+    "copy": "Nusxa olish",
+    "copied": "Nusxa olindi",
     "welcome": "Bir vaqtning o‘zida bitta savol bering, men bosqichma-bosqich javob beraman. Mashq qilmoqchi bo‘lgan mavzuga e’tibor qarating.",
     "missingApiKey": "API kalit topilmadi. .env fayliga VITE_GOOGLE_GENAI_API_KEY qo‘shing.",
     "failedResponse": "Javobni olishda xatolik. Qayta urinib ko‘ring.",
@@ -236,3 +238,6 @@
     }
   }
 }
+
+
+

@@ -153,6 +153,8 @@
     "send": "Send",
     "sending": "Sending...",
     "attach": "Attach",
+    "copy": "Copy",
+    "copied": "Copied",
     "welcome": "Ask one question at a time and I will answer step by step. Focus on the topics you want to practice.",
     "missingApiKey": "Missing API key in .env. Add VITE_GOOGLE_GENAI_API_KEY and reload.",
     "failedResponse": "Failed to get response. Try again.",

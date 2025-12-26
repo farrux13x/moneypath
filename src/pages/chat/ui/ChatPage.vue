@@ -17,6 +17,24 @@
           <div class="message-content">
             {{ message.content }}
           </div>
+          <div v-if="message.role === 'assistant'" class="message-actions">
+            <button
+              type="button"
+              class="message-action"
+              :aria-label="copiedMessageId === message.id ? t('chat.copied') : t('chat.copy')"
+              :title="copiedMessageId === message.id ? t('chat.copied') : t('chat.copy')"
+              @click="copyMessage(message)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z"
+                />
+              </svg>
+            </button>
+            <span v-if="copiedMessageId === message.id" class="message-copied">
+              {{ t('chat.copied') }}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -56,7 +74,9 @@ const messages = ref<Message[]>([])
 const draft = ref('')
 const threadRef = ref<HTMLElement | null>(null)
 const isSending = ref(false)
+const copiedMessageId = ref<string | null>(null)
 const { t } = useI18n()
+let copiedTimeout: number | undefined
 
 const apiKey = import.meta.env.VITE_GOOGLE_GENAI_API_KEY
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null
@@ -93,6 +113,33 @@ const loadMessages = () => {
     }
   }
   messages.value = getDefaultMessages()
+}
+
+const copyMessage = async (message: Message) => {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(message.content)
+    } else {
+      const textarea = document.createElement('textarea')
+      textarea.value = message.content
+      textarea.setAttribute('readonly', 'true')
+      textarea.style.position = 'absolute'
+      textarea.style.left = '-9999px'
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+    }
+    copiedMessageId.value = message.id
+    if (copiedTimeout) window.clearTimeout(copiedTimeout)
+    copiedTimeout = window.setTimeout(() => {
+      if (copiedMessageId.value === message.id) {
+        copiedMessageId.value = null
+      }
+    }, 2000)
+  } catch (error) {
+    console.error('Failed to copy message', error)
+  }
 }
 
 const handleSend = async () => {
