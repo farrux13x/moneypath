@@ -115,7 +115,14 @@ export function useChatPage() {
       return
     }
 
+    await sendMessageToAssistant(content, assistantId)
+  }
+
+  const sendMessageToAssistant = async (content: string, assistantId: string) => {
     try {
+      if (!ai) {
+        throw new Error('AI instance is not initialized')
+      }
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash-lite',
         contents: content,
