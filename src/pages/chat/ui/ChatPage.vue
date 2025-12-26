@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { useChatPage } from './useChatPage'
+import { useChatPage } from '../model/useChatPage'
 
 const {
   t,
