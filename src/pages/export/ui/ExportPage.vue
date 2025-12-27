@@ -1,6 +1,8 @@
 <template>
   <div class="export-page">
     <HomeMobileHeader
+      :show-back-button="true"
+      title-align="center"
       :title="t('export.title')"
     />
     <div class="page-container">

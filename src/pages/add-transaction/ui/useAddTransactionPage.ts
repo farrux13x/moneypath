@@ -3,10 +3,6 @@ import { useI18n } from '@/shared/i18n'
 export function useAddTransactionPage() {
   const { t } = useI18n()
 
-  const goBack = () => {
-    window.history.back()
-  }
-
   const handleExpenseAdded = () => {
     // Navigate back to transactions page after adding
     setTimeout(() => {
@@ -16,7 +12,6 @@ export function useAddTransactionPage() {
 
   return {
     t,
-    goBack,
     handleExpenseAdded,
   }
 }

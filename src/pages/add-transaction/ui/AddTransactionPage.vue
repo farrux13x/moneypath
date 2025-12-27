@@ -2,13 +2,11 @@
   <div class="add-transaction-page">
     <!-- Mobile Layout -->
     <div class="mobile-layout mobile-only">
-      <header class="mobile-header">
-        <button class="back-button" @click="goBack" :aria-label="t('common.goBack')">
-          <span class="back-icon">←</span>
-        </button>
-        <h1 class="mobile-title">{{ t('addTransaction.mobileTitle') }}</h1>
-        <div class="header-spacer"></div>
-      </header>
+      <HomeMobileHeader
+        :show-back-button="true"
+        title-align="center"
+        :title="t('addTransaction.mobileTitle')"
+      />
 
       <div class="form-container">
         <AddExpenseForm @expense-added="handleExpenseAdded" />
@@ -33,9 +31,10 @@
 
 <script setup lang="ts">
 import { AddExpenseForm } from '@/features/add-expense/ui'
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useAddTransactionPage } from './useAddTransactionPage'
 
-const { t, goBack, handleExpenseAdded } = useAddTransactionPage()
+const { t, handleExpenseAdded } = useAddTransactionPage()
 </script>
 
 <style scoped src="./AddTransactionPage.css"></style>

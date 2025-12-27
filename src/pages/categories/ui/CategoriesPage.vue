@@ -1,6 +1,8 @@
 <template>
   <div class="categories-page">
     <HomeMobileHeader
+      :show-back-button="true"
+      title-align="center"
       :title="t('categories.title')"
     />
     <div class="page-container">

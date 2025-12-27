@@ -1,6 +1,8 @@
 <template>
   <div class="profile-page">
     <HomeMobileHeader
+      :show-back-button="true"
+      title-align="center"
       :title="t('profile.title')"
     />
     <div class="page-container">
