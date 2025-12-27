@@ -1,7 +1,10 @@
 <template>
   <div class="settings-page">
+    <HomeMobileHeader
+      :title="t('settings.title')"
+    />
     <div class="page-container">
-      <header class="page-header">
+      <header class="page-header desktop-only">
         <h1 class="page-title">{{ t('settings.title') }}</h1>
         <p class="page-subtitle">{{ t('settings.subtitle') }}</p>
       </header>
@@ -92,6 +95,7 @@
 
 <script setup lang="ts">
 import { ThemeToggle } from '@/shared/ui/ThemeToggle'
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useSettingsPage } from './useSettingsPage'
 
 const { t, locale, locales, goToProfile, goToExport } = useSettingsPage()

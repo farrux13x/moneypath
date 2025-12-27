@@ -1,7 +1,10 @@
 <template>
   <div class="chat-page">
     <div class="chat-shell">
-      <header class="chat-header">
+      <HomeMobileHeader
+        :title="t('chat.title')"
+      />
+      <header class="chat-header desktop-only">
         <div class="chat-header-text">
           <h1 class="chat-title">{{ t('chat.title') }}</h1>
           <p class="chat-subtitle">{{ t('chat.subtitle') }}</p>
@@ -58,6 +61,7 @@
 </template>
 
 <script setup lang="ts">
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useChatPage } from '../model/useChatPage'
 
 const {

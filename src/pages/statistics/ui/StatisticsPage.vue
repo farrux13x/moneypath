@@ -1,7 +1,10 @@
 <template>
   <div class="statistics-page">
+    <HomeMobileHeader
+      :title="t('statistics.title')"
+    />
     <div class="page-container">
-      <header class="page-header">
+      <header class="page-header desktop-only">
         <h1 class="page-title">{{ t('statistics.title') }}</h1>
         <p class="page-subtitle">{{ t('statistics.subtitle') }}</p>
       </header>
@@ -106,6 +109,7 @@ import { PieChart } from '@/shared/ui/PieChart'
 import { BarChart } from '@/shared/ui/BarChart'
 import { LineChart } from '@/shared/ui/LineChart'
 import { PeriodFilter } from '@/features/period-filter/ui'
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useStatisticsPage } from './useStatisticsPage'
 
 const {

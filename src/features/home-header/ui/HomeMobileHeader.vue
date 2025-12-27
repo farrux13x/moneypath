@@ -1,5 +1,5 @@
 <template>
-  <header class="mobile-header">
+  <header class="mobile-header mobile-only">
     <h1 class="mobile-title">{{ title }}</h1>
     <div class="header-actions">
       <slot></slot>
