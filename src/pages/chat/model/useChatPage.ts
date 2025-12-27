@@ -1,5 +1,7 @@
 import { ref, onMounted, nextTick, watch } from 'vue'
 import { GoogleGenAI } from '@google/genai'
+import OpenAI from 'openai'
+import Anthropic from '@anthropic-ai/sdk'
 import { useI18n } from '@/shared/i18n'
 
 type Message = {
@@ -21,6 +23,15 @@ export function useChatPage() {
 
   const apiKey = import.meta.env.VITE_GOOGLE_GENAI_API_KEY
   const ai = apiKey ? new GoogleGenAI({ apiKey }) : null
+  const openAiApiKey = import.meta.env.VITE_OPENAI_API_KEY
+  const openAiClient = openAiApiKey
+    ? new OpenAI({ apiKey: openAiApiKey, dangerouslyAllowBrowser: true, baseURL: 'https://api.deepseek.com' })
+    : null
+  
+  const anthropicApiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
+  const anthropicClient = anthropicApiKey
+    ? new Anthropic({ apiKey: anthropicApiKey, dangerouslyAllowBrowser: true })
+    : null
 
   const getDefaultMessages = (): Message[] => [
     {
@@ -115,10 +126,10 @@ export function useChatPage() {
       return
     }
 
-    await sendMessageToAssistant(content, assistantId)
+    await sendMessageToAssistantDeepSeek(content, assistantId)
   }
 
-  const sendMessageToAssistant = async (content: string, assistantId: string) => {
+  const sendMessageToAssistantGemini = async (content: string, assistantId: string) => {
     try {
       if (!ai) {
         throw new Error('AI instance is not initialized')
@@ -138,6 +149,97 @@ export function useChatPage() {
         assistant.content = t('chat.failedResponse')
       }
       console.error('Gemini request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
+
+  const sendMessageToAssistantOpenAI = async (content: string, assistantId: string) => {
+    try {
+      if (!openAiClient) {
+        throw new Error('OpenAI client is not initialized')
+      }
+      const response = await openAiClient.responses.create({
+        model: 'o3-mini',
+        input: content,
+      })
+      const reply = response.output_text || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('OpenAI request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
+
+  const sendMessageToAssistantDeepSeek = async (content: string, assistantId: string) => {
+    try {
+      if (!openAiClient) {
+        throw new Error('OpenAI client is not initialized')
+      }
+      const response = await openAiClient.chat.completions.create({
+        model: 'deepseek-chat',
+        messages: [{ role: "system", content: content }],
+      })
+      const reply = response.choices[0].message.content || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('OpenAI request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
+
+  const sendMessageToAssistantAnthropic = async (content: string, assistantId: string) => {
+    try {
+      if (!anthropicClient) {
+        throw new Error('Anthropic client is not initialized')
+      }
+      const response = await anthropicClient.messages.create({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 1000,
+        messages: [
+          {
+            role: 'user',
+            content,
+          },
+        ],
+      })
+      const reply =
+        response.content
+          .filter((block) => block.type === 'text')
+          .map((block) => block.text)
+          .join('\n') || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('Anthropic request failed', error)
     } finally {
       isSending.value = false
       persistMessages()
