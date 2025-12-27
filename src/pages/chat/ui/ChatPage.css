@@ -178,6 +178,7 @@
 }
 
 .chat-input {
+  width: 100%;
   flex: 1;
   border: none;
   background: transparent;

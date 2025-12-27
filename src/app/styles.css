@@ -78,10 +78,6 @@ body {
 
 /* Mobile-first: Hide desktop layouts on phones */
 @media (max-width: 640px) {
-  #app {
-    padding-bottom: 40px; /* Space for bottom navigation */
-  }
-
   .desktop-only {
     display: none !important;
   }
