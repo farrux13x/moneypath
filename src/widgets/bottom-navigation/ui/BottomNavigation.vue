@@ -27,8 +27,8 @@ const emit = defineEmits<{
 const navItems = [
   { id: 'home', label: 'Transactions', icon: '📋' },
   { id: 'statistics', label: 'Statistics', icon: '📊' },
-  { id: 'chat', label: 'Chat', icon: 'T' },
-  { id: 'settings', label: 'Settings', icon: 'S' },
+  { id: 'chat', label: 'Chat', icon: '💬' },
+  { id: 'settings', label: 'Settings', icon: '⚙️' },
 ]
 
 const navigate = (page: string) => {
