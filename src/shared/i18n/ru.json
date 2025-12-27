@@ -168,7 +168,8 @@
     },
     "missingGeminiKey": "Missing API key in .env. Add VITE_GOOGLE_GENAI_API_KEY and reload.",
     "missingOpenAiKey": "Missing API key in .env. Add VITE_OPENAI_API_KEY and reload.",
-    "missingAnthropicKey": "Missing API key in .env. Add VITE_ANTHROPIC_API_KEY and reload."
+    "missingAnthropicKey": "Missing API key in .env. Add VITE_ANTHROPIC_API_KEY and reload.",
+    "importImage": "Import image"
   },
   "home": {
     "mobileTitle": "Транзакции",

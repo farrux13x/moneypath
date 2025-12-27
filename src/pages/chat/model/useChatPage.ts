@@ -11,6 +11,7 @@ type Message = {
 }
 
 type ModelId = 'gemini' | 'openai' | 'deepseek' | 'anthropic'
+type ModelOption = { id: ModelId; enabled: boolean }
 
 const STORAGE_KEY = 'chatMessages'
 
@@ -36,11 +37,11 @@ export function useChatPage() {
     ? new Anthropic({ apiKey: anthropicApiKey, dangerouslyAllowBrowser: true })
     : null
 
-  const modelOptions: Array<{ id: ModelId }> = [
-    { id: 'deepseek' },
-    { id: 'gemini' },
-    { id: 'openai' },
-    { id: 'anthropic' },
+  const modelOptions: ModelOption[] = [
+    { id: 'gemini', enabled: true },
+    { id: 'openai', enabled: false },
+    { id: 'deepseek', enabled: true },
+    { id: 'anthropic', enabled: false },
   ]
 
   const getDefaultMessages = (): Message[] => [
@@ -126,17 +127,22 @@ export function useChatPage() {
     persistMessages()
     scrollToBottom()
 
+    const effectiveModel =
+      modelOptions.find((model) => model.id === selectedModel.value && model.enabled)
+        ?.id ?? modelOptions.find((model) => model.enabled)?.id ?? 'deepseek'
+
+    if (effectiveModel !== selectedModel.value) {
+      selectedModel.value = effectiveModel
+    }
+
     const missingKeyMessage = (() => {
-      if (selectedModel.value === 'gemini' && !ai) {
+      if (effectiveModel === 'gemini' && !ai) {
         return t('chat.missingGeminiKey')
       }
-      if (
-        (selectedModel.value === 'openai' || selectedModel.value === 'deepseek') &&
-        !openAiClient
-      ) {
+      if ((effectiveModel === 'openai' || effectiveModel === 'deepseek') && !openAiClient) {
         return t('chat.missingOpenAiKey')
       }
-      if (selectedModel.value === 'anthropic' && !anthropicClient) {
+      if (effectiveModel === 'anthropic' && !anthropicClient) {
         return t('chat.missingAnthropicKey')
       }
       return null
@@ -152,7 +158,7 @@ export function useChatPage() {
       return
     }
 
-    switch (selectedModel.value) {
+    switch (effectiveModel) {
       case 'gemini':
         await sendMessageToAssistantGemini(content, assistantId)
         break
