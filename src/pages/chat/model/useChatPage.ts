@@ -1,7 +1,7 @@
 import { ref, onMounted, nextTick, watch } from 'vue'
 import { GoogleGenAI } from '@google/genai'
 import OpenAI from 'openai'
-// import Anthropic from '@anthropic-ai/sdk'
+import Anthropic from '@anthropic-ai/sdk'
 import { useI18n } from '@/shared/i18n'
 
 type Message = {
@@ -9,6 +9,8 @@ type Message = {
   role: 'user' | 'assistant'
   content: string
 }
+
+type ModelId = 'gemini' | 'openai' | 'deepseek' | 'anthropic'
 
 const STORAGE_KEY = 'chatMessages'
 
@@ -18,6 +20,7 @@ export function useChatPage() {
   const threadRef = ref<HTMLElement | null>(null)
   const isSending = ref(false)
   const copiedMessageId = ref<string | null>(null)
+  const selectedModel = ref<ModelId>('deepseek')
   const { t } = useI18n()
   let copiedTimeout: number | undefined
 
@@ -28,10 +31,17 @@ export function useChatPage() {
     ? new OpenAI({ apiKey: openAiApiKey, dangerouslyAllowBrowser: true, baseURL: 'https://api.deepseek.com' })
     : null
   
-  // const anthropicApiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
-  // const anthropicClient = anthropicApiKey
-  //   ? new Anthropic({ apiKey: anthropicApiKey, dangerouslyAllowBrowser: true })
-  //   : null
+  const anthropicApiKey = import.meta.env.VITE_ANTHROPIC_API_KEY
+  const anthropicClient = anthropicApiKey
+    ? new Anthropic({ apiKey: anthropicApiKey, dangerouslyAllowBrowser: true })
+    : null
+
+  const modelOptions: Array<{ id: ModelId }> = [
+    { id: 'deepseek' },
+    { id: 'gemini' },
+    { id: 'openai' },
+    { id: 'anthropic' },
+  ]
 
   const getDefaultMessages = (): Message[] => [
     {
@@ -116,72 +126,102 @@ export function useChatPage() {
     persistMessages()
     scrollToBottom()
 
-    if (!ai) {
+    const missingKeyMessage = (() => {
+      if (selectedModel.value === 'gemini' && !ai) {
+        return t('chat.missingGeminiKey')
+      }
+      if (
+        (selectedModel.value === 'openai' || selectedModel.value === 'deepseek') &&
+        !openAiClient
+      ) {
+        return t('chat.missingOpenAiKey')
+      }
+      if (selectedModel.value === 'anthropic' && !anthropicClient) {
+        return t('chat.missingAnthropicKey')
+      }
+      return null
+    })()
+
+    if (missingKeyMessage) {
       const fallback = messages.value.find((message) => message.id === assistantId)
       if (fallback) {
-        fallback.content = t('chat.missingApiKey')
+        fallback.content = missingKeyMessage
       }
       isSending.value = false
       persistMessages()
       return
     }
 
-    await sendMessageToAssistantDeepSeek(content, assistantId)
+    switch (selectedModel.value) {
+      case 'gemini':
+        await sendMessageToAssistantGemini(content, assistantId)
+        break
+      case 'openai':
+        await sendMessageToAssistantOpenAI(content, assistantId)
+        break
+      case 'anthropic':
+        await sendMessageToAssistantAnthropic(content, assistantId)
+        break
+      case 'deepseek':
+      default:
+        await sendMessageToAssistantDeepSeek(content, assistantId)
+        break
+    }
   }
 
-  // const sendMessageToAssistantGemini = async (content: string, assistantId: string) => {
-  //   try {
-  //     if (!ai) {
-  //       throw new Error('AI instance is not initialized')
-  //     }
-  //     const response = await ai.models.generateContent({
-  //       model: 'gemini-2.5-flash-lite',
-  //       contents: content,
-  //     })
-  //     const reply = response.text || t('chat.noResponse')
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = reply
-  //     }
-  //   } catch (error) {
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = t('chat.failedResponse')
-  //     }
-  //     console.error('Gemini request failed', error)
-  //   } finally {
-  //     isSending.value = false
-  //     persistMessages()
-  //     scrollToBottom()
-  //   }
-  // }
+  const sendMessageToAssistantGemini = async (content: string, assistantId: string) => {
+    try {
+      if (!ai) {
+        throw new Error('AI instance is not initialized')
+      }
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash-lite',
+        contents: content,
+      })
+      const reply = response.text || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('Gemini request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
 
-  // const sendMessageToAssistantOpenAI = async (content: string, assistantId: string) => {
-  //   try {
-  //     if (!openAiClient) {
-  //       throw new Error('OpenAI client is not initialized')
-  //     }
-  //     const response = await openAiClient.responses.create({
-  //       model: 'o3-mini',
-  //       input: content,
-  //     })
-  //     const reply = response.output_text || t('chat.noResponse')
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = reply
-  //     }
-  //   } catch (error) {
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = t('chat.failedResponse')
-  //     }
-  //     console.error('OpenAI request failed', error)
-  //   } finally {
-  //     isSending.value = false
-  //     persistMessages()
-  //     scrollToBottom()
-  //   }
-  // }
+  const sendMessageToAssistantOpenAI = async (content: string, assistantId: string) => {
+    try {
+      if (!openAiClient) {
+        throw new Error('OpenAI client is not initialized')
+      }
+      const response = await openAiClient.responses.create({
+        model: 'o3-mini',
+        input: content,
+      })
+      const reply = response.output_text || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('OpenAI request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
 
   const sendMessageToAssistantDeepSeek = async (content: string, assistantId: string) => {
     try {
@@ -210,42 +250,42 @@ export function useChatPage() {
     }
   }
 
-  // const sendMessageToAssistantAnthropic = async (content: string, assistantId: string) => {
-  //   try {
-  //     if (!anthropicClient) {
-  //       throw new Error('Anthropic client is not initialized')
-  //     }
-  //     const response = await anthropicClient.messages.create({
-  //       model: 'claude-sonnet-4-5',
-  //       max_tokens: 1000,
-  //       messages: [
-  //         {
-  //           role: 'user',
-  //           content,
-  //         },
-  //       ],
-  //     })
-  //     const reply =
-  //       response.content
-  //         .filter((block) => block.type === 'text')
-  //         .map((block) => block.text)
-  //         .join('\n') || t('chat.noResponse')
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = reply
-  //     }
-  //   } catch (error) {
-  //     const assistant = messages.value.find((message) => message.id === assistantId)
-  //     if (assistant) {
-  //       assistant.content = t('chat.failedResponse')
-  //     }
-  //     console.error('Anthropic request failed', error)
-  //   } finally {
-  //     isSending.value = false
-  //     persistMessages()
-  //     scrollToBottom()
-  //   }
-  // }
+  const sendMessageToAssistantAnthropic = async (content: string, assistantId: string) => {
+    try {
+      if (!anthropicClient) {
+        throw new Error('Anthropic client is not initialized')
+      }
+      const response = await anthropicClient.messages.create({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 1000,
+        messages: [
+          {
+            role: 'user',
+            content,
+          },
+        ],
+      })
+      const reply =
+        response.content
+          .filter((block) => block.type === 'text')
+          .map((block) => block.text)
+          .join('\n') || t('chat.noResponse')
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = reply
+      }
+    } catch (error) {
+      const assistant = messages.value.find((message) => message.id === assistantId)
+      if (assistant) {
+        assistant.content = t('chat.failedResponse')
+      }
+      console.error('Anthropic request failed', error)
+    } finally {
+      isSending.value = false
+      persistMessages()
+      scrollToBottom()
+    }
+  }
 
   onMounted(() => {
     loadMessages()
@@ -263,6 +303,8 @@ export function useChatPage() {
     threadRef,
     isSending,
     copiedMessageId,
+    selectedModel,
+    modelOptions,
     copyMessage,
     handleSend,
   }

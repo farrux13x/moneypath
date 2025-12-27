@@ -61,6 +61,28 @@
   color: var(--text-secondary);
 }
 
+.chat-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.model-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.model-select {
+  min-width: 180px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
 .chat-thread {
   background: var(--surface-glass);
   border: 1px solid var(--border-color);
@@ -237,6 +259,15 @@
 }
 
 @media (max-width: 640px) {
+  .chat-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .model-select {
+    width: 100%;
+  }
+
   .chat-thread {
     padding: 1.25rem;
     max-height: 55vh;

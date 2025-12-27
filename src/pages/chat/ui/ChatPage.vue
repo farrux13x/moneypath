@@ -13,6 +13,20 @@
           </div>
         </header>
 
+        <div class="chat-controls">
+          <label class="model-label" for="chat-model">{{ t('chat.modelLabel') }}</label>
+          <select
+            id="chat-model"
+            v-model="selectedModel"
+            class="model-select"
+            :aria-label="t('chat.modelLabel')"
+          >
+            <option v-for="model in modelOptions" :key="model.id" :value="model.id">
+              {{ t(`chat.models.${model.id}`) }}
+            </option>
+          </select>
+        </div>
+
         <div ref="threadRef" class="chat-thread">
           <div
             v-for="message in messages"
@@ -73,6 +87,8 @@ const {
   draft,
   isSending,
   copiedMessageId,
+  selectedModel,
+  modelOptions,
   copyMessage,
   handleSend,
 } = useChatPage()
