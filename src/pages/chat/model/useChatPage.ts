@@ -274,7 +274,7 @@ export function useChatPage() {
       const reply =
         response.content
           .filter((block) => block.type === 'text')
-          .map((block) => block.text)
+          .map((block) => block)
           .join('\n') || t('chat.noResponse')
       const assistant = messages.value.find((message) => message.id === assistantId)
       if (assistant) {
