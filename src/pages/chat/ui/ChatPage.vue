@@ -22,6 +22,19 @@
             <div class="message-content">
               {{ message.content }}
             </div>
+            <div
+              v-if="message.role === 'assistant' && (message.modelProvider || message.modelName)"
+              class="message-meta"
+            >
+              <span class="message-meta-provider">{{ message.modelProvider }}</span>
+              <span
+                v-if="message.modelProvider && message.modelName"
+                class="message-meta-separator"
+              >
+                &middot;
+              </span>
+              <span class="message-meta-model">{{ message.modelName }}</span>
+            </div>
             <div v-if="message.role === 'assistant'" class="message-actions">
               <button
                 type="button"

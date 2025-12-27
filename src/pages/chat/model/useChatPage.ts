@@ -8,6 +8,8 @@ type Message = {
   id: string
   role: 'user' | 'assistant'
   content: string
+  modelProvider?: string
+  modelName?: string
 }
 
 type ModelId = 'gemini' | 'openai' | 'deepseek' | 'anthropic'
@@ -36,6 +38,13 @@ export function useChatPage() {
   const anthropicClient = anthropicApiKey
     ? new Anthropic({ apiKey: anthropicApiKey, dangerouslyAllowBrowser: true })
     : null
+
+  const MODEL_CONFIG: Record<ModelId, { provider: string; model: string }> = {
+    gemini: { provider: 'Gemini', model: 'gemini-2.5-flash-lite' },
+    openai: { provider: 'OpenAI', model: 'o3-mini' },
+    deepseek: { provider: 'DeepSeek', model: 'deepseek-chat' },
+    anthropic: { provider: 'Anthropic', model: 'claude-sonnet-4-5' },
+  }
 
   const modelOptions: ModelOption[] = [
     { id: 'gemini', enabled: true },
@@ -158,6 +167,12 @@ export function useChatPage() {
       return
     }
 
+    const assistant = messages.value.find((message) => message.id === assistantId)
+    if (assistant) {
+      assistant.modelProvider = MODEL_CONFIG[effectiveModel].provider
+      assistant.modelName = MODEL_CONFIG[effectiveModel].model
+    }
+
     switch (effectiveModel) {
       case 'gemini':
         await sendMessageToAssistantGemini(content, assistantId)
@@ -181,7 +196,7 @@ export function useChatPage() {
         throw new Error('AI instance is not initialized')
       }
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-lite',
+        model: MODEL_CONFIG.gemini.model,
         contents: content,
       })
       const reply = response.text || t('chat.noResponse')
@@ -208,7 +223,7 @@ export function useChatPage() {
         throw new Error('OpenAI client is not initialized')
       }
       const response = await openAiClient.responses.create({
-        model: 'o3-mini',
+        model: MODEL_CONFIG.openai.model,
         input: content,
       })
       const reply = response.output_text || t('chat.noResponse')
@@ -235,7 +250,7 @@ export function useChatPage() {
         throw new Error('OpenAI client is not initialized')
       }
       const response = await openAiClient.chat.completions.create({
-        model: 'deepseek-chat',
+        model: MODEL_CONFIG.deepseek.model,
         messages: [{ role: "system", content: content }],
       })
       const reply = response.choices[0].message.content || t('chat.noResponse')
@@ -262,7 +277,7 @@ export function useChatPage() {
         throw new Error('Anthropic client is not initialized')
       }
       const response = await anthropicClient.messages.create({
-        model: 'claude-sonnet-4-5',
+        model: MODEL_CONFIG.anthropic.model,
         max_tokens: 1000,
         messages: [
           {

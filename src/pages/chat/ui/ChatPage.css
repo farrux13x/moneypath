@@ -86,6 +86,18 @@
   animation: messageRise 0.35s ease both;
 }
 
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.message-meta-separator {
+  opacity: 0.7;
+}
+
 .message--assistant .message-content {
   max-width: 70%;
   background: var(--bg-secondary);
@@ -101,6 +113,7 @@
   align-items: center;
   gap: 0.5rem;
   opacity: 0.8;
+  position: relative;
 }
 
 .message-action {
@@ -127,6 +140,36 @@
   width: 14px;
   height: 14px;
   fill: currentColor;
+}
+
+.model-info {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+  min-width: 220px;
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  z-index: 2;
+}
+
+.model-info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.model-info-row + .model-info-row {
+  margin-top: 0.35rem;
+}
+
+.model-info-label {
+  color: var(--text-secondary);
 }
 
 .message-copied {
