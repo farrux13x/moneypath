@@ -3,14 +3,14 @@ import type { Category } from './types'
 
 // Default categories
 const defaultCategories: Category[] = [
-  { id: 'food', name: 'Food & Dining', color: '#ef4444' },
-  { id: 'transport', name: 'Transportation', color: '#3b82f6' },
-  { id: 'shopping', name: 'Shopping', color: '#8b5cf6' },
-  { id: 'bills', name: 'Bills & Utilities', color: '#f59e0b' },
-  { id: 'entertainment', name: 'Entertainment', color: '#ec4899' },
-  { id: 'health', name: 'Health & Fitness', color: '#10b981' },
-  { id: 'education', name: 'Education', color: '#6366f1' },
-  { id: 'other', name: 'Other', color: '#6b7280' },
+  { id: 'food', name: 'Food & Dining', color: '#e07a5f' },
+  { id: 'transport', name: 'Transportation', color: '#3a7ca5' },
+  { id: 'shopping', name: 'Shopping', color: '#7fb9b1' },
+  { id: 'bills', name: 'Bills & Utilities', color: '#e3b26f' },
+  { id: 'entertainment', name: 'Entertainment', color: '#c57b8a' },
+  { id: 'health', name: 'Health & Fitness', color: '#5aa380' },
+  { id: 'education', name: 'Education', color: '#2f7f7b' },
+  { id: 'other', name: 'Other', color: '#7a8b8f' },
 ]
 
 const categories = ref<Category[]>([])

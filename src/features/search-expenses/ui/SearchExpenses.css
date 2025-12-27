@@ -3,6 +3,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .search-form {
@@ -16,7 +17,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.25rem;
   padding: 1.25rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
 }
@@ -48,7 +49,7 @@
 .filter-select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+  box-shadow: var(--focus-ring);
 }
 
 .amount-range,

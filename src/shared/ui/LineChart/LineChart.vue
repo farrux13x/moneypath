@@ -83,7 +83,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   width: 400,
   height: 300,
-  color: '#6366f1',
+      color: '#2f7f7b',
 })
 
 const padding = 50

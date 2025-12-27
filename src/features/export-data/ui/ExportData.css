@@ -3,6 +3,7 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .section-description {
@@ -20,7 +21,7 @@
 
 .export-option {
   padding: 1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
 }
@@ -44,8 +45,8 @@
 .success-message {
   margin-top: 1rem;
   padding: 0.75rem;
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: rgba(44, 140, 109, 0.16);
+  color: #1c6b54;
   border-radius: var(--radius-md);
   text-align: center;
   font-size: 0.875rem;

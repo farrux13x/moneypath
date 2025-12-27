@@ -3,6 +3,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .expense-form {
@@ -38,7 +39,7 @@ select.input {
 select.input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+  box-shadow: var(--focus-ring);
 }
 
 select.input--error {

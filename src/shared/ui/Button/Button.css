@@ -32,7 +32,7 @@
 
 .button--primary {
   background-color: var(--primary-color);
-  color: white;
+  color: #f9fbfa;
 }
 
 .button--primary:hover:not(:disabled) {
@@ -47,12 +47,12 @@
 }
 
 .button--secondary:hover:not(:disabled) {
-  background-color: var(--border-color);
+  background-color: var(--bg-secondary);
 }
 
 .button--danger {
   background-color: var(--danger-color);
-  color: white;
+  color: #fff6f4;
 }
 
 .button--danger:hover:not(:disabled) {
@@ -61,7 +61,7 @@
 
 .button--success {
   background-color: var(--success-color);
-  color: white;
+  color: #f3fffb;
 }
 
 .button--success:hover:not(:disabled) {

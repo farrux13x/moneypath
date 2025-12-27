@@ -42,7 +42,7 @@ const { t } = useI18n()
 
 const formData = reactive({
   name: '',
-  color: '#6366f1',
+  color: '#2f7f7b',
 })
 
 const errors = reactive({
@@ -61,7 +61,7 @@ const validateForm = (): boolean => {
 
   // Validate color format
   if (!/^#[0-9A-F]{6}$/i.test(formData.color)) {
-    formData.color = '#6366f1' // Reset to default if invalid
+    formData.color = '#2f7f7b' // Reset to default if invalid
   }
 
   return true
@@ -79,7 +79,7 @@ const handleSubmit = () => {
 
   // Reset form
   formData.name = ''
-  formData.color = '#6366f1'
+  formData.color = '#2f7f7b'
 
   isSubmitting.value = false
 }

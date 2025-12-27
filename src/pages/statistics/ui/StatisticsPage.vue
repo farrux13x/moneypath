@@ -190,7 +190,7 @@ const getCategoryName = (categoryId: string): string => {
 }
 
 const getCategoryColor = (categoryId: string): string => {
-  return getCategoryById(categoryId)?.color || '#6b7280'
+  return getCategoryById(categoryId)?.color || '#7a8b8f'
 }
 
 const getPeriodTitle = (): string => {
@@ -411,7 +411,7 @@ const periodBarData = computed(() => {
     return {
       label,
       value: amount,
-      color: '#6366f1',
+      color: '#2f7f7b',
     }
   })
 })

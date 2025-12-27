@@ -12,7 +12,7 @@
 
 .period-button {
   padding: 0.625rem 1.25rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border: 2px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-primary);
@@ -25,14 +25,14 @@
 }
 
 .period-button:hover {
-  background-color: var(--bg-tertiary);
+  background-color: var(--bg-secondary);
   border-color: var(--primary-color);
 }
 
 .period-button.active {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
-  color: white;
+  color: #f4fffd;
 }
 
 @media (max-width: 640px) {

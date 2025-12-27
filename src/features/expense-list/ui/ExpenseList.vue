@@ -64,7 +64,7 @@ const getCategoryName = (categoryId: string): string => {
 }
 
 const getCategoryColor = (categoryId: string): string => {
-  return getCategoryById(categoryId)?.color || '#6b7280'
+  return getCategoryById(categoryId)?.color || '#7a8b8f'
 }
 
 const formatDate = (dateString: string): string => {

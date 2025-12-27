@@ -19,7 +19,7 @@
 
 .page-header {
   text-align: center;
-  color: white;
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,13 +40,13 @@
 
 .profile-language-label {
   font-size: 0.85rem;
-  opacity: 0.85;
+  color: var(--text-secondary);
 }
 
 .profile-language-select {
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(15, 23, 42, 0.7);
-  color: white;
+  border: 1px solid var(--border-color);
+  background: var(--surface-glass);
+  color: var(--text-primary);
   border-radius: 0.75rem;
   padding: 0.35rem 0.75rem;
   font-size: 0.9rem;
@@ -54,20 +54,20 @@
 }
 
 .profile-language-select:focus {
-  border-color: rgba(59, 130, 246, 0.7);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  border-color: var(--primary-color);
+  box-shadow: var(--focus-ring);
 }
 
 .page-title {
+  font-family: var(--font-display);
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .page-subtitle {
   font-size: 1.25rem;
-  opacity: 0.95;
+  color: var(--text-secondary);
 }
 
 .profile-content {

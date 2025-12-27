@@ -24,7 +24,7 @@
 .input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+  box-shadow: var(--focus-ring);
 }
 
 .input:disabled {
@@ -37,7 +37,7 @@
 }
 
 .input--error:focus {
-  box-shadow: 0 0 0 3px rgb(239 68 68 / 0.1);
+  box-shadow: var(--danger-ring);
 }
 
 .input-error {

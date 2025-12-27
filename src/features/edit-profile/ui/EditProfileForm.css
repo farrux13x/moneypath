@@ -3,6 +3,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .profile-form {
@@ -38,14 +39,14 @@ select.input {
 select.input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+  box-shadow: var(--focus-ring);
 }
 
 .success-message {
   margin-top: 1rem;
   padding: 0.75rem;
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: rgba(44, 140, 109, 0.16);
+  color: #1c6b54;
   border-radius: var(--radius-md);
   text-align: center;
   font-size: 0.875rem;

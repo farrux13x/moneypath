@@ -11,6 +11,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .total-amount {
@@ -44,7 +45,7 @@
 
 .expense-item {
   padding: 1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;

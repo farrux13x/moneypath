@@ -3,6 +3,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .empty-state {
@@ -19,7 +20,7 @@
 
 .category-item {
   padding: 1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   display: flex;

@@ -7,6 +7,7 @@
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-primary);
+  font-family: var(--font-display);
 }
 
 .no-results {
@@ -30,7 +31,7 @@
 
 .result-item {
   padding: 1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
@@ -84,7 +85,7 @@
   display: flex;
   justify-content: space-around;
   padding: 1.25rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--surface-glass);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   gap: 1rem;

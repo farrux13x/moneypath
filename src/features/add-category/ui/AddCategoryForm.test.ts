@@ -33,7 +33,7 @@ describe('AddCategoryForm', () => {
 
     expect(addCategoryMock).toHaveBeenCalledWith({
       name: 'Pets',
-      color: '#6366f1',
+      color: '#2f7f7b',
     })
   })
 })
