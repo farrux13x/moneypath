@@ -1,7 +1,10 @@
 <template>
   <div class="profile-page">
+    <HomeMobileHeader
+      :title="t('profile.title')"
+    />
     <div class="page-container">
-      <header class="page-header">
+      <header class="page-header desktop-only">
         <div class="profile-header-text">
           <h1 class="page-title">{{ t('profile.title') }}</h1>
           <p class="page-subtitle">{{ t('profile.subtitle') }}</p>
@@ -24,6 +27,7 @@
 <script setup lang="ts">
 import { ProfileCard } from '@/widgets/profile-card/ui'
 import { EditProfileForm } from '@/features/edit-profile/ui'
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useProfilePage } from './useProfilePage'
 
 const { t } = useProfilePage()
