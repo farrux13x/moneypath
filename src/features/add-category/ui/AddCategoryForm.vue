@@ -59,9 +59,8 @@ const validateForm = (): boolean => {
     return false
   }
 
-  // Validate color format
   if (!/^#[0-9A-F]{6}$/i.test(formData.color)) {
-    formData.color = '#2f7f7b' // Reset to default if invalid
+    formData.color = '#2f7f7b' 
   }
 
   return true
