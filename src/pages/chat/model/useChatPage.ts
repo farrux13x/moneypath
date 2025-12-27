@@ -1,4 +1,4 @@
-import { ref, onMounted, nextTick, watch } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { GoogleGenAI } from '@google/genai'
 import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
@@ -24,6 +24,8 @@ export function useChatPage() {
   const isSending = ref(false)
   const copiedMessageId = ref<string | null>(null)
   const selectedModel = ref<ModelId>('deepseek')
+  const autoScrollEnabled = ref(true)
+  const autoScrollLocked = ref(false)
   const { t } = useI18n()
   let copiedTimeout: number | undefined
 
@@ -65,10 +67,23 @@ export function useChatPage() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.value))
   }
 
-  const scrollToBottom = async () => {
+  const scrollToBottom = async (force = false) => {
+    if (!force && !autoScrollEnabled.value) return
     await nextTick()
     if (threadRef.value) {
       threadRef.value.scrollTop = threadRef.value.scrollHeight
+    }
+  }
+
+  const handleThreadScroll = () => {
+    if (!threadRef.value) return
+    const { scrollTop, scrollHeight, clientHeight } = threadRef.value
+    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight)
+    if (distanceFromBottom > 24) {
+      autoScrollLocked.value = true
+      autoScrollEnabled.value = false
+    } else if (!autoScrollLocked.value) {
+      autoScrollEnabled.value = true
     }
   }
 
@@ -134,7 +149,9 @@ export function useChatPage() {
     draft.value = ''
     isSending.value = true
     persistMessages()
-    scrollToBottom()
+    autoScrollLocked.value = false
+    autoScrollEnabled.value = true
+    scrollToBottom(true)
 
     const effectiveModel =
       modelOptions.find((model) => model.id === selectedModel.value && model.enabled)
@@ -164,6 +181,7 @@ export function useChatPage() {
       }
       isSending.value = false
       persistMessages()
+      scrollToBottom()
       return
     }
 
@@ -310,7 +328,21 @@ export function useChatPage() {
 
   onMounted(() => {
     loadMessages()
-    scrollToBottom()
+    scrollToBottom(true)
+    nextTick(() => {
+      if (threadRef.value) {
+        threadRef.value.addEventListener('scroll', handleThreadScroll, {
+          passive: true,
+        })
+        handleThreadScroll()
+      }
+    })
+  })
+
+  onUnmounted(() => {
+    if (threadRef.value) {
+      threadRef.value.removeEventListener('scroll', handleThreadScroll)
+    }
   })
 
   watch(messages, () => {

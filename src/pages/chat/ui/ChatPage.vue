@@ -122,6 +122,7 @@ const {
   t,
   messages,
   draft,
+  threadRef,
   isSending,
   copiedMessageId,
   selectedModel,
