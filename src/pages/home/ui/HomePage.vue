@@ -5,20 +5,14 @@
       <header class="mobile-header">
         <h1 class="mobile-title">{{ t('home.mobileTitle') }}</h1>
         <div class="header-actions">
-          <button
-            class="filter-button"
+          <FilterButton
             @click="showSearch = !showSearch"
-            :aria-label="t('common.filter')"
-          >
-            <span>🔍</span>
-          </button>
-          <button
-            class="add-button"
+            :ariaLabel="t('common.filter')"
+          />
+          <AddButton
             @click="goToAddTransaction"
-            :aria-label="t('common.addExpense')"
-          >
-            <span class="add-icon">+</span>
-          </button>
+            :ariaLabel="t('common.addExpense')"
+          />
         </div>
       </header>
 
@@ -73,6 +67,7 @@
 
 <script setup lang="ts">
 import { AddExpenseForm } from '@/features/add-expense/ui'
+import { AddButton, FilterButton } from '@/features/home-actions/ui'
 import { ExpenseList } from '@/features/expense-list/ui'
 import { SearchExpenses } from '@/features/search-expenses/ui'
 import { SearchResults } from '@/features/search-results/ui'
@@ -96,3 +91,7 @@ const {
 </script>
 
 <style scoped src="./HomePage.css"></style>
+
+
+
+
