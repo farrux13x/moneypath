@@ -1,7 +1,6 @@
 .settings-page {
   width: 100%;
   min-height: calc(100vh - 120px);
-  padding: 1.5rem 1rem 2.5rem;
   color: var(--text-primary);
 }
 
@@ -175,10 +174,6 @@
 }
 
 @media (max-width: 640px) {
-  .settings-page {
-    padding: 1rem 1rem 6rem;
-  }
-
   .settings-item {
     padding: 1.1rem 1.2rem;
   }
