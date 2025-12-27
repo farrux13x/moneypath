@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import { ExportData } from '@/features/export-data/ui'
 import { ImportData } from '@/features/import-data/ui'
-import { useI18n } from '@/shared/i18n'
+import { useExportPage } from './useExportPage'
 
-const { t } = useI18n()
+const { t } = useExportPage()
 </script>
 
 <style scoped src="./ExportPage.css"></style>

@@ -92,17 +92,9 @@
 
 <script setup lang="ts">
 import { ThemeToggle } from '@/shared/ui/ThemeToggle'
-import { useI18n } from '@/shared/i18n'
+import { useSettingsPage } from './useSettingsPage'
 
-const { t, locale, locales } = useI18n()
-
-const goToProfile = () => {
-  window.location.hash = 'profile'
-}
-
-const goToExport = () => {
-  window.location.hash = 'export'
-}
+const { t, locale, locales, goToProfile, goToExport } = useSettingsPage()
 </script>
 
 <style scoped src="./SettingsPage.css"></style>

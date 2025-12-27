@@ -72,42 +72,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { AddExpenseForm } from '@/features/add-expense/ui'
 import { ExpenseList } from '@/features/expense-list/ui'
 import { SearchExpenses } from '@/features/search-expenses/ui'
 import { SearchResults } from '@/features/search-results/ui'
 import { MobileExpenseList } from '@/widgets/mobile-expense-list/ui'
-import type { Expense } from '@/entities/expense/model/types'
-import { useI18n } from '@/shared/i18n'
-
-const { t } = useI18n()
-
-const searchResults = ref<Expense[]>([])
-const showSearchResults = ref(false)
-const showSearch = ref(false)
+import { useHomePage } from './useHomePage'
 
 defineEmits<{
   'add-expense': []
 }>()
 
-const handleSearchResults = (results: Expense[]) => {
-  searchResults.value = results
-}
-
-const handleFiltersActive = (active: boolean) => {
-  showSearchResults.value = active
-}
-
-
-const handleExpenseClick = (expense: Expense) => {
-  // Handle expense click if needed (e.g., show details, edit)
-  console.log('Expense clicked:', expense)
-}
-
-const goToAddTransaction = () => {
-  window.location.hash = 'add-transaction'
-}
+const {
+  t,
+  searchResults,
+  showSearchResults,
+  showSearch,
+  handleSearchResults,
+  handleFiltersActive,
+  handleExpenseClick,
+  goToAddTransaction,
+} = useHomePage()
 </script>
 
 <style scoped src="./HomePage.css"></style>

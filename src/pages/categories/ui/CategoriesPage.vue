@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import { AddCategoryForm } from '@/features/add-category/ui'
 import { CategoryList } from '@/features/category-list/ui'
-import { useI18n } from '@/shared/i18n'
+import { useCategoriesPage } from './useCategoriesPage'
 
-const { t } = useI18n()
+const { t } = useCategoriesPage()
 </script>
 
 <style scoped src="./CategoriesPage.css"></style>

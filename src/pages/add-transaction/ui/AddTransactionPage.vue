@@ -33,20 +33,9 @@
 
 <script setup lang="ts">
 import { AddExpenseForm } from '@/features/add-expense/ui'
-import { useI18n } from '@/shared/i18n'
+import { useAddTransactionPage } from './useAddTransactionPage'
 
-const { t } = useI18n()
-
-const goBack = () => {
-  window.history.back()
-}
-
-const handleExpenseAdded = () => {
-  // Navigate back to transactions page after adding
-  setTimeout(() => {
-    window.location.hash = ''
-  }, 500)
-}
+const { t, goBack, handleExpenseAdded } = useAddTransactionPage()
 </script>
 
 <style scoped src="./AddTransactionPage.css"></style>

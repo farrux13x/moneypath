@@ -24,9 +24,9 @@
 <script setup lang="ts">
 import { ProfileCard } from '@/widgets/profile-card/ui'
 import { EditProfileForm } from '@/features/edit-profile/ui'
-import { useI18n } from '@/shared/i18n'
+import { useProfilePage } from './useProfilePage'
 
-const { t } = useI18n()
+const { t } = useProfilePage()
 </script>
 
 <style scoped src="./ProfilePage.css"></style>
