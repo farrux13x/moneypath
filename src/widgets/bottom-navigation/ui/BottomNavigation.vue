@@ -27,7 +27,6 @@ const emit = defineEmits<{
 const navItems = [
   { id: 'home', label: 'Transactions', icon: '📋' },
   { id: 'statistics', label: 'Statistics', icon: '📊' },
-  { id: 'categories', label: 'Categories', icon: '📁' },
   { id: 'chat', label: 'Chat', icon: 'T' },
   { id: 'settings', label: 'Settings', icon: 'S' },
 ]

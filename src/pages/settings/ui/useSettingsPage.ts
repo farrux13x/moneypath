@@ -11,11 +11,16 @@ export function useSettingsPage() {
     window.location.hash = 'export'
   }
 
+  const goToCategories = () => {
+    window.location.hash = 'categories'
+  }
+
   return {
     t,
     locale,
     locales,
     goToProfile,
     goToExport,
+    goToCategories,
   }
 }

@@ -30,6 +30,18 @@
           <span class="settings-item-icon">></span>
         </button>
 
+        <button class="settings-item" @click="goToCategories">
+          <div class="settings-item-text">
+            <span class="settings-item-title">{{
+              t('features.categoryList.title')
+            }}</span>
+            <span class="settings-item-subtitle">{{
+              t('categories.subtitle')
+            }}</span>
+          </div>
+          <span class="settings-item-icon">></span>
+        </button>
+
         <a
           class="settings-item settings-item--link"
           href="https://github.com/farrux13x/moneypath"
@@ -98,7 +110,8 @@ import { ThemeToggle } from '@/shared/ui/ThemeToggle'
 import { HomeMobileHeader } from '@/features/home-header/ui'
 import { useSettingsPage } from './useSettingsPage'
 
-const { t, locale, locales, goToProfile, goToExport } = useSettingsPage()
+const { t, locale, locales, goToProfile, goToExport, goToCategories } =
+  useSettingsPage()
 </script>
 
 <style scoped src="./SettingsPage.css"></style>
