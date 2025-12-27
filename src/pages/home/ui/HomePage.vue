@@ -2,19 +2,17 @@
   <div class="home-page">
     <!-- Mobile Layout -->
     <div class="mobile-layout mobile-only">
-      <header class="mobile-header">
-        <h1 class="mobile-title">{{ t('home.mobileTitle') }}</h1>
-        <div class="header-actions">
-          <FilterButton
-            @click="showSearch = !showSearch"
-            :ariaLabel="t('common.filter')"
-          />
-          <AddButton
-            @click="goToAddTransaction"
-            :ariaLabel="t('common.addExpense')"
-          />
-        </div>
-      </header>
+      <HomeMobileHeader
+        :title="t('home.mobileTitle')">
+        <FilterButton
+          @click="showSearch = !showSearch"
+          :ariaLabel="t('common.filter')"
+        />
+        <AddButton
+          @click="goToAddTransaction"
+          :ariaLabel="t('common.addExpense')"
+        />
+      </HomeMobileHeader>
 
       <div v-if="showSearch" class="mobile-search-section">
         <SearchExpenses
@@ -68,6 +66,7 @@
 <script setup lang="ts">
 import { AddExpenseForm } from '@/features/add-expense/ui'
 import { AddButton, FilterButton } from '@/features/home-actions/ui'
+import { HomeMobileHeader } from '@/features/home-header/ui'
 import { ExpenseList } from '@/features/expense-list/ui'
 import { SearchExpenses } from '@/features/search-expenses/ui'
 import { SearchResults } from '@/features/search-results/ui'
