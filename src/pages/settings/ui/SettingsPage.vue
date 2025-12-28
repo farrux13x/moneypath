@@ -2,7 +2,9 @@
   <div class="settings-page">
     <HomeMobileHeader
       :title="t('settings.title')"
-    />
+    >
+      <ThemeToggle />
+    </HomeMobileHeader>
     <div class="page-container">
       <header class="page-header desktop-only">
         <h1 class="page-title">{{ t('settings.title') }}</h1>
@@ -91,15 +93,6 @@
           </select>
         </div>
 
-        <div class="settings-item settings-item--toggle">
-          <div class="settings-item-text">
-            <span class="settings-item-title">{{ t('settings.theme') }}</span>
-            <span class="settings-item-subtitle">{{
-              t('settings.themeSubtitle')
-            }}</span>
-          </div>
-          <ThemeToggle />
-        </div>
       </div>
     </div>
   </div>
